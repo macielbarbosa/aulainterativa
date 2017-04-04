@@ -6,53 +6,20 @@
 }
 
 body{
-	background-image: url("../imagens/fundo.png");
+	/*background-image: url("../imagens/fundo.png");*/
 	font-family: Arial, Sans-serif;
 	font-size: 15px;
 }
 
-div#interface{
-	position: relative;
-	width: 1200px;
-	height: 1400px;
-	margin: -20px auto 10px auto;
-	box-shadow: 0px 0px 10px black;
-	padding: 20px;
-	background-color: white;
+nav.navbar{
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
-header{
-	position: relative;
-}
-
-img#logo{
-	position: absolute;
-	top: 0px;
-}
-
-ul.menu{
-	list-style-type: none;
-    margin: -10px -18px -10px -18px;
-    padding: 0px;
-    overflow: hidden;
-    background-color: rgb(47,98,128);
-    display: block;
-}
-
-li {
-    float: right;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #111111;
+#logo{
+	font-family: chawp;
+	font-size: 25pt;
+	color: black;
 }
 
 h2{
@@ -61,10 +28,9 @@ h2{
 }
 
 section#principal{
-	position: absolute;
-	left: 50px;
+	
+	margin-top: 30px;
 	float: left;
-	width: 520px;
 	margin-left: 30px;
 }
 
@@ -202,14 +168,4 @@ h1#logo{
 	position: absolute;
 	top: 250px;
 	left: 360px;
-}
-
-div#home{
-	position: relative;
-	width: 1200px;
-	height: 800px;
-	margin: -20px auto 10px auto;
-	box-shadow: 0px 0px 10px black;
-	padding: 20px;
-	background-color: white;
 }
