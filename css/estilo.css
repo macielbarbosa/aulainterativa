@@ -9,6 +9,7 @@ body{
 	/*background-image: url("../imagens/fundo.png");*/
 	font-family: Arial, Sans-serif;
 	font-size: 15px;
+	padding-top: 50px;
 }
 
 nav.navbar{

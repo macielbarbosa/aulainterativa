@@ -3,7 +3,7 @@
 <head>
 	<meta charset='UTF-8'/>
 	<title>Aula Interativa</title>
-	<script src = "javascript/funcoes.js"></script>
+	<script src = "javascript/rotacao.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -28,12 +28,12 @@
 			   <!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			   	<ul class="nav navbar-nav">
-			        	<li class="active"><a href="index.html">INÍCIO<span class="sr-only">(current)</span></a></li>
+			        	<li><a href="index.html">INÍCIO<span class="sr-only">(current)</span></a></li>
 			        	<li class="dropdown">
 			         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ÁLGEBRA LINEAR<span class="caret"></span></a>
 			         <ul class="dropdown-menu">
 			            <li><a href="independencia.html">Independência Linear</a></li>
-			            <li><a href="rotacao.html">Rotação de vetor em torno dos eixos</a></li>
+			            <li class="active"><a href="rotacao.html">Rotação de vetor em torno dos eixos</a></li>
 			            <!--li role="separator" class="divider"></li-->
 			         </ul>
 			        	</li>
@@ -56,8 +56,48 @@
 			      </ul>
 			   </div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
-		</nav>	
+		</nav>
+		<div class="container">
+			<h1>Rotação de vetores em torno dos eixos</h1>
+		</div>
 		</header>
-		
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<br><p>Seja <b>v</b> &isin; &real;&sup2;:</p>
+					<form id="entrada">
+						<b>v</b> = ( 
+						<input type="text" name="vx" size="1"/> , 
+						<input type="text" name="vy" size="1"/> , 
+						<input type="text" name="vz" size="1"/> )<br/><br/>
+						Rotação em torno dos eixos em graus:<br/><br/>
+						<input type="checkbox" id="rotZ">
+						Eixo z:
+						<input type="text" name="nz" size="1"/><br/><br/>
+						<input type="checkbox" id="rotY">
+						Eixo y: 
+						<input type="text" name="ny" size="1"/><br/><br/>
+						<input type="checkbox" id="rotX">
+						Eixo x: 
+						<input type="text" name="nx" size="1"/>
+						<br/><br/>
+						<button type="button" onclick="rotacionar()">Rotacionar</button>
+					</form>
+				</div>
+			
+				<div class="col-sm-6">
+					<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+					<script type="text/javascript">
+				    	var applet1 = new GGBApplet({material_id: "TksW6PcZ", borderColor:"#55FF00"}, true);
+				   		//var applet1 = new GGBApplet({filename: "geogebra/material-Gnse64qV.ggb","showtoolbar":true}, true);
+				    	applet1.setHTML5Codebase('https://app.geogebra.org/5.0/web3d/');
+				    	window.onload = function() {
+				        	applet1.inject('applet_container1');
+				    	}
+					</script>
+					<div style="width:900px;height:800px;display:block" id="applet_container1"></div>
+				</div>
+			</div>
+		</div>
 </body>
 </html>
