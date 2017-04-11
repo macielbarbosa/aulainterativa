@@ -65,110 +65,148 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<br><p>Seja <b>v</b> &isin; &real;&sup2;:</p>
-					<form id="entrada">
+					<form id="dados">
 						<b>v</b> = ( 
-						<input type="text" name="vx" size="1"/> , 
-						<input type="text" name="vy" size="1"/> , 
-						<input type="text" name="vz" size="1"/> )<br/><br/>
-						Rotação em torno dos eixos em graus:<br/><br/>
+						<input type="text" name="vetor" size="9" placeholder="   x  ,  y  ,  z"/>
+						)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="plotV()">Plotar</button>
+						<br/><br/>
+						Rotação em torno dos eixos em graus:
+						<br/><br/>
 						<input type="checkbox" id="rotZ" checked/>
 						Eixo z:
-						<input type="text" name="nz" size="1"/><br/><br/>
-						<input type="checkbox" id="rotY" checked/>
+						<input type="text" name="nz" size="1"/>
+						<br/><br/>
+						<input type="checkbox" id="rotY"/>
 						Eixo y: 
-						<input type="text" name="ny" size="1"/><br/><br/>
-						<input type="checkbox" id="rotX" checked/>
+						<input type="text" name="ny" size="1"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="rotacionar()">Rotacionar</button>
+						<br/><br/>
+						<input type="checkbox" id="rotX"/>
 						Eixo x: 
 						<input type="text" name="nx" size="1"/>
 						<br/><br/>
-						<button type="button" onclick="rotacionar()">Rotacionar</button>
 					</form>
 				</div>
 				<div class="col-sm-6">
 					<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
-			    <script type="text/javascript">
-			        var parameters = {"id":"KWhHeY4q","width":700,"height":600,"showToolBar":false,"borderColor":null,"showMenuBar":false,"showAlgebraInput":false,"showResetIcon":true,"enableLabelDrags":false,"enableShiftDragZoom":true,"enableRightClick":false,"capturingThreshold":null,"showToolBarHelp":false,"errorDialogsActive":false,"useBrowserForJS":false,"ggbBase64":"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"};
-			        var applet = new GGBApplet(parameters, '5.0');
-			        applet.setHTML5Codebase('https://app.geogebra.org/5.0/web3d/');
-			        window.onload = function() {
-			            applet.inject('applet_container','preferHTML5');
-			        }
-			        function rotacionar(){
-			            var dados = document.getElementById('entrada');
-			            vx = dados.elements[0].value;
-			            vy = dados.elements[1].value;
-			            vz = dados.elements[2].value;
-			            nz = dados.elements[4].value;
-			            ny = dados.elements[6].value;
-			            nx = dados.elements[8].value;
-			            rotZ = document.getElementById('rotZ').checked;
-			            rotY = document.getElementById('rotY').checked;
-			            rotX = document.getElementById('rotX').checked;
-			            ggb = document.ggbApplet;
-			            ggb.setVisible('v',false);
-			            ggb.setVisible('cx',false);
-			            ggb.setVisible('cy',false);
-			            ggb.setVisible('cz',false);
-			            ggb.setVisible('α',false);
-			            ggb.setVisible('β',false);
-			            ggb.setVisible('γ',false);
-			            if(rotZ)
-			                rotacionarZ();
-			            if(rotY) {
-			                if(rotZ)
-			                    setTimeout(rotacionarY, 1000);
-			                else
-			                    rotacionarY();
-			            }
-			            if(rotX){
-			                if(rotZ && rotY)
-			                    setTimeout(rotacionarX, 2000);
-			                else if(rotY || rotZ)
-			                    setTimeout(rotacionarX, 1000);
-			                else
-			                    rotacionarX();
-			            }
-			        }
-			        function rotacionarZ(){
-			            ggb.setVisible('α',true);
-			            ggb.setVisible('cz',true);
-			            ggb.setVisible('v',true);
-			            ggb.evalCommand("Pz = ("+vx+","+vy+","+vz+")");
-			            ggb.evalCommand('v = Qz');
-			            ggb.evalCommand('tz = 0');
-			            ggb.evalCommand('nz = '+nz);
-			            ggb.evalCommand('StartAnimation[tz]');
-			        }
-			        function rotacionarY() {
-			            ggb.setVisible('β',true);
-			            ggb.setVisible('cy',true);
-			            ggb.setVisible('v',true);
-			            if(rotZ)
-			                ggb.evalCommand("Py = Rotate[Pz,"+nz+"°,zAxis]");
-			            else
-			                ggb.evalCommand("Py = ("+vx+","+vy+","+vz+")");
-			            ggb.evalCommand('v = Qy');
-			            ggb.evalCommand('ty = 0');
-			            ggb.evalCommand('ny = '+ny);
-			            ggb.evalCommand('StartAnimation[ty]');
-			        }
-			        function rotacionarX() {
-			            ggb.setVisible('γ',true);
-			            ggb.setVisible('cx',true);
-			            ggb.setVisible('v',true);
-			            if(!rotZ && !rotY)
-			                ggb.evalCommand("Px = ("+vx+","+vy+","+vz+")");
-			            else if(rotY)
-			                ggb.evalCommand("Px = Rotate[Py,"+ny+"°,yAxis]");
-			            else
-			                ggb.evalCommand("Px = Rotate[Pz,"+nz+"°,zAxis]");
-			            ggb.evalCommand('v = Qx');
-			            ggb.evalCommand('tx = 0');
-			            ggb.evalCommand('nx = '+nx);
-			            ggb.evalCommand('StartAnimation[tx]');
-			        }
-			    </script>
-        	<div id="applet_container"></div>
+				    <script type="text/javascript">
+				        var parameters = {"id":"KWhHeY4q","width":700,"height":600,"showToolBar":false,"borderColor":null,"showMenuBar":false,"showAlgebraInput":false,"showResetIcon":true,"enableLabelDrags":false,"enableShiftDragZoom":true,"enableRightClick":false,"capturingThreshold":null,"showToolBarHelp":false,"errorDialogsActive":false,"useBrowserForJS":false,"ggbBase64":"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"};
+				        var applet = new GGBApplet(parameters, '5.0');
+				        applet.setHTML5Codebase('https://app.geogebra.org/5.0/web3d/');
+				        window.onload = function() {
+				            applet.inject('applet_container','preferHTML5');
+				        }
+				        function plotV(){
+				        	ggb = document.ggbApplet;
+				        	ggb.setVisible('semiCx',false);
+				            ggb.setVisible('semiCy',false);
+				            ggb.setVisible('semiCz',false);
+				            ggb.setVisible('α',false);
+				            ggb.setVisible('β',false);
+				            ggb.setVisible('γ',false);
+				            ggb.setVisible('cX',false);
+				            ggb.setVisible('cY',false);
+				            ggb.setVisible('cZ',false);
+				            ggb.setVisible('arcX',false);
+				            ggb.setVisible('arcY',false);
+				            ggb.setVisible('arcZ',false);
+				            ggb.setVisible("v'",false);
+				        	dados = document.getElementById('dados');
+				        	coordenadas = dados.elements[0].value;
+				        	ggb.evalCommand('Pz = ('+ coordenadas +')');
+				        	var x = ggb.getXcoord('Pz');
+				        	var y = ggb.getYcoord('Pz');
+				        	var z = ggb.getZcoord('Pz');
+				        	var moduloV = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)+Math.pow(z,2));
+				        	ggb.setCoordSystem(-moduloV,moduloV,-moduloV,moduloV,-moduloV,moduloV,false);
+				        	ggb.evalCommand('v = Pz');
+				        	ggb.setVisible('v',true);
+				        }
+				        function rotacionar(){
+				            nz = dados.elements[3].value;
+				            ny = dados.elements[5].value;
+				            nx = dados.elements[8].value;
+				            rotZ = document.getElementById('rotZ').checked;
+				            rotY = document.getElementById('rotY').checked;
+				            rotX = document.getElementById('rotX').checked;
+				            plotV();
+				            if(rotZ)
+				                rotacionarZ();
+				            if(rotY) {
+				                if(rotZ)
+				                    setTimeout(rotacionarY, 1000);
+				                else
+				                    rotacionarY();
+				            }
+				            if(rotX){
+				                if(rotZ && rotY)
+				                    setTimeout(rotacionarX, 2000);
+				                else if(rotY || rotZ)
+				                    setTimeout(rotacionarX, 1000);
+				                else
+				                    rotacionarX();
+				            }
+				        }
+				        function rotacionarZ(){
+				            ggb.evalCommand("v' = Qz");
+				            ggb.evalCommand('tz = 0');
+				            ggb.evalCommand('nz = '+nz);
+				            if(checados()==1)
+				            	ggb.setVisible('cZ',true);
+				            ggb.setVisible('α',true);
+				            ggb.setVisible('semiCz',true);
+				            ggb.setVisible('arcZ',true);
+				            ggb.setVisible("v'",true);
+				            ggb.evalCommand('StartAnimation[tz]');
+				        }
+				        function rotacionarY() {
+				            if(rotZ)
+				                ggb.evalCommand("Py = Rotate[Pz,"+nz+"°,zAxis]");
+				            else
+				                ggb.evalCommand("Py = ("+coordenadas+")");
+				            ggb.evalCommand("v' = Qy");
+				            ggb.evalCommand('ty = 0');
+				            ggb.evalCommand('ny = '+ny);
+				            if(checados()==1)
+				            	ggb.setVisible('cY',true);
+				            ggb.setVisible('β',true);
+				            ggb.setVisible('semiCy',true);
+				            ggb.setVisible('arcY',true);
+				            ggb.setVisible("v'",true);
+				            ggb.evalCommand('StartAnimation[ty]');
+				        }
+				        function rotacionarX() {
+				            if(!rotZ && !rotY)
+				                ggb.evalCommand("Px = ("+coordenadas+")");
+				            else if(rotY)
+				                ggb.evalCommand("Px = Rotate[Py,"+ny+"°,yAxis]");
+				            else
+				                ggb.evalCommand("Px = Rotate[Pz,"+nz+"°,zAxis]");
+				            ggb.evalCommand("v' = Qx");
+				            ggb.evalCommand('tx = 0');
+				            ggb.evalCommand('nx = '+nx);
+				            if(checados()==1)
+				            	ggb.setVisible('cX',true);
+				            ggb.setVisible('γ',true);
+				            ggb.setVisible('semiCx',true);
+				            ggb.setVisible('arcX',true);
+				            ggb.setVisible("v'",true);
+				            ggb.evalCommand('StartAnimation[tx]');
+				        }
+				        function checados(){
+				        	var checados=0;
+				        	if(rotZ)
+				        		checados++;
+				        	if(rotY)
+				        		checados++;
+				        	if(rotX)
+				        		checados++;
+				        	return checados;
+				        }
+				    </script>
+        			<div id="applet_container"></div>
 				</div>
 			</div>
 		</div>
