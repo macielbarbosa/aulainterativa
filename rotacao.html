@@ -9,94 +9,280 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+	<script type="text/javascript">
+		var parameters = {"id":"e5gJqcTX","width":700,"height":600,"showToolBar":false,"borderColor":null,"showMenuBar":false,"showAlgebraInput":false,"showResetIcon":true,"enableLabelDrags":false,"enableShiftDragZoom":true,"enableRightClick":false,"capturingThreshold":null,"showToolBarHelp":false,"errorDialogsActive":false,"useBrowserForJS":false,"ggbBase64":"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"};
+		var applet = new GGBApplet(parameters, '5.0');
+		applet.setHTML5Codebase('https://app.geogebra.org/5.0/web3d/');
+		window.onload = function() {
+			applet.inject('applet_container','preferHTML5');
+		}
+		function plotV(){
+			ggb = document.ggbApplet;
+			dados = document.getElementById('dados');
+			coordenadas = dados.elements[0].value;
+			ggb.evalCommand('α = 0°');
+			ggb.evalCommand('β = 0°');
+			ggb.evalCommand('γ = 0°');
+			ggb.setVisible('cX',false);
+			ggb.setVisible('cY',false);
+			ggb.setVisible('cZ',false);
+			ggb.setVisible("v'",false);
+			ggb.evalCommand('Pz = ('+ coordenadas +')');
+			var x = ggb.getXcoord('Pz');
+			var y = ggb.getYcoord('Pz');
+			var z = ggb.getZcoord('Pz');
+			var moduloV = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)+Math.pow(z,2));
+			document.getElementById('v').innerHTML = '<b>v</b> = ('+x+', '+y+', '+z+')</br>Módulo = '+moduloV.toFixed(2);
+			ggb.setCoordSystem(-moduloV,moduloV,-moduloV,moduloV,-moduloV,moduloV,false);
+			ggb.evalCommand('v = Pz');
+			ggb.setVisible('v',true);
+		}
+		function rotacionar(){
+			nz = dados.elements[3].value;
+			ny = dados.elements[5].value;
+			nx = dados.elements[8].value;
+			rotZ = document.getElementById('rotZ').checked;
+			rotY = document.getElementById('rotY').checked;
+			rotX = document.getElementById('rotX').checked;
+			plotV();
+			if(rotZ){
+				rotacionarZ();
+				setTimeout(atualizarComponentes, 1000);
+			}
+			if(rotY) {
+				if(rotZ){
+					setTimeout(rotacionarY, 1000);
+					setTimeout(atualizarComponentes, 2000);
+				}
+				else
+					rotacionarY();
+					setTimeout(atualizarComponentes,1000);
+			}
+			if(rotX){
+				if(rotZ && rotY){
+					setTimeout(rotacionarX, 2000);
+					setTimeout(atualizarComponentes,3000);
+					
+				}
+				else if(rotY || rotZ){
+					setTimeout(rotacionarX, 1000);
+					setTimeout(atualizarComponentes,2000);
+				}
+				else{
+					rotacionarX();
+					setTimeout(atualizarComponentes,1000);
+				}
+			}
+		}
+		function rotacionarZ(){
+			rotacaoNegativa('z');
+			ggb.evalCommand("v' = Qz");
+			ggb.evalCommand('tz = 0');
+			ggb.evalCommand('nz = '+nz);
+			if(checados()==1)
+				ggb.setVisible('cZ',true);
+			ggb.setVisible("v'",true);
+			ggb.evalCommand('StartAnimation[tz]');
+		}
+		function rotacionarY() {
+			rotacaoNegativa('y');
+			if(rotZ)
+				ggb.evalCommand("Py = Qz");
+			else
+				ggb.evalCommand("Py = ("+coordenadas+")");
+			ggb.evalCommand("v' = Qy");
+			ggb.evalCommand('ty = 0');
+			ggb.evalCommand('ny = '+ny);
+			if(checados()==1)
+				ggb.setVisible('cY',true);
+			ggb.setVisible("v'",true);
+			ggb.evalCommand('StartAnimation[ty]');
+		}
+		function rotacionarX() {
+			rotacaoNegativa('x');
+			if(!rotZ && !rotY)
+				ggb.evalCommand("Px = ("+coordenadas+")");
+			else if(rotY)
+				ggb.evalCommand("Px = Qy");
+			else
+				ggb.evalCommand("Px = Qz");
+			ggb.evalCommand("v' = Qx");
+			ggb.evalCommand('tx = 0');
+			ggb.evalCommand('nx = '+nx);
+			if(checados()==1)
+				ggb.setVisible('cX',true);
+			ggb.setVisible("v'",true);
+			ggb.evalCommand('StartAnimation[tx]');
+		}
+		function checados(){
+			var checados=0;
+			if(rotZ)
+				checados++;
+			if(rotY)
+				checados++;
+			if(rotX)
+				checados++;
+			return checados;
+		}
+		function rotacaoNegativa(eixo){
+			if(eixo=='z'){
+				if(nz<0){	
+					ggb.evalCommand('Qz=Rotate[Pz,(-tz)°,zAxis]');
+					ggb.evalCommand('α=Angle[Qz,Cz,Pz,zAxis]');
+					ggb.evalCommand('Mz=Rotate[Pz,(-α)/2,zAxis]');
+					nz = Math.abs(nz);
+				}
+				else{
+					ggb.evalCommand('Qz=Rotate[Pz,tz°,zAxis]');
+					ggb.evalCommand('α=Angle[Pz,Cz,Qz,zAxis]');
+					ggb.evalCommand('Mz=Rotate[Pz,α/2,zAxis]');
+				}
+			}
+			else if(eixo=='y')
+				if(ny<0){	
+					ggb.evalCommand('Qy=Rotate[Py,(-ty)°,yAxis]');
+					ggb.evalCommand('β=Angle[Qy,Cy,Py,yAxis]');
+					ggb.evalCommand('My=Rotate[Py,(-β)/2,yAxis]');
+					ny = Math.abs(ny);
+				}
+				else{
+					ggb.evalCommand('Qy=Rotate[Py,ty°,yAxis]');
+					ggb.evalCommand('β=Angle[Py,Cy,Qy,yAxis]');
+					ggb.evalCommand('My=Rotate[Py,β/2,yAxis]');
+				}
+			else{
+				if(nx<0){	
+					ggb.evalCommand('Qx=Rotate[Px,(-tx)°,xAxis]');
+					ggb.evalCommand('γ=Angle[Qx,Cx,Px,xAxis]');
+					ggb.evalCommand('Mx=Rotate[Px,(-γ)/2,xAxis]');
+					nx = Math.abs(nx);
+				}
+				else{
+					ggb.evalCommand('Qx=Rotate[Px,tx°,xAxis]');
+					ggb.evalCommand('γ=Angle[Px,Cx,Qx,xAxis]');
+					ggb.evalCommand('Mx=Rotate[Px,γ/2,xAxis]');
+				}
+			}
+		}
+		function atualizarComponentes(){
+			var x = ggb.getXcoord("v'");
+			var y = ggb.getYcoord("v'");
+			var z = ggb.getZcoord("v'");
+			var modulo = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)+Math.pow(z,2));
+			if(Math.abs(Math.round(x)-x)<0.005)
+				x = Math.round(x);
+			else
+				x = x.toFixed(2);
+			if(Math.abs(Math.round(y)-y)<0.005)
+				y = Math.round(y);
+			else
+				y = y.toFixed(2);
+			if(Math.abs(Math.round(z)-z)<0.005)
+				z = Math.round(z);
+			else
+				z = z.toFixed(2);
+			document.getElementById("v'").innerHTML = "<b>v</b>' = ("+x+", "+y+", "+z+")</br>Módulo = "+modulo.toFixed(2);
+		}
+	</script>
+	<style type="text/css">
+		p.vetor{
+			font-size: 15pt;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-default navbar-fixed-top">
-		 	<div class="container-fluid">
-		   <!-- Brand and toggle get grouped for better mobile display -->
-			   <div class="navbar-header">
-			  	   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			       	<span class="sr-only">Toggle navigation</span>
-			        	<span class="icon-bar"></span>
-			        	<span class="icon-bar"></span>
-			        	<span class="icon-bar"></span>
-			      </button>
-			      <a class="navbar-brand" id="logo" href="index.html">Aula Interativa</a>
-			   </div>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" id="logo" href="index.html">Aula Interativa</a>
+				</div>
 
-			   <!-- Collect the nav links, forms, and other content for toggling -->
-			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			   	<ul class="nav navbar-nav">
-			        	<li><a href="index.html">INÍCIO<span class="sr-only">(current)</span></a></li>
-			        	<li class="dropdown">
-			         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ÁLGEBRA LINEAR<span class="caret"></span></a>
-			         <ul class="dropdown-menu">
-			            <li><a href="independencia.html">Independência Linear</a></li>
-			            <li class="active"><a href="rotacao.html">Rotação de vetor em torno dos eixos</a></li>
-			            <!--li role="separator" class="divider"></li-->
-			         </ul>
-			        	</li>
-			        	<li class="dropdown">
-			         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CÁLCULO<span class="caret"></span></a>
-			         <ul class="dropdown-menu">
-			            <li><a href="#">Em breve</a></li>
-			         </ul>
-			        	</li>
-			      </ul>
-			      <form class="navbar-form navbar-left">
-			      	<div class="form-group">
-			          	<input type="text" class="form-control" placeholder="Pesquisa">
-			        	</div>
-			        	<button type="submit" class="btn btn-default">Buscar</button>
-			      </form>
-			      <ul class="nav navbar-nav navbar-right">
-			        	<li><a href="#">CONTATO</a></li>
-			        	<li><a href="#">SOBRE</a></li>
-			      </ul>
-			   </div><!-- /.navbar-collapse -->
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">INÍCIO<span class="sr-only">(current)</span></a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ÁLGEBRA LINEAR<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="independencia.html">Independência Linear</a></li>
+								<li class="active"><a href="rotacao.html">Rotação de vetor em torno dos eixos</a></li>
+								<!--li role="separator" class="divider"></li-->
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CÁLCULO<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Em breve</a></li>
+							</ul>
+						</li>
+					</ul>
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Pesquisa">
+						</div>
+						<button type="submit" class="btn btn-default">Buscar</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">CONTATO</a></li>
+						<li><a href="#">SOBRE</a></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
 		<div class="container">
 			<h1>Rotação de vetores em torno dos eixos</h1>
 		</div>
-		</header>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<br><p>Seja <b>v</b> &isin; &real;&sup2;:</p>
-					<form id="entrada">
-						<b>v</b> = ( 
-						<input type="text" name="vx" size="1"/> , 
-						<input type="text" name="vy" size="1"/> , 
-						<input type="text" name="vz" size="1"/> )<br/><br/>
-						Rotação em torno dos eixos em graus:<br/><br/>
-						<input type="checkbox" id="rotZ" checked>
-						Eixo z:
-						<input type="text" name="nz" size="1"/><br/><br/>
-						<input type="checkbox" id="rotY" checked>
-						Eixo y: 
-						<input type="text" name="ny" size="1"/><br/><br/>
-						<input type="checkbox" id="rotX" checked>
-						Eixo x: 
-						<input type="text" name="nx" size="1"/>
-						<br/><br/>
-						<button type="button" onclick="rotacionar()">Rotacionar</button>
-					</form>
-				</div>
-				<div class="col-sm-6">
-					<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
-					<script type="text/javascript">
-				   		var parameters = {"id":"E9PNZqfR","width":700,"height":500,"showToolBar":false,"borderColor":null,"showMenuBar":false,"showAlgebraInput":false,"showResetIcon":true,"enableLabelDrags":false,"enableShiftDragZoom":true,"enableRightClick":false,"capturingThreshold":null,"showToolBarHelp":false,"errorDialogsActive":true,"useBrowserForJS":false,"ggbBase64":"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"};
-		                var applet = new GGBApplet(parameters, '5.0');
-		                applet.setHTML5Codebase('https://app.geogebra.org/5.0/web3d/');
-		                window.onload = function() {
-							applet.inject('applet_container');
-		                }
-        			</script>
-        			<div id="applet_container"></div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<br><p>Seja <b>v</b> &isin; &real;&sup2;:</p>
+				<form id="dados">
+					<b>v</b> = ( 
+					<input type="text" name="vetor" size="9" placeholder="   x  ,  y  ,  z"/>
+					)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="plotV()">Plotar</button>
+					<br/><br/>
+					Rotação em torno dos eixos em graus:
+					<br/><br/>
+					<input type="checkbox" id="rotZ" checked/>
+					Eixo z:
+					<input type="text" name="nz" size="1"/>
+					<br/><br/>
+					<input type="checkbox" id="rotY"/>
+					Eixo y: 
+					<input type="text" name="ny" size="1"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="rotacionar()">Rotacionar</button>
+					<br/><br/>
+					<input type="checkbox" id="rotX"/>
+					Eixo x: 
+					<input type="text" name="nx" size="1"/>
+					<br/><br/>
+				</form>
+				<div class="row">
+					<div class="col-sm-6">
+						<p class="vetor" id="v"></p>
+					</div>
+					<div class="col-sm-6">
+						<p class="vetor" id="v'"></p>
+					</div>
 				</div>
 			</div>
+			<div class="col-sm-6">
+				<div id="applet_container"></div>
+			</div>
 		</div>
+	</div>
 </body>
 </html>

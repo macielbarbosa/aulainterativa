@@ -9,7 +9,6 @@ body{
 	/*background-image: url("../imagens/fundo.png");*/
 	font-family: Arial, Sans-serif;
 	font-size: 15px;
-	padding-top: 75px;
 }
 
 nav.navbar{
@@ -23,13 +22,7 @@ nav.navbar{
 	color: black;
 }
 
-h2{
-	margin-left: 90px;
-	padding-top: 30px;
-}
-
 section#principal{
-	
 	margin-top: 30px;
 	float: left;
 	margin-left: 30px;
@@ -50,7 +43,7 @@ p.recuo{
 p.teorema{
 	border: 1px solid gray;
 	padding: 10px;
-	width: 378px;
+	width: 80%;
 	margin-left: 50px;
 }
 
@@ -103,10 +96,9 @@ aside{
 
 div#grafico{
 	overflow: scroll;
-	width: 550px;
+	width: auto;
 	height: 465px;
-	margin-left: 0px;
-	margin-right: 0px;
+	margin-bottom: 20px; 
 	border: 1px solid gray;
 	position: relative;
 	box-shadow: 0px 0px 10px gray;
@@ -124,7 +116,7 @@ img#plano{
 	left: 0px;
 }
 
-aside p#vetores{
+p#vetores{
 	text-align: center;
 	display: none;
 }
