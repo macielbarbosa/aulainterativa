@@ -33,6 +33,7 @@
 			var y = ggb.getYcoord('Pz');
 			var z = ggb.getZcoord('Pz');
 			var moduloV = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)+Math.pow(z,2));
+			document.getElementById('v').innerHTML = '<b>v</b> = ('+x+', '+y+', '+z+')</br>Módulo = '+moduloV.toFixed(2);
 			ggb.setCoordSystem(-moduloV,moduloV,-moduloV,moduloV,-moduloV,moduloV,false);
 			ggb.evalCommand('v = Pz');
 			ggb.setVisible('v',true);
@@ -45,58 +46,70 @@
 			rotY = document.getElementById('rotY').checked;
 			rotX = document.getElementById('rotX').checked;
 			plotV();
-			if(rotZ)
+			if(rotZ){
 				rotacionarZ();
+				setTimeout(atualizarComponentes, 1000);
+			}
 			if(rotY) {
-				if(rotZ)
+				if(rotZ){
 					setTimeout(rotacionarY, 1000);
+					setTimeout(atualizarComponentes, 2000);
+				}
 				else
 					rotacionarY();
+					setTimeout(atualizarComponentes,1000);
 			}
 			if(rotX){
-				if(rotZ && rotY)
+				if(rotZ && rotY){
 					setTimeout(rotacionarX, 2000);
-				else if(rotY || rotZ)
+					setTimeout(atualizarComponentes,3000);
+					
+				}
+				else if(rotY || rotZ){
 					setTimeout(rotacionarX, 1000);
-				else
+					setTimeout(atualizarComponentes,2000);
+				}
+				else{
 					rotacionarX();
+					setTimeout(atualizarComponentes,1000);
+				}
 			}
 		}
 		function rotacionarZ(){
+			rotacaoNegativa('z');
 			ggb.evalCommand("v' = Qz");
 			ggb.evalCommand('tz = 0');
 			ggb.evalCommand('nz = '+nz);
-			ggb.evalCommand('α = Angle[Pz,Cz,Qz,zAxis]')
 			if(checados()==1)
 				ggb.setVisible('cZ',true);
 			ggb.setVisible("v'",true);
 			ggb.evalCommand('StartAnimation[tz]');
 		}
 		function rotacionarY() {
+			rotacaoNegativa('y');
 			if(rotZ)
-				ggb.evalCommand("Py = Rotate[Pz,"+nz+"°,zAxis]");
+				ggb.evalCommand("Py = Qz");
 			else
 				ggb.evalCommand("Py = ("+coordenadas+")");
 			ggb.evalCommand("v' = Qy");
 			ggb.evalCommand('ty = 0');
 			ggb.evalCommand('ny = '+ny);
-			ggb.evalCommand('β = Angle[Py,Cy,Qy,yAxis]')
 			if(checados()==1)
 				ggb.setVisible('cY',true);
 			ggb.setVisible("v'",true);
 			ggb.evalCommand('StartAnimation[ty]');
 		}
 		function rotacionarX() {
+			rotacaoNegativa('x');
 			if(!rotZ && !rotY)
 				ggb.evalCommand("Px = ("+coordenadas+")");
 			else if(rotY)
-				ggb.evalCommand("Px = Rotate[Py,"+ny+"°,yAxis]");
+				ggb.evalCommand("Px = Qy");
 			else
-				ggb.evalCommand("Px = Rotate[Pz,"+nz+"°,zAxis]");
+				ggb.evalCommand("Px = Qz");
 			ggb.evalCommand("v' = Qx");
 			ggb.evalCommand('tx = 0');
 			ggb.evalCommand('nx = '+nx);
-			ggb.evalCommand('γ = Angle[Px,Cx,Qx,xAxis]')
 			if(checados()==1)
 				ggb.setVisible('cX',true);
 			ggb.setVisible("v'",true);
@@ -112,7 +125,72 @@
 				checados++;
 			return checados;
 		}
+		function rotacaoNegativa(eixo){
+			if(eixo=='z'){
+				if(nz<0){	
+					ggb.evalCommand('Qz=Rotate[Pz,(-tz)°,zAxis]');
+					ggb.evalCommand('α=Angle[Qz,Cz,Pz,zAxis]');
+					ggb.evalCommand('Mz=Rotate[Pz,(-α)/2,zAxis]');
+					nz = Math.abs(nz);
+				}
+				else{
+					ggb.evalCommand('Qz=Rotate[Pz,tz°,zAxis]');
+					ggb.evalCommand('α=Angle[Pz,Cz,Qz,zAxis]');
+					ggb.evalCommand('Mz=Rotate[Pz,α/2,zAxis]');
+				}
+			}
+			else if(eixo=='y')
+				if(ny<0){	
+					ggb.evalCommand('Qy=Rotate[Py,(-ty)°,yAxis]');
+					ggb.evalCommand('β=Angle[Qy,Cy,Py,yAxis]');
+					ggb.evalCommand('My=Rotate[Py,(-β)/2,yAxis]');
+					ny = Math.abs(ny);
+				}
+				else{
+					ggb.evalCommand('Qy=Rotate[Py,ty°,yAxis]');
+					ggb.evalCommand('β=Angle[Py,Cy,Qy,yAxis]');
+					ggb.evalCommand('My=Rotate[Py,β/2,yAxis]');
+				}
+			else{
+				if(nx<0){	
+					ggb.evalCommand('Qx=Rotate[Px,(-tx)°,xAxis]');
+					ggb.evalCommand('γ=Angle[Qx,Cx,Px,xAxis]');
+					ggb.evalCommand('Mx=Rotate[Px,(-γ)/2,xAxis]');
+					nx = Math.abs(nx);
+				}
+				else{
+					ggb.evalCommand('Qx=Rotate[Px,tx°,xAxis]');
+					ggb.evalCommand('γ=Angle[Px,Cx,Qx,xAxis]');
+					ggb.evalCommand('Mx=Rotate[Px,γ/2,xAxis]');
+				}
+			}
+		}
+		function atualizarComponentes(){
+			var x = ggb.getXcoord("v'");
+			var y = ggb.getYcoord("v'");
+			var z = ggb.getZcoord("v'");
+			var modulo = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)+Math.pow(z,2));
+			if(Math.abs(Math.round(x)-x)<0.005)
+				x = Math.round(x);
+			else
+				x = x.toFixed(2);
+			if(Math.abs(Math.round(y)-y)<0.005)
+				y = Math.round(y);
+			else
+				y = y.toFixed(2);
+			if(Math.abs(Math.round(z)-z)<0.005)
+				z = Math.round(z);
+			else
+				z = z.toFixed(2);
+			document.getElementById("v'").innerHTML = "<b>v</b>' = ("+x+", "+y+", "+z+")</br>Módulo = "+modulo.toFixed(2);
+		}
 	</script>
+	<style type="text/css">
+		p.vetor{
+			font-size: 15pt;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<header>
@@ -192,6 +270,14 @@
 					<input type="text" name="nx" size="1"/>
 					<br/><br/>
 				</form>
+				<div class="row">
+					<div class="col-sm-6">
+						<p class="vetor" id="v"></p>
+					</div>
+					<div class="col-sm-6">
+						<p class="vetor" id="v'"></p>
+					</div>
+				</div>
 			</div>
 			<div class="col-sm-6">
 				<div id="applet_container"></div>
