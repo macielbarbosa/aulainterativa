@@ -21,12 +21,12 @@
 			ggb = document.ggbApplet;
 			dados = document.getElementById('dados');
 			coordenadas = dados.elements[0].value;
-			ggb.evalCommand('α = 0°');
-			ggb.evalCommand('β = 0°');
-			ggb.evalCommand('γ = 0°');
 			ggb.setVisible('cX',false);
 			ggb.setVisible('cY',false);
 			ggb.setVisible('cZ',false);
+			ggb.setValue('tx',0);
+			ggb.setValue('ty',0);
+			ggb.setValue('tz',0);
 			ggb.setVisible("v'",false);
 			ggb.evalCommand('Pz = ('+ coordenadas +')');
 			var x = ggb.getXcoord('Pz');
@@ -83,7 +83,6 @@
 		function rotacionarZ(){
 			rotacaoNegativa('z');
 			ggb.evalCommand("v' = Qz");
-			ggb.evalCommand('tz = 0');
 			ggb.evalCommand('nz = '+nz);
 			if(checados()==1)
 				ggb.setVisible('cZ',true);
@@ -100,7 +99,6 @@
 			else
 				ggb.evalCommand("Py = ("+coordenadas+")");
 			ggb.evalCommand("v' = Qy");
-			ggb.evalCommand('ty = 0');
 			ggb.evalCommand('ny = '+ny);
 			if(checados()==1)
 				ggb.setVisible('cY',true);
@@ -119,7 +117,6 @@
 			else
 				ggb.evalCommand("Px = Qz");
 			ggb.evalCommand("v' = Qx");
-			ggb.evalCommand('tx = 0');
 			ggb.evalCommand('nx = '+nx);
 			if(checados()==1)
 				ggb.setVisible('cX',true);
@@ -144,38 +141,38 @@
 				if(nz<0){	
 					ggb.evalCommand('Qz=Rotate[Pz,(-tz)°,zAxis]');
 					ggb.evalCommand('α=Angle[Qz,Cz,Pz,zAxis]');
-					ggb.evalCommand('Mz=Rotate[Pz,(-α)/2,zAxis]');
+					ggb.evalCommand('Mz=Rotate[Pz,-0.001°,zAxis]');
 					nz = Math.abs(nz);
 				}
 				else{
 					ggb.evalCommand('Qz=Rotate[Pz,tz°,zAxis]');
 					ggb.evalCommand('α=Angle[Pz,Cz,Qz,zAxis]');
-					ggb.evalCommand('Mz=Rotate[Pz,α/2,zAxis]');
+					ggb.evalCommand('Mz=Rotate[Pz,0.001°,zAxis]');
 				}
 			}
 			else if(eixo=='y')
 				if(ny<0){	
 					ggb.evalCommand('Qy=Rotate[Py,(-ty)°,yAxis]');
 					ggb.evalCommand('β=Angle[Qy,Cy,Py,yAxis]');
-					ggb.evalCommand('My=Rotate[Py,(-β)/2,yAxis]');
+					ggb.evalCommand('My=Rotate[Py,-0.001°,yAxis]');
 					ny = Math.abs(ny);
 				}
 				else{
 					ggb.evalCommand('Qy=Rotate[Py,ty°,yAxis]');
 					ggb.evalCommand('β=Angle[Py,Cy,Qy,yAxis]');
-					ggb.evalCommand('My=Rotate[Py,β/2,yAxis]');
+					ggb.evalCommand('My=Rotate[Py,0.001°,yAxis]');
 				}
 			else{
 				if(nx<0){	
 					ggb.evalCommand('Qx=Rotate[Px,(-tx)°,xAxis]');
 					ggb.evalCommand('γ=Angle[Qx,Cx,Px,xAxis]');
-					ggb.evalCommand('Mx=Rotate[Px,(-γ)/2,xAxis]');
+					ggb.evalCommand('Mx=Rotate[Px,-0.001°,xAxis]');
 					nx = Math.abs(nx);
 				}
 				else{
 					ggb.evalCommand('Qx=Rotate[Px,tx°,xAxis]');
 					ggb.evalCommand('γ=Angle[Px,Cx,Qx,xAxis]');
-					ggb.evalCommand('Mx=Rotate[Px,γ/2,xAxis]');
+					ggb.evalCommand('Mx=Rotate[Px,0.001°,xAxis]');
 				}
 			}
 		}
