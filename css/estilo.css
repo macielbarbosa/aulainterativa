@@ -78,11 +78,6 @@ p.caption{
 	margin-left: 60px;
 }
 
-iframe#video{
-	position: relative;
-	float:right;
-}
-
 button#btnExercicios{
 	margin-top: 20px;
 	margin-left: 170px;
