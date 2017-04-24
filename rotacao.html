@@ -6,7 +6,9 @@
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script  type = "text / javascript"  async src = "https://example.com/MathJax.js?config=MML_CHTML "></script>
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
@@ -38,6 +40,10 @@
 			ggb.evalCommand('v = Pz');
 			ggb.setVisible('v',true);
 			document.getElementById("v'").style.display = 'none';
+			document.getElementById("matrizRotZ").style.display = 'none';
+			document.getElementById("matrizRotY").style.display = 'none';
+			document.getElementById("matrizRotX").style.display = 'none';
+			document.getElementById("demo").style.display = 'none';
 		}
 		function rotacionar(){
 			nz = dados.elements[3].value;
@@ -65,8 +71,10 @@
 			else if(nx && rotX)
 				rotacionarX();
 			atualizarComponentes();
+			matrizesRotacao();
 			document.getElementById("v'").style.display = 'block';
 			document.getElementById("demo").style.display = 'block';
+			document.getElementById("matrizV").innerHTML = '`[['+vx+'],['+vy+'],['+vz+']]`';
 		}
 		function rotacionarZ(){
 			rotacaoNegativa('z');
@@ -193,6 +201,20 @@
 			vy = y*Math.cos(nx*Math.PI/180) - z*Math.sin(nx*Math.PI/180);
 			vz = y*Math.sin(nx*Math.PI/180) + z*Math.cos(nx*Math.PI/180);
 		}
+		function matrizesRotacao(){
+			if(rotZ && nz){
+				document.getElementById('matrizRotZ').innerHTML = '`[[cos'+nz+'"&deg;",-sin'+nz+'"&deg;",0],[sin'+nz+'"&deg;",cos'+nz+'"&deg;", 0],[0,0,1]]`';
+				document.getElementById('matrizRotZ').style.display = 'block';
+			}
+			if(rotY && ny){
+				document.getElementById('matrizRotY').innerHTML = '`[[cos'+ny+'"&deg;",0,sin'+ny+'"&deg;"],[0,1,0],[-sin'+ny+'"&deg;",0,cos'+ny+'"&deg;"]]`';
+				document.getElementById('matrizRotY').style.display = 'block';
+			}
+			if(rotX && nx){
+				document.getElementById('matrizRotY').innerHTML = '`[[1,0,0],[0,cos'+nx+'"&deg;",-sin'+nx+'"&deg;"],[0,sin'+nx+'"&deg;",cos'+nx+'"&deg;"]]`';
+				document.getElementById('matrizRotX').style.display = 'block';
+			}
+		}
 	</script>
 </head>
 <body>
@@ -290,13 +312,20 @@
 			<div class="col-sm-6">
 				<div id="demo">
 					<h4>Cálculo das coordenadas de <b>v</b>'</h4>
+					As matrizes de rotação no `RR^3 são:`<br/><br/>
+					Eixo Z `rarr R_alpha = [[cosalpha,-sinalpha,0],[sinalpha,cosalpha, 0],[0,0,1]]`<br/><br/>
+					Eixo Y `rarr R_beta = [[cosbeta,0,sinbeta],[0,1,0],[-sinbeta,0,cosbeta]]`<br/><br/>
+					Eixo X `rarr R_gamma = [[1,0,0],[0,cosgamma,-singamma],[0,singamma,cosgamma]]`<br/><br/>
+					`v' = `<span id="matrizRotX"></span><span id="matrizRotY"></span><span id="matrizRotZ"></span><span id="matrizV"></span>
 					<h4>Módulo constante</h4>
-					O módulo do vetor resultante <b>v</b>' é o igual ao módulo do vetor <b>v</b>.<br/><br/>
+					O módulo do vetor resultante <b>v</b>' é o igual ao módulo do vetor <b>v</b>.<br/>
 					Seja R a matriz de rotação:<br/><br/>
 					<p class="calculo">	
-						<b>v</b>' = R <b>v</b><br/>
-						| <b>v</b>' | = &radic; &lang; <b>v</b>', <b>v</b>' &rang;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = &radic; <b>v</b>'<sup>T</sup> <b>v</b>' <br/>
+						`v' = R v`<br/><br/>
+						`|v'| = sqrt((:v',v':))`<br/><br/>
+						`= sqrt(v'^T v') = sqrt((Rv)^T Rv)`<br/><br/>
+						`= sqrt(v^T R^T Rv) = sqrt(v^T R^-1 Rv)`<br/><br/>
+						`= sqrt(v^Tv) = |v|` <br/><br/>
 					</p>
 				</div>
 			</div>
