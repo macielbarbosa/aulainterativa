@@ -150,3 +150,21 @@ h1#logo{
 	top: 250px;
 	left: 360px;
 }
+
+.vetor{
+	font-size: 15pt;
+	text-align: center;
+}
+
+#demo{
+	display: block;
+}
+
+.overline{
+	text-decoration: overline;
+}
+
+.calculo{
+	margin-left: 10%;
+	font-size: 12pt;
+}

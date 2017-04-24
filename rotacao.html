@@ -3,10 +3,10 @@
 <head>
 	<meta charset='UTF-8'/>
 	<title>Rotação de vetores</title>
-	<script src = "javascript/rotacao.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script  type = "text / javascript"  async src = "https://example.com/MathJax.js?config=MML_CHTML "></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
@@ -50,22 +50,23 @@
 			if(nz && rotZ){
 				rotacionarZ();
 				if(ny && rotY){
-					setTimeout(rotacionarY, 1000);
+					setTimeout(rotacionarY, 1500);
 					if(nx && rotX)
-					setTimeout(rotacionarX,2000);
+					setTimeout(rotacionarX,3000);
 				}
 				else if(nx && rotX)
-					setTimeout(rotacionarX, 1000);
+					setTimeout(rotacionarX, 1500);
 			}
 			else if(ny && rotY) {
 				rotacionarY();
 				if(nx && rotX)
-					setTimeout(rotacionarX, 1000);
+					setTimeout(rotacionarX, 1500);
 			}
 			else if(nx && rotX)
 				rotacionarX();
 			atualizarComponentes();
 			document.getElementById("v'").style.display = 'block';
+			document.getElementById("demo").style.display = 'block';
 		}
 		function rotacionarZ(){
 			rotacaoNegativa('z');
@@ -74,39 +75,35 @@
 			if((!rotY || !ny) && (!rotX || !nx))
 				ggb.setVisible('cZ',true);
 			ggb.setVisible("v'",true);
-			ggb.setAnimating('tx',false);
-			ggb.setAnimating('ty',false);
-			ggb.setAnimating('tz',true);
-			ggb.startAnimation();
+			ggb.evalCommand('StartAnimation[tz]');
 		}
 		function rotacionarY(){
 			rotacaoNegativa('y');
-			ggb.evalCommand("Py = Qz");
+			if(rotZ && nz)
+				ggb.evalCommand('Py = Rotate[Pz,'+nz+'°,zAxis]');
+			else
+				ggb.evalCommand('Py = ('+coordenadas+')');
 			ggb.evalCommand("v' = Qy");
 			ggb.evalCommand('ny = '+Math.abs(ny));
 			if((!rotZ || !nz) && (!rotX || !nx))
 				ggb.setVisible('cY',true);
 			ggb.setVisible("v'",true);
-			ggb.setAnimating('tx',false);
-			ggb.setAnimating('ty',true);
-			ggb.setAnimating('tz',false);
-			ggb.startAnimation();
+			ggb.evalCommand('StartAnimation[ty]');
 		}
 		function rotacionarX(){
 			rotacaoNegativa('x');
 			if(ny && rotY)
-				ggb.evalCommand("Px = Qy");
+				ggb.evalCommand('Px = Rotate[Py,'+ny+'°,yAxis]');
+			else if(rotZ && nz)
+				ggb.evalCommand('Px = Rotate[Pz,'+nz+'°,zAxis]');
 			else
-				ggb.evalCommand("Px = Qz");
+				ggb.evalCommand('Px = ('+coordenadas+')');
 			ggb.evalCommand("v' = Qx");
 			ggb.evalCommand('nx = '+Math.abs(nx));
 			if((!rotZ || !nz) && (!rotY || !ny))
 				ggb.setVisible('cX',true);
 			ggb.setVisible("v'",true);
-			ggb.setAnimating('tx',true);
-			ggb.setAnimating('ty',false);
-			ggb.setAnimating('tz',false);
-			ggb.startAnimation();
+			ggb.evalCommand('StartAnimation[tx]');
 		}
 		function rotacaoNegativa(eixo){
 			if(eixo=='z'){
@@ -197,12 +194,6 @@
 			vz = y*Math.sin(nx*Math.PI/180) + z*Math.cos(nx*Math.PI/180);
 		}
 	</script>
-	<style type="text/css">
-		p.vetor{
-			font-size: 15pt;
-			text-align: center;
-		}
-	</style>
 </head>
 <body>
 	<header>
@@ -269,17 +260,17 @@
 					<br/><br/>
 					<input type="checkbox" id="rotZ" checked/>
 					Eixo z:
-					<input type="text" name="nz" size="1"/>
+					<input type="text" name="nz" size="2"/>
 					<br/><br/>
 					<input type="checkbox" id="rotY" checked/>
 					Eixo y: 
-					<input type="text" name="ny" size="1"/>
+					<input type="text" name="ny" size="2"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" onclick="rotacionar()">Rotacionar</button>
 					<br/><br/>
 					<input type="checkbox" id="rotX" checked/>
 					Eixo x: 
-					<input type="text" name="nx" size="1"/>
+					<input type="text" name="nx" size="2"/>
 					<br/><br/>
 				</form>
 				<div class="row">
@@ -296,14 +287,25 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-8">
-				<br/>
-				<p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCGoK950uuEZyURnLXCSjx7Q' target="_blank"><i>Academia Zanella</i></a></p>
-				<iframe width="100%" height="422" src="https://www.youtube.com/embed/nu82tPe-ty4" frameborder="0" allowfullscreen></iframe>
+			<div class="col-sm-6">
+				<div id="demo">
+					<h4>Cálculo das coordenadas de <b>v</b>'</h4>
+					<h4>Módulo constante</h4>
+					O módulo do vetor resultante <b>v</b>' é o igual ao módulo do vetor <b>v</b>.<br/><br/>
+					Seja R a matriz de rotação:<br/><br/>
+					<p class="calculo">	
+						<b>v</b>' = R <b>v</b><br/>
+						| <b>v</b>' | = &radic; &lang; <b>v</b>', <b>v</b>' &rang;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = &radic; <b>v</b>'<sup>T</sup> <b>v</b>' <br/>
+					</p>
 				</div>
 			</div>
-			<div class="col-sm-2"></div>
+			<div class="col-sm-6">
+				<br/>
+				<p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCGoK950uuEZyURnLXCSjx7Q' target="_blank"><i>Academia Zanella</i></a></p>
+				<iframe width="100%" height="312" src="https://www.youtube.com/embed/nu82tPe-ty4" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
