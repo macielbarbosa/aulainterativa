@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 	<meta charset='UTF-8'/>
@@ -19,7 +19,12 @@
 		window.onload = function() {
 			applet.inject('applet_container','preferHTML5');
 		}
+		var reset = true;
 		function plotV(){
+			if(reset){	//evitar bug de primeira utilização do ggbApplet
+				ggbApplet.reset();
+				reset = false;
+			}
 			ggb = document.ggbApplet;
 			dados = document.getElementById('dados');
 			coordenadas = dados.elements[0].value;
@@ -39,6 +44,7 @@
 			ggb.setCoordSystem(-moduloV,moduloV,-moduloV,moduloV,-moduloV,moduloV,false);
 			ggb.evalCommand('v = Pz');
 			ggb.setVisible('v',true);
+			document.getElementById("matrizV").innerHTML = '`[['+vx+'],['+vy+'],['+vz+']]`';
 			document.getElementById("v'").style.display = 'none';
 			document.getElementById("matrizRotZ").style.display = 'none';
 			document.getElementById("matrizRotY").style.display = 'none';
@@ -74,7 +80,7 @@
 			matrizesRotacao();
 			document.getElementById("v'").style.display = 'block';
 			document.getElementById("demo").style.display = 'block';
-			document.getElementById("matrizV").innerHTML = '`[['+vx+'],['+vy+'],['+vz+']]`';
+			MathJax.Hub.Typeset(); //atualizar notacao asciimath
 		}
 		function rotacionarZ(){
 			rotacaoNegativa('z');
@@ -169,6 +175,7 @@
 			else
 				z = z.toFixed(2);
 			document.getElementById("v'").innerHTML = "<b>v</b>' = ("+x+", "+y+", "+z+")</br>Módulo = "+modulo.toFixed(2);
+			document.getElementById("matrizV'").innerHTML = '`[['+x+'],['+y+'],['+z+']]`';
 		}
 		function rotacaoV(){
 			if(nz && rotZ){
@@ -203,17 +210,32 @@
 		}
 		function matrizesRotacao(){
 			if(rotZ && nz){
-				document.getElementById('matrizRotZ').innerHTML = '`[[cos'+nz+'"&deg;",-sin'+nz+'"&deg;",0],[sin'+nz+'"&deg;",cos'+nz+'"&deg;", 0],[0,0,1]]`';
-				document.getElementById('matrizRotZ').style.display = 'block';
+				document.getElementById('matrizRotZ').innerHTML = '`[[cos'+nz+'\"&deg;\",-sin'+nz+'\"&deg;\",0],[sin'+nz+'\"&deg;\",cos'+nz+'\"&deg;\", 0],[0,0,1]]`';
+				document.getElementById('matrizRotZ').style.display = 'inline';
 			}
 			if(rotY && ny){
-				document.getElementById('matrizRotY').innerHTML = '`[[cos'+ny+'"&deg;",0,sin'+ny+'"&deg;"],[0,1,0],[-sin'+ny+'"&deg;",0,cos'+ny+'"&deg;"]]`';
-				document.getElementById('matrizRotY').style.display = 'block';
+				document.getElementById('matrizRotY').innerHTML = '`[[cos'+ny+'\"&deg;\",0,sin'+ny+'\"&deg;\"],[0,1,0],[-sin'+ny+'\"&deg;\",0,cos'+ny+'\"&deg;\"]]`';
+				document.getElementById('matrizRotY').style.display = 'inline';
 			}
 			if(rotX && nx){
-				document.getElementById('matrizRotY').innerHTML = '`[[1,0,0],[0,cos'+nx+'"&deg;",-sin'+nx+'"&deg;"],[0,sin'+nx+'"&deg;",cos'+nx+'"&deg;"]]`';
-				document.getElementById('matrizRotX').style.display = 'block';
+				document.getElementById('matrizRotX').innerHTML = '`[[1,0,0],[0,cos'+nx+'\"&deg;\",-sin'+nx+'\"&deg;\"],[0,sin'+nx+'\"&deg;\",cos'+nx+'\"&deg;\"]]`';
+				document.getElementById('matrizRotX').style.display = 'inline';
 			}
+			var eqRot = document.getElementById('eqRot');
+			if(nz && rotZ){
+				eqRot.innerHTML = '`v\' = R_alphav`';
+				if(ny && rotY)
+					eqRot.innerHTML = '`v\' = R_alphaR_betav`';
+				if(nx && rotX)
+					eqRot.innerHTML = '`v\' = R_alphaR_betaR_gammav`';
+			}
+			else if(ny && rotY) {
+				eqRot.innerHTML = '`v\' = R_betav`';
+				if(nx && rotX)
+					eqRot.innerHTML = '`v\' = R_betaR_gammav`';
+			}
+			else if(nx && rotX)
+				eqRot.innerHTML = '`v\' = R_gammav`';
 		}
 	</script>
 </head>
@@ -316,7 +338,8 @@
 					Eixo Z `rarr R_alpha = [[cosalpha,-sinalpha,0],[sinalpha,cosalpha, 0],[0,0,1]]`<br/><br/>
 					Eixo Y `rarr R_beta = [[cosbeta,0,sinbeta],[0,1,0],[-sinbeta,0,cosbeta]]`<br/><br/>
 					Eixo X `rarr R_gamma = [[1,0,0],[0,cosgamma,-singamma],[0,singamma,cosgamma]]`<br/><br/>
-					`v' = `<span id="matrizRotX"></span><span id="matrizRotY"></span><span id="matrizRotZ"></span><span id="matrizV"></span>
+					<span id="eqRot"></span><br><br>
+					`v' = `<span id="matrizRotX"></span><span id="matrizRotY"></span><span id="matrizRotZ"></span><span id="matrizV"></span>` = `<span id="matrizV'"></span><br/><br/><br/>
 					<h4>Módulo constante</h4>
 					O módulo do vetor resultante <b>v</b>' é o igual ao módulo do vetor <b>v</b>.<br/>
 					Seja R a matriz de rotação:<br/><br/>
