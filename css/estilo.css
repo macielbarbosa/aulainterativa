@@ -6,7 +6,6 @@
 }
 
 body{
-	/*background-image: url("../imagens/fundo.png");*/
 	font-family: Arial, Sans-serif;
 	font-size: 15px;
 }
@@ -20,12 +19,6 @@ nav.navbar{
 	font-family: chawp;
 	font-size: 25pt;
 	color: black;
-}
-
-section#principal{
-	margin-top: 30px;
-	float: left;
-	margin-left: 30px;
 }
 
 p{
@@ -76,11 +69,6 @@ p.caption{
 	font-size: 10pt;
 	margin-bottom: 0px;
 	margin-left: 60px;
-}
-
-iframe#video{
-	position: relative;
-	float:right;
 }
 
 button#btnExercicios{
@@ -161,4 +149,22 @@ h1#logo{
 	position: absolute;
 	top: 250px;
 	left: 360px;
+}
+
+.vetor{
+	font-size: 15pt;
+	text-align: center;
+}
+
+#demo{
+	display: none;
+}
+
+.overline{
+	text-decoration: overline;
+}
+
+.calculo{
+	margin-left: 10%;
+	font-size: 12pt;
 }

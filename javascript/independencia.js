@@ -90,10 +90,6 @@ function calcular3(){
 	document.getElementById("v3").style.display = 'block';
 	document.getElementById("prova3").style.display = 'block';
 	
-	document.getElementById('videoFloat').style.position = 'absolute';
-	document.getElementById('videoFloat').style.top = '520px';
-	document.getElementById('videoFloat').style.left = '560px';
-	
 	var getValor = document.getElementById("entrada3");
 	zx = getValor.elements[0].value;
 	zy = getValor.elements[1].value;
