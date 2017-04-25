@@ -75,7 +75,7 @@
 						<b>v</b> = ( 
 						<input type="text" name="vx" size="1"/> , 
 						<input type="text" name="vy" size="1"/> )<br/><br/><br/>
-						<button type="button" onclick="calcular2()">Calcular</button>
+						<abbr title="Verifica se são linearmente dependentes ou independentes"><button type="button" onclick="calcular2()">Verificar</button></abbr>
 					</form>
 					<div id="resposta2">
 						<p class="recuo">
@@ -96,7 +96,7 @@
 							<b>z</b> = ( 
 							<input type="text" name="zx" size="1"/> , 
 							<input type="text" name="zy" size="1"/> )<br/><br/><br/>
-							<button type="button" onclick="calcular3()">Calcular</button>
+							<abbr title="Verifica se {w,v,z} são LD ou LI"><button type="button" onclick="calcular3()">Verificar</button></abbr>
 						</form>
 					</div>	
 				</div>
@@ -114,7 +114,7 @@
 				<div class="col-sm-6">	
 					<div id="resposta3">
 						<p class="recuo">
-							Para <b>z</b> = (<span id="zx"></span>, <span id="zy"></span>) o conjunto de vetores S = {<b>w</b>, <b>v</b>, <b>z</b>} é <ins>linearmente dependente</ins> (LD), pois um conjunto com três ou mais vetores no &real;&sup2; sempre é LD.
+							Para <b>z</b> = (<span id="zx"></span>, <span id="zy"></span>) o conjunto de vetores S = {<b>w</b>, <b>v</b>, <b>z</b>} é <ins>linearmente dependente</ins> (<abbr title='Linearmente dependente'>LD</abbr>), pois um conjunto com três ou mais vetores no &real;&sup2; sempre é <abbr title='Linearmente dependente'>LD</abbr>.
 							<p class="teorema">	
 								<b>TEOREMA</b><br/>
 								<i>Seja S = {<b>v</b><small><sub>1</sub></small>, <b>v</b><small><sub>2</sub></small>,..., <b>v</b><sub>r</sub>} um conjunto de vetores em <b>R</b><sup>n</sup>. Se r > n, então S é linearmente independente.</i>
@@ -126,7 +126,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div>
-						<p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCdv5kM0ZID619s3kNUIlBdg' target="_blank"><i>O Estudante</i></a></p>
+						<p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCdv5kM0ZID619s3kNUIlBdg' target="_blank"><cite>O Estudante</cite></a></p>
 						<iframe id="video" width="100%" height="315" src="https://www.youtube.com/embed/HhhBL1p8LFU" frameborder="0" allowfullscreen>
 						</iframe>
 					</div>

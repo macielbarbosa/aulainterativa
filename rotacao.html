@@ -40,11 +40,12 @@
 			vy = ggb.getYcoord('Pz');
 			vz = ggb.getZcoord('Pz');
 			var moduloV = Math.sqrt(Math.pow(vx,2)+Math.pow(vy,2)+Math.pow(vz,2));
-			document.getElementById('v').innerHTML = '<b>v</b> = ('+vx+', '+vy+', '+vz+')</br>Módulo = '+moduloV.toFixed(2);
+			document.getElementById('v').innerHTML = '<br/><b>v</b> = ('+vx+', '+vy+', '+vz+')<br/><br/>| <b>v</b> | = '+moduloV.toFixed(2)+'<br/><br/>';
 			ggb.setCoordSystem(-moduloV,moduloV,-moduloV,moduloV,-moduloV,moduloV,false);
 			ggb.evalCommand('v = Pz');
 			ggb.setVisible('v',true);
 			document.getElementById("matrizV").innerHTML = '`[['+vx+'],['+vy+'],['+vz+']]`';
+			document.getElementById('v').style.display = 'block';
 			document.getElementById("v'").style.display = 'none';
 			document.getElementById("matrizRotZ").style.display = 'none';
 			document.getElementById("matrizRotY").style.display = 'none';
@@ -174,7 +175,7 @@
 				z = Math.round(z);
 			else
 				z = z.toFixed(2);
-			document.getElementById("v'").innerHTML = "<b>v</b>' = ("+x+", "+y+", "+z+")</br>Módulo = "+modulo.toFixed(2);
+			document.getElementById("v'").innerHTML = "<br/><b>v</b>' = ("+x+", "+y+", "+z+")<br/><br/>| <b>v</b>' | = "+modulo.toFixed(2)+"<br/><br/>";
 			document.getElementById("matrizV'").innerHTML = '`[['+x+'],['+y+'],['+z+']]`';
 		}
 		function rotacaoV(){
@@ -209,24 +210,29 @@
 			vz = y*Math.sin(nx*Math.PI/180) + z*Math.cos(nx*Math.PI/180);
 		}
 		function matrizesRotacao(){
+			var matrizRotZ = document.getElementById('matrizRotZ');
+			var matrizRotY = document.getElementById('matrizRotY');
+			var matrizRotX = document.getElementById('matrizRotX');
 			if(rotZ && nz){
-				document.getElementById('matrizRotZ').innerHTML = '`[[cos'+nz+'\"&deg;\",-sin'+nz+'\"&deg;\",0],[sin'+nz+'\"&deg;\",cos'+nz+'\"&deg;\", 0],[0,0,1]]`';
-				document.getElementById('matrizRotZ').style.display = 'inline';
+				matrizRotZ.innerHTML = '`[[cos'+nz+'\"&deg;\",-sin'+nz+'\"&deg;\",0],[sin'+nz+'\"&deg;\",cos'+nz+'\"&deg;\", 0],[0,0,1]]xx`';					
+				matrizRotZ.style.display = 'inline';
 			}
 			if(rotY && ny){
-				document.getElementById('matrizRotY').innerHTML = '`[[cos'+ny+'\"&deg;\",0,sin'+ny+'\"&deg;\"],[0,1,0],[-sin'+ny+'\"&deg;\",0,cos'+ny+'\"&deg;\"]]`';
-				document.getElementById('matrizRotY').style.display = 'inline';
+				matrizRotY.innerHTML = '`[[cos'+ny+'\"&deg;\",0,sin'+ny+'\"&deg;\"],[0,1,0],[-sin'+ny+'\"&deg;\",0,cos'+ny+'\"&deg;\"]]xx`';
+				matrizRotY.style.display = 'inline';
 			}
 			if(rotX && nx){
-				document.getElementById('matrizRotX').innerHTML = '`[[1,0,0],[0,cos'+nx+'\"&deg;\",-sin'+nx+'\"&deg;\"],[0,sin'+nx+'\"&deg;\",cos'+nx+'\"&deg;\"]]`';
-				document.getElementById('matrizRotX').style.display = 'inline';
+				matrizRotX.innerHTML = '`[[1,0,0],[0,cos'+nx+'\"&deg;\",-sin'+nx+'\"&deg;\"],[0,sin'+nx+'\"&deg;\",cos'+nx+'\"&deg;\"]]xx`';
+				matrizRotX.style.display = 'inline';
 			}
 			var eqRot = document.getElementById('eqRot');
 			if(nz && rotZ){
 				eqRot.innerHTML = '`v\' = R_alphav`';
 				if(ny && rotY)
 					eqRot.innerHTML = '`v\' = R_alphaR_betav`';
-				if(nx && rotX)
+				else if(nx && rotX)
+					eqRot.innerHTML = '`v\' = R_alphaR_gammav`';
+				if(ny && rotY && nx && rotX)
 					eqRot.innerHTML = '`v\' = R_alphaR_betaR_gammav`';
 			}
 			else if(ny && rotY) {
@@ -296,7 +302,7 @@
 				<br><p>Seja <b>v</b> &isin; &real;&sup3;:</p>
 				<form id="dados">
 					<b>v</b> = ( 
-					<input type="text" name="vetor" size="9" placeholder="   x  ,  y  ,  z"/>
+					<input type="text" name="vetor" size="9" placeholder="x  ,  y  ,  z"/>
 					)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" onclick="plotV()">Plotar</button>
 					<br/><br/>
@@ -304,17 +310,17 @@
 					<br/><br/>
 					<input type="checkbox" id="rotZ" checked/>
 					Eixo z:
-					<input type="text" name="nz" size="2"/>
+					<input type="text" name="nz" size="2" placeholder="&alpha;&deg;"/>
 					<br/><br/>
 					<input type="checkbox" id="rotY" checked/>
 					Eixo y: 
-					<input type="text" name="ny" size="2"/>
+					<input type="text" name="ny" size="2" placeholder="&beta;&deg;"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" onclick="rotacionar()">Rotacionar</button>
 					<br/><br/>
 					<input type="checkbox" id="rotX" checked/>
 					Eixo x: 
-					<input type="text" name="nx" size="2"/>
+					<input type="text" name="nx" size="2" placeholder="&gamma;&deg;"/>
 					<br/><br/>
 				</form>
 				<div class="row">
@@ -354,7 +360,7 @@
 			</div>
 			<div class="col-sm-6">
 				<br/>
-				<p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCGoK950uuEZyURnLXCSjx7Q' target="_blank"><i>Academia Zanella</i></a></p>
+				<p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCGoK950uuEZyURnLXCSjx7Q' target="_blank"><cite>Academia Zanella</cite></a></p>
 				<iframe width="100%" height="312" src="https://www.youtube.com/embed/nu82tPe-ty4" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>

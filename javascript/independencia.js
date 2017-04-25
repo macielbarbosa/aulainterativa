@@ -77,17 +77,17 @@ function calcular2(){
 
 function resetCanvas(grafico){
 	document.getElementById(grafico).remove();
-	var canvasW = document.createElement("CANVAS");
-	canvasW.setAttribute("height","756");
-	canvasW.setAttribute("width","756");
-    canvasW.id = grafico;
-    document.getElementById("grafico").appendChild(canvasW);
+	var canvas = document.createElement("CANVAS");
+	canvas.setAttribute("height","756");
+	canvas.setAttribute("width","756");
+    canvas.id = grafico;
+    document.getElementById("grafico").appendChild(canvas);
 }
-//Cálcular 
+//Cálculo com 3 vetores
 function calcular3(){
 	terceiroVetor = true;
 	document.getElementById("resposta3").style.display = 'block';
-	document.getElementById("v3").style.display = 'block';
+	document.getElementById("v3").style.display = 'inline';
 	document.getElementById("prova3").style.display = 'block';
 	
 	var getValor = document.getElementById("entrada3");
@@ -411,7 +411,7 @@ function anguloMedio(){
 function prova(tipo){
 	if(tipo == 'doisVetores'){
 		if (wx==0 && wy==0 || vx==0 && vy==0){
-		document.getElementById("resultado2").innerHTML = "<ins>linearmente dependente</ins> (LD)";
+		document.getElementById("resultado2").innerHTML = "<ins>linearmente dependente</ins> (<abbr title='Linearmente dependente'>LD</abbr>)";
 		document.getElementById("justificativa2").innerHTML = "é um conjunto finito de vetores que contém o vetor nulo.";
 		document.getElementById('vetorNulo').style.display = 'block';
 		}
@@ -419,7 +419,7 @@ function prova(tipo){
 			document.getElementById('prova2').style.display = 'block';
 			var escalarV = moduloW/moduloV;
 			var escalarW = moduloV/moduloW;
-			document.getElementById("resultado2").innerHTML = "<ins>linearmente dependente</ins> (LD)";
+			document.getElementById("resultado2").innerHTML = "<ins>linearmente dependente</ins> (<abbr title='Linearmente dependente'>LD</abbr>)";
 			document.getElementById("justificativa2").innerHTML = "um dos vetores de S é um múltiplo escalar do outro:";
 			document.getElementById('multiplos').style.display = 'block';
 			if (moduloW>=moduloV)
@@ -431,7 +431,7 @@ function prova(tipo){
 			document.getElementById('prova2').style.display = 'block';
 			var escalarV = -1*moduloW/moduloV;
 			var escalarW = -1*moduloV/moduloW;
-			document.getElementById("resultado2").innerHTML = "<ins>linearmente dependente</ins> (LD)";
+			document.getElementById("resultado2").innerHTML = "<ins>linearmente dependente</ins> (<abbr title='Linearmente dependente'>LD</abbr>)";
 			document.getElementById("justificativa2").innerHTML = "um dos vetores de S é um múltiplo escalar do outro:";
 			document.getElementById('multiplos').style.display = 'block';
 			if (moduloW>=moduloV)
@@ -441,7 +441,7 @@ function prova(tipo){
 		}
 		else{
 			document.getElementById('prova2').style.display = 'block';
-			document.getElementById("resultado2").innerHTML = "<ins>linearmente independente</ins> (LI)";
+			document.getElementById("resultado2").innerHTML = "<ins>linearmente independente</ins> (<abbr title='Linearmente independente'>LI</abbr>)";
 			document.getElementById("justificativa2").innerHTML = "nenhum dos dois vetores de S é um múltiplo escalar do outro:";
 			document.getElementById('naoMultiplos').style.display = 'block'; 
 			if (moduloW>moduloV)
@@ -621,11 +621,4 @@ function moduloAnguloMedio(){
 		return moduloV;
 	if(anguloMedio()==anguloZ)
 		return moduloZ;
-}
-
-function exercicio1(){
-	if(document.getElementById('a').checked==true && document.getElementById('b').checked==false && document.getElementById('c').checked==true &&document.getElementById('d').checked==false && document.getElementById('e').checked==false)
-		document.getElementById('resp1').innerHTML = 'Resposta correta!';
-	else
-		document.getElementById('resp1').innerHTML = 'Resposta incorreta!';
 }
