@@ -72,6 +72,7 @@ function calcular2(){
 	if(terceiroVetor){
 		resetCanvas("graficoZ");
 		desenhar("graficoZ", moduloZ, anguloZ, "green","seta-verde");
+		alphaBetaV();
 	}
 }
 
@@ -124,6 +125,8 @@ function calcular3(){
 	desenhar("graficoW", moduloW, anguloW, "red","seta-vermelha");
 	desenhar("graficoV", moduloV, anguloV, "blue","seta-azul");
 	desenhar("graficoZ", moduloZ, anguloZ, "green","seta-verde");
+
+	alphaBetaV();
 }
 
 function desenhar(grafico,modulo,angulo,cor,corSeta){
@@ -161,8 +164,8 @@ function desenhar(grafico,modulo,angulo,cor,corSeta){
     ctx.drawImage(seta, 0, 0, 10, 10);
     ctx.translate(-1*modulo/escala*47+9, 3);
 
-	//Plot dos eixos secundários
 	if(angulo!=anguloMedio() && terceiroVetor && !vetorNulo() && !angulosIguais()){
+		//Plot dos eixos secundários
 		ctx.beginPath();
 		ctx.translate(-1,2);
 		ctx.rotate(-Math.PI);
@@ -177,6 +180,17 @@ function desenhar(grafico,modulo,angulo,cor,corSeta){
 
 		//Plot da combinação linear
 		if(angulo>anguloMedio()){
+			//plot vetor combinação linear
+			ctx.beginPath();
+			ctx.rect(0, 0, alpha*modulo/escala*47-8/escala,3);
+			ctx.fillStyle = 'yellow';
+			ctx.fill();
+			//plot seta
+			seta = document.getElementById('seta-amarela');
+			ctx.translate(alpha*modulo/escala*47-9,-3);
+		    ctx.drawImage(seta, 0, 0, 8, 8);
+		    ctx.translate(-alpha*modulo/escala*47+9, 3);
+
 			ctx.beginPath();
 			ctx.rotate(angulo-anguloMedio());
 			ctx.translate(moduloAnguloMedio()/escala*47, 0);
@@ -186,6 +200,17 @@ function desenhar(grafico,modulo,angulo,cor,corSeta){
 			ctx.fill();
 		}
 		else{
+			//plot vetor combinação linear
+			ctx.beginPath();
+			ctx.rect(0, 0, beta*modulo/escala*47-8/escala,3);
+			ctx.fillStyle = 'orange';
+			ctx.fill();
+			//plot seta
+			seta = document.getElementById('seta-laranja');
+			ctx.translate(beta*modulo/escala*47-9,-3);
+		    ctx.drawImage(seta, 0, 0, 8, 8);
+		    ctx.translate(-beta*modulo/escala*47+9, 3);
+
 			ctx.beginPath();
 			ctx.rotate(angulo-anguloMedio());
 			ctx.translate(moduloAnguloMedio()/escala*47, 0);
@@ -621,4 +646,20 @@ function moduloAnguloMedio(){
 		return moduloV;
 	if(anguloMedio()==anguloZ)
 		return moduloZ;
+}
+
+function alphaBetaV(){
+	if (anguloW>anguloMedio())
+			document.getElementById('alphaV').innerHTML = "<b style='color: yellow;'>&alpha;w</b> = ("+ (alpha*wx).toFixed(2) +", "+ (alpha*wy).toFixed(2) +")";
+	else if(anguloV>anguloMedio())
+		document.getElementById('alphaV').innerHTML = "<b style='color: yellow;'>&alpha;v</b> = ("+ (alpha*vx).toFixed(2) +", "+ (alpha*vy).toFixed(2) +")";
+	else
+		document.getElementById('alphaV').innerHTML = "<b style='color: yellow;'>&alpha;z</b> = ("+ (alpha*zx).toFixed(2) +", "+ (alpha*zy).toFixed(2) +")";
+	
+	if (anguloW<anguloMedio())
+		document.getElementById('betaV').innerHTML = "<b style='color: orange;'>&beta;w</b> = ("+ (beta*wx).toFixed(2) +", "+ (beta*wy).toFixed(2) +")";
+	else if(anguloV<anguloMedio())
+		document.getElementById('betaV').innerHTML = "<b style='color: orange;'>&beta;v</b> = ("+ (beta*vx).toFixed(2) +", "+ (beta*vy).toFixed(2) +")";
+	else
+		document.getElementById('betaV').innerHTML = "<b style='color: orange;'>&beta;z</b> = ("+ (beta*zx).toFixed(2) +", "+ (beta*zy).toFixed(2) +")";
 }
