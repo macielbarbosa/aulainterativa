@@ -29,22 +29,19 @@
 			ggb = document.ggbApplet;
 			dados = document.getElementById('dados');
 			coordenadas = dados.elements[0].value;
-			ggb.setVisible('cX',false);
-			ggb.setVisible('cY',false);
-			ggb.setVisible('cZ',false);
-			ggb.setValue('tx',0);
-			ggb.setValue('ty',0);
-			ggb.setValue('tz',0);
-			ggb.setVisible("v'",false);
+			var moduloV;
+			if(!coordenadas || !coordenadasV()){
+				alert('ENTRADA INVÁLIDA\nPor favor, adicione as coordenadas númericas ( x , y , z ) do vetor v separadas por vírculas');
+				return;
+			}
 			ggb.evalCommand('Pz = ('+ coordenadas +')');
 			vx = ggb.getXcoord('Pz');
 			vy = ggb.getYcoord('Pz');
 			vz = ggb.getZcoord('Pz');
-			var moduloV = Math.sqrt(Math.pow(vx,2)+Math.pow(vy,2)+Math.pow(vz,2));
-			document.getElementById('v').innerHTML = '<br/><b>v</b> = ('+vx+', '+vy+', '+vz+')<br/><br/>| <b>v</b> | = '+moduloV.toFixed(2)+'<br/><br/>';
+			moduloV = Math.sqrt(Math.pow(vx,2)+Math.pow(vy,2)+Math.pow(vz,2));
 			ggb.setCoordSystem(-moduloV,moduloV,-moduloV,moduloV,-moduloV,moduloV,false);
-			ggb.evalCommand('v = Pz');
-			ggb.setVisible('v',true);
+			document.getElementById('v').innerHTML = '<br/><b>v</b> = ('+vx+', '+vy+', '+vz+')<br/><br/>| <b>v</b> | = '+moduloV.toFixed(2)+'<br/><br/>';
+			
 			document.getElementById("matrizV").innerHTML = '`[['+vx+'],['+vy+'],['+vz+']]`';
 			document.getElementById('v').style.display = 'block';
 			document.getElementById("v'").style.display = 'none';
@@ -52,6 +49,16 @@
 			document.getElementById("matrizRotY").style.display = 'none';
 			document.getElementById("matrizRotX").style.display = 'none';
 			document.getElementById("demo").style.display = 'none';
+
+			ggb.evalCommand('v = Pz');
+			ggb.setVisible('v',true);
+			ggb.setVisible('cX',false);
+			ggb.setVisible('cY',false);
+			ggb.setVisible('cZ',false);
+			ggb.setValue('tx',0);
+			ggb.setValue('ty',0);
+			ggb.setValue('tz',0);
+			ggb.setVisible("v'",false);
 		}
 		function rotacionar(){
 			nz = dados.elements[3].value;
@@ -228,21 +235,36 @@
 			}
 			var eqRot = document.getElementById('eqRot');
 			if(nz && rotZ){
-				eqRot.innerHTML = '`v\' = R_alphav`';
+				eqRot.innerHTML = '`v\' = R_alpha"&nbsp;"v`';
 				if(ny && rotY)
-					eqRot.innerHTML = '`v\' = R_alphaR_betav`';
+					eqRot.innerHTML = '`v\' = R_betaR_alpha"&nbsp;"v`';
 				else if(nx && rotX)
-					eqRot.innerHTML = '`v\' = R_alphaR_gammav`';
+					eqRot.innerHTML = '`v\' = R_gammaR_alpha"&nbsp;"v`';
 				if(ny && rotY && nx && rotX)
-					eqRot.innerHTML = '`v\' = R_alphaR_betaR_gammav`';
+					eqRot.innerHTML = '`v\' = R_gammaR_betaR_alpha"&nbsp;"v`';
 			}
 			else if(ny && rotY) {
-				eqRot.innerHTML = '`v\' = R_betav`';
+				eqRot.innerHTML = '`v\' = R_beta"&nbsp;"v`';
 				if(nx && rotX)
-					eqRot.innerHTML = '`v\' = R_betaR_gammav`';
+					eqRot.innerHTML = '`v\' = R_gammaR_beta"&nbsp;"v`';
 			}
 			else if(nx && rotX)
-				eqRot.innerHTML = '`v\' = R_gammav`';
+				eqRot.innerHTML = '`v\' = R_gamma"&nbsp;"v`';
+		}
+		function coordenadasV(){
+			var virgulas = 0;
+			var letras = 0;
+			for(var i=0; i<coordenadas.length; i++){
+				if(i!=coordenadas.length-1 && coordenadas.charAt(i)=='.' && coordenadas.charAt(i+1)=='.')
+					return false;
+				else if(coordenadas.charAt(i)==' ' || coordenadas.charAt(i)=='.')
+					continue;
+				else if(coordenadas.charAt(i)==',')
+					virgulas++;
+				else if(coordenadas.charAt(i)<'0' || coordenadas.charAt(i)>'9')
+					letras++;
+			}
+			return virgulas==2 && letras==0;
 		}
 	</script>
 </head>
@@ -300,12 +322,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
-				<br><p>Seja <b>v</b> &isin; &real;&sup3;:</p>
+				<br><p>Seja `v` &isin; &real;&sup3;:</p>
 				<form id="dados">
-					<b>v</b> = ( 
+					`v` = ( 
 					<input type="text" name="vetor" size="9" placeholder="x  ,  y  ,  z"/>
-					)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" onclick="plotV()">Plotar</button>
+					)
+					<button class="rotacao" type="button" onclick="plotV()">Plotar</button>
 					<br/><br/>
 					Rotação em torno dos eixos em graus:
 					<br/><br/>
@@ -316,8 +338,7 @@
 					<input type="checkbox" id="rotY" checked/>
 					Eixo y: 
 					<input type="text" name="ny" size="2" placeholder="&beta;&deg;"/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" onclick="rotacionar()">Rotacionar</button>
+					<button class="rotacao" type="button" onclick="rotacionar()">Rotacionar</button>
 					<br/><br/>
 					<input type="checkbox" id="rotX" checked/>
 					Eixo x: 
@@ -344,7 +365,7 @@
 			<div class="col-sm-6">
 				<div id="demo">
 					<h4>Cálculo das coordenadas de <b>v</b>'</h4>
-					As matrizes de rotação no `RR^3 são:`<br/><br/>
+					As matrizes de rotação no &real;&sup3; são:<br/><br/>
 					Eixo Z `rarr R_alpha = [[cosalpha,-sinalpha,0],[sinalpha,cosalpha, 0],[0,0,1]]`<br/><br/>
 					Eixo Y `rarr R_beta = [[cosbeta,0,sinbeta],[0,1,0],[-sinbeta,0,cosbeta]]`<br/><br/>
 					Eixo X `rarr R_gamma = [[1,0,0],[0,cosgamma,-singamma],[0,singamma,cosgamma]]`<br/><br/>

@@ -15,6 +15,7 @@ function calcular2(){
 	document.getElementById('naoMultiplos').style.display = 'none';
 	document.getElementById('vetorNulo').style.display = 'none';
 	document.getElementById('prova2').style.display = 'none';
+	document.getElementById('resposta3').style.display = 'none';
 
 	//Armazenar os valores digitados
 	var getValor = document.getElementById("entrada2");
@@ -64,16 +65,17 @@ function calcular2(){
     //Reiniciar o canvas
     resetCanvas("graficoW");
 	resetCanvas("graficoV");
+	resetCanvas("graficoZ");
 
 	//Desenhar os vetores nos cavas
 	desenhar("graficoW", moduloW, anguloW, "red", "seta-vermelha");
 	desenhar("graficoV", moduloV, anguloV, "blue", "seta-azul");
 
-	if(terceiroVetor){
+	/*if(terceiroVetor){
 		resetCanvas("graficoZ");
 		desenhar("graficoZ", moduloZ, anguloZ, "green","seta-verde");
 		alphaBetaV();
-	}
+	}*/
 }
 
 function resetCanvas(grafico){
@@ -126,7 +128,7 @@ function calcular3(){
 	desenhar("graficoV", moduloV, anguloV, "blue","seta-azul");
 	desenhar("graficoZ", moduloZ, anguloZ, "green","seta-verde");
 
-	alphaBetaV();
+	//alphaBetaV();
 }
 
 function desenhar(grafico,modulo,angulo,cor,corSeta){
@@ -164,7 +166,7 @@ function desenhar(grafico,modulo,angulo,cor,corSeta){
     ctx.drawImage(seta, 0, 0, 10, 10);
     ctx.translate(-1*modulo/escala*47+9, 3);
 
-	if(angulo!=anguloMedio() && terceiroVetor && !vetorNulo() && !angulosIguais()){
+	/*if(angulo!=anguloMedio() && terceiroVetor && !vetorNulo() && !angulosIguais()){
 		//Plot dos eixos secundários
 		ctx.beginPath();
 		ctx.translate(-1,2);
@@ -219,7 +221,7 @@ function desenhar(grafico,modulo,angulo,cor,corSeta){
 			ctx.fillStyle = 'black';
 			ctx.fill();
 		}	
-	}	
+	}*/	
 }
 
 //Escalonar matriz dos vetores

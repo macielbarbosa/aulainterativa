@@ -21,7 +21,7 @@ nav.navbar{
 
 #logo{
 	font-family: chawp;
-	font-size: 25pt;
+	font-size: 15pt;
 	color: black;
 }
 
@@ -152,3 +152,6 @@ span#v3{
 	font-size: 12pt;
 }
 
+button.rotacao{
+	margin-left: 40px;
+}
