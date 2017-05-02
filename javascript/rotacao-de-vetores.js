@@ -48,7 +48,7 @@ function plotV(){
 function rotacionar(){
 	nz = dados.elements[3].value;
 	ny = dados.elements[5].value;
-	nx = dados.elements[8].value;
+	nx = dados.elements[7].value;
 	rotZ = document.getElementById('rotZ').checked;
 	rotY = document.getElementById('rotY').checked;
 	rotX = document.getElementById('rotX').checked;
@@ -219,7 +219,10 @@ function matrizesRotacao(){
 		matrizRotX.style.display = 'inline';
 	}
 	var eqRot = document.getElementById('eqRot');
-	if(nz && rotZ){
+	if(!nz || !rotZ && !ny || !rotY && !nx || !rotX){
+		eqRot.innerHTML = '`v\' = v`';
+	}
+	else if(nz && rotZ){
 		eqRot.innerHTML = '`v\' = R_alpha"&nbsp;"v`';
 		if(ny && rotY)
 			eqRot.innerHTML = '`v\' = R_betaR_alpha"&nbsp;"v`';

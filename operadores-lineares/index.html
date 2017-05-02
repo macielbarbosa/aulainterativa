@@ -11,7 +11,7 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+  <script src="http://www.geogebra.org/scripts/deployggb.js"></script>
   <script src="../javascript/operadores-lineares.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
@@ -45,9 +45,14 @@
     <div class="row">
       <div class="col-sm-6">
         <form id="dados">
-          Quantidade de pontos da figura de 3 à 6:<br><br>
-          <input type="number" value="4" name="numPontos" min="3" max="6"/>
-          <button class="marginButton" type="button" onclick="points()">OK</button>
+          Escolha a quantidade de vertices da figura:<br><br>
+          <select>
+            <option value="3">3 - Triângulo</option>
+            <option value="4" selected>4 - Retângulo</option>
+            <option value="5">5 - Pentágono</option>
+            <option value="6">6 - Hexágono</option>
+          </select>
+          <button class="marginButton" type="button" onclick="vertice()">OK</button>
           <br/><br/>
           Organize os ponto como quiser!
           <br/><br/>
