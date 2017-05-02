@@ -29,7 +29,7 @@ p{
 	text-align: justify;
 }
 
-form{
+#dados{
 	margin: 25px 50px 25px 50px;
 }
 
@@ -90,7 +90,7 @@ div#grafico{
 	box-shadow: 0px 0px 10px gray;
 }
 
-canvas{
+#grafico canvas{
 	position: absolute;
 	top: 21px;
 	left: 21px;
@@ -143,15 +143,11 @@ span#v3{
 	display: none;
 }
 
-.overline{
-	text-decoration: overline;
-}
-
 .calculo{
 	margin-left: 10%;
 	font-size: 12pt;
 }
 
-button.rotacao{
+.marginButton{
 	margin-left: 40px;
 }

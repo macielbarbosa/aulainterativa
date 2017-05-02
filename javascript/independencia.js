@@ -3,7 +3,7 @@ var terceiroVetor=false;
 
 //Posicionar o gráfico no centro
 function centralizar(){
-	document.getElementById("grafico").scrollLeft = 320;
+	document.getElementById("grafico").scrollLeft = 400;
 }
 
 //Cálculo com 2 vetores
@@ -136,15 +136,15 @@ function desenhar(grafico,modulo,angulo,cor,corSeta){
 
 	//determinar a escala do grafico
 	if(maiorModulo()<=8){
-		document.getElementById('plano').src = "imagens/plano8.png";
+		document.getElementById('plano').src = "../imagens/plano8.png";
 		escala = 1;
 	}
 	else if(maiorModulo()>8 && maiorModulo()<=16){
-		document.getElementById('plano').src = "imagens/plano16.png";
+		document.getElementById('plano').src = "../imagens/plano16.png";
 		escala = 2.05;
 	}
 	else if(maiorModulo()>16){
-		document.getElementById('plano').src = "imagens/plano24.png";
+		document.getElementById('plano').src = "../imagens/plano24.png";
 		escala = 3.14;
 	}
 	
