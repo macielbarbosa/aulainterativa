@@ -45,16 +45,17 @@
     <div class="row">
       <div class="col-sm-6">
         <form id="dados">
-          Escolha a quantidade de vertices da figura:<br><br>
+          Escolha a figura:<br><br>
           <select>
-            <option value="3">3 - Triângulo</option>
-            <option value="4" selected>4 - Retângulo</option>
-            <option value="5">5 - Pentágono</option>
-            <option value="6">6 - Hexágono</option>
+            <option value="vetor" selected>Vetor</option>
+            <option value="triangulo">Triângulo</option>
+            <option value="retangulo">Retângulo</option>
+            <option value="pentagono">Pentágono</option>
+            <option value="hexagono">Hexágono</option>
           </select>
-          <button class="marginButton" type="button" onclick="vertice()">OK</button>
+          <button class="marginButton" type="button" onclick="figure()">OK</button>
           <br/><br/>
-          Organize os ponto como quiser!
+          Modifique a figura clicando e arrastado no gráfico!
           <br/><br/>
           Selecione o tipo de operador linear:
           <br/><br/>
@@ -108,7 +109,9 @@
       <div class="col-sm-6">
         <br/>
         <p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCsnltJrgiw3TaoDPT5EE3KA' target="_blank"><cite>Diario Academico : Faculdade</cite></a></p>
-        <iframe width="100%" height="312" src="https://www.youtube.com/embed/7lz-TwKZy1k" frameborder="0" allowfullscreen></iframe>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/7lz-TwKZy1k"></iframe>
+        </div>
         </div>
       </div>
     </div>
