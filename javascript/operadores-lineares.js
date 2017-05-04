@@ -5,15 +5,24 @@ window.onload = function() {
 	applet.inject('applet_container');
 }
 
-/*$('#op1').change(function() {
-    var val = $("#op1 option:selected").text();
-    alert(val);
-});*/
+function select(elemento,escalar){
+	var valor = elemento.value;
+	var escalar = document.getElementById(escalar);
+	if(valor=='dilatacao' || valor=='cisalhamento'){
+		escalar.style.display = 'inline';
+		escalar.setAttribute('placeholder','Escalar');
+	}
+	else if(valor=='rotacao'){
+		escalar.style.display = 'inline';
+		escalar.setAttribute('placeholder','Graus');
+	}
+	else
+		escalar.style.display = 'none';
+}
 
-function figure(){
+function figure(elemento){
 	ggb = document.cVW7D8fU;
-	dados = document.getElementById('dados');
-	figura = dados.elements[0].value;
+	var figura = elemento.value;
 	ggb.setVisible('vetor',false);
 	ggb.setVisible('triangulo',false);
 	ggb.setVisible('quadrado',false);
@@ -60,15 +69,18 @@ function figure(){
 	}
 	
 }
-function executar(){
-	operador1 = dados.elements[2].value;
-	operador2 = dados.elements[4].value;
-	operador3 = dados.elements[6].value;
-	
-	operacao(operador1,'escalar1');
-	operacao(operador2,'escalar2');
-	operacao(operador3,'escalar3');
 
+function executar(){
+	var dados = document.getElementById('dados');
+	var operador1 = dados.elements[1].value;
+	var operador2 = dados.elements[3].value;
+	var operador3 = dados.elements[5].value;
+	var escalar1 = dados.elements[2].value;
+	var escalar2 = dados.elements[4].value;
+	var escalar3 = dados.elements[6].value;
+	operacao(operador1,escalar1);
+	operacao(operador2,escalar2);
+	operacao(operador3,escalar3);
 }
 
 function operacao(operador,escalar){
@@ -82,10 +94,7 @@ function operacao(operador,escalar){
 		else if(operador=='dilatacao'){
 			
 		}
-		else if(operador=='rotacaoX'){
-			
-		}
-		else if(operador=='rotacaoY'){
+		else if(operador=='rotacao'){
 			
 		}
 		else if(operador=='cisalhamento'){
