@@ -148,6 +148,10 @@ span#v3{
 	font-size: 12pt;
 }
 
-.marginButton{
+.marginInput{
 	margin-left: 40px;
+}
+
+#escalar1, #escalar2, #escalar3{
+	display: none;
 }
