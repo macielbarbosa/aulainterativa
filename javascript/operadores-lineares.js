@@ -36,7 +36,11 @@ function executar(){
 	var escalar1 = dados.elements[2].value;
 	var escalar2 = dados.elements[4].value;
 	var escalar3 = dados.elements[6].value;
+	ggb = document.FvpzC6hc;
+	figura = dados.elements[0].value;
 	var tempo = 1000;
+	//alert(isNaN(escalar1));
+	//entradaInvalida(operador1,operador2,operador3,escalar1,escalar2,escalar3);
 	operacao(operador1,escalar1);
 	if(operador2!="nenhum"){
 		setTimeout(function(){operacao(operador2,escalar2);},tempo);
@@ -47,7 +51,6 @@ function executar(){
 }
 
 function operacao(operador,escalar){
-	figura = dados.elements[0].value;
 	visibilidadeLinha();
 	if(operador=='nenhum'){	
 		return;
@@ -113,10 +116,64 @@ function operacao(operador,escalar){
 		}
 	}
 	else if(operador=='dilatacao'){
-		
+		if(figura=='vetor')
+			dilatacao('A',escalar);
+		else if(figura=='triangulo'){
+			dilatacao('A',escalar);
+			dilatacao('B',escalar);
+			dilatacao('C',escalar);
+		}
+		else if(figura=='retangulo'){
+			dilatacao('A',escalar);
+			dilatacao('B',escalar);
+			dilatacao('C',escalar);
+			dilatacao('D',escalar);
+		}
+		else if(figura=='pentagono'){
+			dilatacao('A',escalar);
+			dilatacao('B',escalar);
+			dilatacao('C',escalar);
+			dilatacao('D',escalar);
+			dilatacao('E',escalar);
+		}
+		else if(figura=='hexagono'){
+			dilatacao('A',escalar);
+			dilatacao('B',escalar);
+			dilatacao('C',escalar);
+			dilatacao('D',escalar);
+			dilatacao('E',escalar);
+			dilatacao('F',escalar);
+		}
 	}
 	else if(operador=='rotacao'){
-		
+		if(figura=='vetor')
+			rotacao('A',escalar);
+		else if(figura=='triangulo'){
+			rotacao('A',escalar);
+			rotacao('B',escalar);
+			rotacao('C',escalar);
+		}
+		else if(figura=='retangulo'){
+			rotacao('A',escalar);
+			rotacao('B',escalar);
+			rotacao('C',escalar);
+			rotacao('D',escalar);
+		}
+		else if(figura=='pentagono'){
+			rotacao('A',escalar);
+			rotacao('B',escalar);
+			rotacao('C',escalar);
+			rotacao('D',escalar);
+			rotacao('E',escalar);
+		}
+		else if(figura=='hexagono'){
+			rotacao('A',escalar);
+			rotacao('B',escalar);
+			rotacao('C',escalar);
+			rotacao('D',escalar);
+			rotacao('E',escalar);
+			rotacao('F',escalar);
+		}
 	}
 	else if(operador=='cisalhamento'){
 		
@@ -124,12 +181,32 @@ function operacao(operador,escalar){
 }
 
 function reflexaoX(P){
-	ggb.evalCommand('Execute[{\"'+P.toLowerCase()+'nx=x('+P+')\",\"'+P.toLowerCase()+'tx=x('+P+')\",\"'+P.toLowerCase()+'ny=-y('+P+')\",\"'+P.toLowerCase()+'ty=-y('+P+')\"}]');
+	var p = P.toLowerCase();
+	ggb.evalCommand(p+'nx=x('+P+')');
+	ggb.evalCommand(p+'tx=x('+P+')');
+	ggb.evalCommand(p+'ny=-y('+P+')');
+	ggb.evalCommand(p+'ty=-y('+P+')');
 }
 
 function reflexaoY(P){
-	ggb.evalCommand('Execute[{\"'+P.toLowerCase()+'nx=-x('+P+')\",\"'+P.toLowerCase()+'tx=-x('+P+')\",\"'+P.toLowerCase()+'ny=y('+P+')\",\"'+P.toLowerCase()+'ty=y('+P+')\"}]');
+	var p = P.toLowerCase();
+	ggb.evalCommand(p+'nx=-x('+P+')');
+	ggb.evalCommand(p+'tx=-x('+P+')');
+	ggb.evalCommand(p+'ny=y('+P+')');
+	ggb.evalCommand(p+'ty=y('+P+')');
 }
+
+function dilatacao(P,escalar){
+	var p = P.toLowerCase();
+	ggb.evalCommand(p+'nx='+escalar+'*x('+P+')');
+	ggb.evalCommand(p+'tx='+escalar+'*x('+P+')');
+	ggb.evalCommand(p+'ny='+escalar+'*y('+P+')');
+	ggb.evalCommand(p+'ty='+escalar+'*y('+P+')');
+}
+
+/*function rotacao(P,graus){
+	ggb.evalCommand('Execute[{\"'+P.toLowerCase()+'nx='+escalar+'*x('+P+')\",\"'+P.toLowerCase()+'tx='+escalar+'*x('+P+')\",\"'+P.toLowerCase()+'ny='+escalar+'*y('+P+')\",\"'+P.toLowerCase()+'ty='+escalar+'*y('+P+')\"}]');
+}*/
 
 function visibilidadeFalse(){
 	var variaveis = ['vetor','triangulo','quadrado','pentagono','hexagono','B','C','D','E','F','vetor\'','triangulo\'','quadrado\'','pentagono\'','hexagono\'','A\'','B\'','C\'','D\'','E\'','F\''];
@@ -176,7 +253,6 @@ function visibilidadeTrue(figura){
 }
 
 function visibilidadeLinha(){
-	ggb = document.FvpzC6hc;
 	if(figura=='vetor'){
 		ggb.setVisible('vetor\'',true);
 		ggb.setVisible('A\'',true);
@@ -212,3 +288,21 @@ function visibilidadeLinha(){
 		ggb.setVisible('F\'',true);
 	}
 }
+
+/*function entradaInvalida(op1,op2,op3,e1,e2,e3){
+	if(op1=='rotacao'||op1=='cisalhamento')
+		if(typeof e1 != 'number'){
+			alert('ENTRADA INVALIDA\nParametro de operador invalido');
+			return;
+		}
+	if(op2=='rotacao'||op2=='cisalhamento')
+		if(typeof e2 != 'number'){
+			alert('ENTRADA INVALIDA\nParametro de operador invalido');
+			return;
+		}
+	if(op3=='rotacao'||op3=='cisalhamento')
+		if(typeof e3 != 'number'){
+			alert('ENTRADA INVALIDA\nParametro de operador invalido');
+			return;
+		}
+}*/
