@@ -53,10 +53,64 @@ function operacao(operador,escalar){
 		return;
 	}
 	if(operador=='reflexaoX'){
-		ggb.evalCommand("Execute[{\"anx=x(A)\",\"atx=x(A)\",\"any=-1*y(A)\",\"aty=-1*y(A)\"}]");
+		if(figura=='vetor')
+			reflexaoX('A');
+		else if(figura=='triangulo'){
+			reflexaoX('A');
+			reflexaoX('B');
+			reflexaoX('C');
+		}
+		else if(figura=='retangulo'){
+			reflexaoX('A');
+			reflexaoX('B');
+			reflexaoX('C');
+			reflexaoX('D');
+		}
+		else if(figura=='pentagono'){
+			reflexaoX('A');
+			reflexaoX('B');
+			reflexaoX('C');
+			reflexaoX('D');
+			reflexaoX('E');
+		}
+		else if(figura=='hexagono'){
+			reflexaoX('A');
+			reflexaoX('B');
+			reflexaoX('C');
+			reflexaoX('D');
+			reflexaoX('E');
+			reflexaoX('F');
+		}
 	}
 	else if(operador=='reflexaoY'){
-		
+		if(figura=='vetor')
+			reflexaoY('A');
+		else if(figura=='triangulo'){
+			reflexaoY('A');
+			reflexaoY('B');
+			reflexaoY('C');
+		}
+		else if(figura=='retangulo'){
+			reflexaoY('A');
+			reflexaoY('B');
+			reflexaoY('C');
+			reflexaoY('D');
+		}
+		else if(figura=='pentagono'){
+			reflexaoY('A');
+			reflexaoY('B');
+			reflexaoY('C');
+			reflexaoY('D');
+			reflexaoY('E');
+		}
+		else if(figura=='hexagono'){
+			reflexaoY('A');
+			reflexaoY('B');
+			reflexaoY('C');
+			reflexaoY('D');
+			reflexaoY('E');
+			reflexaoY('F');
+		}
 	}
 	else if(operador=='dilatacao'){
 		
@@ -69,8 +123,16 @@ function operacao(operador,escalar){
 	}
 }
 
+function reflexaoX(P){
+	ggb.evalCommand('Execute[{\"'+P.toLowerCase()+'nx=x('+P+')\",\"'+P.toLowerCase()+'tx=x('+P+')\",\"'+P.toLowerCase()+'ny=-y('+P+')\",\"'+P.toLowerCase()+'ty=-y('+P+')\"}]');
+}
+
+function reflexaoY(P){
+	ggb.evalCommand('Execute[{\"'+P.toLowerCase()+'nx=-x('+P+')\",\"'+P.toLowerCase()+'tx=-x('+P+')\",\"'+P.toLowerCase()+'ny=y('+P+')\",\"'+P.toLowerCase()+'ty=y('+P+')\"}]');
+}
+
 function visibilidadeFalse(){
-	var variaveis = ['vetor','triangulo','quadrado','pentagono','hexagono','B','C','D','E','F','vetor\'','triangulo\'','quadrado\'','pentagono\'','hexagono\'','B\'','C\'','D\'','E\'','F\'','vetor','triangulo','quadrado','pentagono','hexagono','B','C','D','E','F','vetor\'','triangulo\'','quadrado\'','pentagono\'','hexagono\'','B\'','C\'','D\'','E\'','F\''];
+	var variaveis = ['vetor','triangulo','quadrado','pentagono','hexagono','B','C','D','E','F','vetor\'','triangulo\'','quadrado\'','pentagono\'','hexagono\'','A\'','B\'','C\'','D\'','E\'','F\''];
 	for(var i=0; i<variaveis.length; i++){
 		ggb.setVisible(variaveis[i],false);
 	}
@@ -121,24 +183,28 @@ function visibilidadeLinha(){
 	}
 	else if(figura=='triangulo'){
 		ggb.setVisible('triangulo\'',true);
+		ggb.setVisible('A\'',true);
 		ggb.setVisible('B\'',true);
 		ggb.setVisible('C\'',true);
 	}
 	else if(figura=='retangulo'){
 		ggb.setVisible('quadrado\'',true);
+		ggb.setVisible('A\'',true);
 		ggb.setVisible('B\'',true);
 		ggb.setVisible('C\'',true);
 		ggb.setVisible('D\'',true);
 	}
 	else if(figura=='pentagono'){
 		ggb.setVisible('pentagono\'',true);
+		ggb.setVisible('A\'',true);
 		ggb.setVisible('B\'',true);
 		ggb.setVisible('C\'',true);
 		ggb.setVisible('D\'',true);
 		ggb.setVisible('E\'',true);
 	}
 	else if(figura=='hexagono'){
-		ggb.setVisible('hexagono',true);
+		ggb.setVisible('hexagono\'',true);
+		ggb.setVisible('A\'',true);
 		ggb.setVisible('B\'',true);
 		ggb.setVisible('C\'',true);
 		ggb.setVisible('D\'',true);
