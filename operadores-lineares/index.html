@@ -41,9 +41,11 @@
     </nav>
   </header>
   <div class="container">
+    <br>
     <h1>Operadores Lineares</h1>
     <div class="row">
       <div class="col-sm-6">
+        <br><h4>São transformações lineares em um mesmo espaço vetorial</h4><br>
         <form id="dados">
           Escolha a figura:<br><br>
           <select class="marginInput" onchange="figurinha()">
@@ -66,7 +68,7 @@
             <option value="cisalhamentoH">Cisalhamento horizontal</option>
             <option value="cisalhamentoV">Cisalhamento vertical</option>
           </select>
-          <input class="marginInput" id="escalar1" placeholder="escalar" size="3"/>
+          <input class="marginInput" id="escalar1" size="3"/>
           <br><br>
           <select class="marginInput" onchange="select(this,'escalar2')">
             <option value="nenhum" selected>Nenhum</option>
@@ -77,7 +79,7 @@
             <option value="cisalhamentoH">Cisalhamento horizontal</option>
             <option value="cisalhamentoV">Cisalhamento vertical</option>
           </select>
-          <input class="marginInput" id="escalar2" placeholder="escalar" size="3"/>
+          <input class="marginInput" id="escalar2" size="3"/>
           <br><br>
           <select class="marginInput" onchange="select(this,'escalar3')">
             <option value="nenhum" selected>Nenhum</option>
@@ -88,7 +90,7 @@
             <option value="cisalhamentoH">Cisalhamento horizontal</option>
             <option value="cisalhamentoV">Cisalhamento vertical</option>
           </select>
-          <input class="marginInput" id="escalar3" placeholder="escalar" size="3"/>
+          <input class="marginInput" id="escalar3" size="3"/>
           <br><br>
           <button class="marginInput" type="button" onclick="executar()">Executar</button>
           <br/><br/>
