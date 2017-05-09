@@ -48,6 +48,7 @@ function executar(){
 	}
 	if(operador3!='nenhum')
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
+	//escalaGrafico();
 }
 
 function operacao(operador,escalar,operacao){
@@ -479,6 +480,9 @@ function visibilidadeFalse(){
 	for(var i=0; i<variaveis.length; i++){
 		ggb.setVisible(variaveis[i],false);
 	}
+	for(var P=15; P<=20; P++){
+		ggb.evalCommand(P+'= (0,0)');
+	}
 }
 
 function visibilidadeTrue(figura){
@@ -567,3 +571,24 @@ function entradaInvalida(op1,op2,op3,e1,e2,e3){
 			return true;
 	return false;
 }
+
+/*function escalaGrafico(){
+	escala = maiorModulo();
+	ggb.setCoordSystem(-escala,escala,-escala,escala);
+}
+
+function maiorModulo(){
+	var modulo = moduloo('A\'');
+	for(var P='B'; P<='F'; P++){
+		console.log(P);
+		if(moduloo(P+'\'')>modulo)
+			modulo = moduloo(P+'\'');
+	}
+	return modulo;
+}
+
+function moduloo(P){
+	var x = ggb.getXcoord(P);
+	var y = ggb.getYcoord(P);
+	return Math.sqrt(x*x+y*y);
+}*/
