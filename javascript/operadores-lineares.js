@@ -41,6 +41,7 @@ function executar(){
 		alert('ENTRADA INVALIDA\nDigite um parâmetro numérico para a operação\nValores flutuantes separado por ponto (.)');
 		return;
 	}
+	//resetCoordenadas();
 	operacao(operador1,escalar1,'operacao1');
 	if(operador2!="nenhum"){
 		setTimeout(function(){operacao(operador2,escalar2,'operacao2');},tempo);
@@ -49,6 +50,7 @@ function executar(){
 	if(operador3!='nenhum')
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
 	//escalaGrafico();
+	document.getElementById('demo').style.display = 'block';
 }
 
 function operacao(operador,escalar,operacao){
@@ -477,12 +479,8 @@ function cisalhamentoV(P,escalar){
 
 function visibilidadeFalse(){
 	var variaveis = ['vetor','triangulo','quadrado','pentagono','hexagono','B','C','D','E','F','vetor\'','triangulo\'','quadrado\'','pentagono\'','hexagono\'','A\'','B\'','C\'','D\'','E\'','F\''];
-	for(var i=0; i<variaveis.length; i++){
+	for(var i=0; i<variaveis.length; i++)
 		ggb.setVisible(variaveis[i],false);
-	}
-	for(var P=15; P<=20; P++){
-		ggb.evalCommand(P+'= (0,0)');
-	}
 }
 
 function visibilidadeTrue(figura){
@@ -572,23 +570,31 @@ function entradaInvalida(op1,op2,op3,e1,e2,e3){
 	return false;
 }
 
-/*function escalaGrafico(){
+/*function resetCoordenadas(){
+	var coordenada = ['ax1','ax2','ax3','ay1','ay2','ay3','bx1','bx2','bx3','by1','by2','by3','cx1','cx2','cx3','cy1','cy2','cy3','dx1','dx2','dx3','dy1','dy2','dy3','ex1','ex2','ex3','ey1','ey2','ey3','fx1','fx2','fx3','fy1','fy2','fy3'];
+	for(var i=0; i<coordenada.length; i++)
+		ggb.evalCommand(coordenada[i]+'= 0');
+}
+
+function escalaGrafico(){
 	escala = maiorModulo();
 	ggb.setCoordSystem(-escala,escala,-escala,escala);
 }
 
 function maiorModulo(){
-	var modulo = moduloo('A\'');
-	for(var P='B'; P<='F'; P++){
-		console.log(P);
-		if(moduloo(P+'\'')>modulo)
-			modulo = moduloo(P+'\'');
+	var mod = modulo('ax2','ay2');
+	console.log(mod);
+	var coordenada = ['ax3','ay3','bx2','by2','bx3','by3','cx2','cy2','cx3','cy3','dx2','dy2','dx3','dy3','ex2','ey2','ex3','ey3','fx2','fy2','fx3','fy3'];
+	for(var i=0; i<coordenada.length; i+=2){
+		if(modulo(coordenada[i],coordenada[i+1]) > mod)
+			mod = modulo(coordenada[i],coordenada[i+1]);
 	}
-	return modulo;
+	//console.log(mod);
+	return mod;
 }
 
-function moduloo(P){
-	var x = ggb.getXcoord(P);
-	var y = ggb.getYcoord(P);
-	return Math.sqrt(x*x+y*y);
+function modulo(x,y){
+	px = ggb.getValue(x);
+	py = ggb.getValue(y);
+	return Math.sqrt(px*px+py*py);
 }*/

@@ -114,23 +114,16 @@
     <div class="row">
       <div class="col-sm-6">
         <div id="demo">
-          <h4>Cálculo das coordenadas de <b>v</b>'</h4>
-          As matrizes de rotação no &real;&sup3; são:<br/><br/>
-          Eixo Z `rarr R_alpha = [[cosalpha,-sinalpha,0],[sinalpha,cosalpha, 0],[0,0,1]]`<br/><br/>
-          Eixo Y `rarr R_beta = [[cosbeta,0,sinbeta],[0,1,0],[-sinbeta,0,cosbeta]]`<br/><br/>
-          Eixo X `rarr R_gamma = [[1,0,0],[0,cosgamma,-singamma],[0,singamma,cosgamma]]`<br/><br/>
-          <span id="eqRot"></span><br><br>
-          `v' = `<span id="matrizRotX"></span><span id="matrizRotY"></span><span id="matrizRotZ"></span><span id="matrizV"></span>` = `<span id="matrizV'"></span><br/><br/><br/>
-          <h4>Módulo constante</h4>
-          O módulo do vetor resultante <b>v</b>' é o igual ao módulo do vetor <b>v</b>.<br/>
-          Seja R a matriz de rotação:<br/><br/>
-          <p class="calculo"> 
-            `v' = R v`<br/><br/>
-            `|v'| = sqrt((:v',v':))`<br/><br/>
-            `= sqrt(v'^T v') = sqrt((Rv)^T Rv)`<br/><br/>
-            `= sqrt(v^T R^T Rv) = sqrt(v^T R^-1 Rv)`<br/><br/>
-            `= sqrt(v^Tv) = |v|` <br/><br/>
-          </p>
+          <h4>Cálculo das operações</h4>
+          As transformações lineares feitas em cada operação são:<br/><br/>
+          `T:"&real;&sup2;"rarr"&real;&sup2;"`<br><br>
+          `p = (x,y)`<br><br>
+          Reflexão no eixo x `rArr T(p) = (x,-y)`<br/><br/>
+          Reflexão no eixo y `rArr T(p) = (-x,y)`<br/><br/>
+          Dilatação/contração `rArr T(p) = a(x,y), a in R`<br/><br/>
+          Rotação `rArr T(p) = (xcostheta+ysintheta, ycostheta-xsintheta), -360"&deg;">theta>360"&deg;"`<br/><br/>
+          Cisalhamento no eixo x `rArr T(p) = (x+alphay,y), alpha in R`<br/><br/>
+          Cisalhamento no eixo y `rArr T(p) = (x,y+alphax), alpha in R`<br/><br/>
         </div>
       </div>
       <div class="col-sm-6">
