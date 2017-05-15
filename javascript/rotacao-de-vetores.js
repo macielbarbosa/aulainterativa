@@ -73,6 +73,7 @@ function rotacionar(){
 	atualizarComponentes();
 	matrizesRotacao();
 	document.getElementById("v'").style.display = 'block';
+	document.getElementById('nota-modulo').style.display = 'inline';
 	document.getElementById("demo").style.display = 'block';
 	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
@@ -218,26 +219,40 @@ function matrizesRotacao(){
 		matrizRotX.innerHTML = '`[[1,0,0],[0,cos'+nx+'\"&deg;\",-sin'+nx+'\"&deg;\"],[0,sin'+nx+'\"&deg;\",cos'+nx+'\"&deg;\"]]xx`';
 		matrizRotX.style.display = 'inline';
 	}
+
+	var composicao = document.getElementById('composicao');
 	var eqRot = document.getElementById('eqRot');
-	if(!nz || !rotZ && !ny || !rotY && !nx || !rotX){
-		eqRot.innerHTML = '`v\' = v`';
-	}
-	else if(nz && rotZ){
+	composicao.style.display = 'block';
+	if(nz && rotZ){
+		composicao.innerHTML = '`v\' = R_alpha(v)`';
 		eqRot.innerHTML = '`v\' = R_alpha"&nbsp;"v`';
-		if(ny && rotY)
+		if(ny && rotY){
+			composicao.innerHTML = '`v\' = R_beta(R_alpha(v)) = (R_beta@R_alpha)(v)`';
 			eqRot.innerHTML = '`v\' = R_betaR_alpha"&nbsp;"v`';
-		else if(nx && rotX)
+		}
+		else if(nx && rotX){
+			composicao.innerHTML = '`v\' = R_gamma(R_alpha(v)) = (R_gamma@R_alpha)(v)`';
 			eqRot.innerHTML = '`v\' = R_gammaR_alpha"&nbsp;"v`';
-		if(ny && rotY && nx && rotX)
+		}
+		if(ny && rotY && nx && rotX){
 			eqRot.innerHTML = '`v\' = R_gammaR_betaR_alpha"&nbsp;"v`';
+			composicao.innerHTML = '`v\' = R_gamma(R_beta(R_alpha(v))) = (R_gamma@R_beta@R_alpha)(v)`';
+		}
 	}
 	else if(ny && rotY) {
+		composicao.innerHTML = '`v\' = R_beta(v)`';
 		eqRot.innerHTML = '`v\' = R_beta"&nbsp;"v`';
-		if(nx && rotX)
+		if(nx && rotX){
+			composicao.innerHTML = '`v\' = R_gamma(R_beta(v)) = (R_gamma@R_beta)(v)`';
 			eqRot.innerHTML = '`v\' = R_gammaR_beta"&nbsp;"v`';
+		}
 	}
-	else if(nx && rotX)
+	else if(nx && rotX){
+		composicao.innerHTML = '`v\' = R_gamma(v)`';
 		eqRot.innerHTML = '`v\' = R_gamma"&nbsp;"v`';
+	}
+	else
+		eqRot.innerHTML = '`v\' = v`';
 }
 function coordenadasV(){
 	var virgulas = 0;

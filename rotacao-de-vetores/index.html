@@ -45,7 +45,7 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<br><p>Seja `v` &isin; &real;&sup3;:</p>
-				<form id="dados">
+				<form id="dados" class="formulario">
 					`v` = ( 
 					<input type="text" name="vetor" size="9" placeholder="x  ,  y  ,  z"/>
 					)
@@ -75,12 +75,12 @@
 						<p class="vetor" id="v'"></p>
 					</div>
 				</div>
+				<span id="nota-modulo" style="margin-left: 40px">As rotações não alteram o módulo do vetor.</span>
 			</div>
 			<div class="col-sm-6">
 				<div id="applet_container"></div>
 				<img src="../imagens/mouse-click.png" style="margin-left: 45%;" /><b style="font-size: 8pt">Visualização 3D </b>
 				<img src="../imagens/mouse-scroll.png"><b style="font-size: 8pt;"> Zoom</b>
-				<p style="font-size: 8pt; text-align: right;">NOTA: Adblock ou similares podem bloquear a aplicação do Geogebra.</p>
 			</div>
 		</div>
 		<div class="row">
@@ -91,6 +91,8 @@
 					Eixo Z `rarr R_alpha = [[cosalpha,-sinalpha,0],[sinalpha,cosalpha, 0],[0,0,1]]`<br/><br/>
 					Eixo Y `rarr R_beta = [[cosbeta,0,sinbeta],[0,1,0],[-sinbeta,0,cosbeta]]`<br/><br/>
 					Eixo X `rarr R_gamma = [[1,0,0],[0,cosgamma,-singamma],[0,singamma,cosgamma]]`<br/><br/>
+					Na rotação realizada:<br><br>
+					<span id="composicao"></span><br>
 					<span id="eqRot"></span><br><br>
 					`v' = `<span id="matrizRotX"></span><span id="matrizRotY"></span><span id="matrizRotZ"></span><span id="matrizV"></span>` = `<span id="matrizV'"></span><br/><br/><br/>
 					<h4>Módulo constante</h4>
