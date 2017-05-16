@@ -70,7 +70,7 @@
           </select>
           <input class="marginInput" id="escalar1" size="3"/>
           <br><br>
-          <select class="marginInput" onchange="select(this,'escalar2')">
+          <select id='operador2' class="marginInput" onchange="select(this,'escalar2')">
             <option value="nenhum" selected>Nenhum</option>
             <option value="reflexaoX">Reflexão no eixo X</option>
             <option value="reflexaoY">Reflexão no eixo Y</option>
@@ -81,7 +81,7 @@
           </select>
           <input class="marginInput" id="escalar2" size="3"/>
           <br><br>
-          <select class="marginInput" onchange="select(this,'escalar3')">
+          <select class="marginInput" onclick="permicao(this)" onchange="select(this,'escalar3')">
             <option value="nenhum" selected>Nenhum</option>
             <option value="reflexaoX">Reflexão no eixo X</option>
             <option value="reflexaoY">Reflexão no eixo Y</option>
@@ -92,6 +92,9 @@
           </select>
           <input class="marginInput" id="escalar3" size="3"/>
           <br><br>
+          <input type="checkbox" id="translacao"/>
+          Translação
+          <input type="text" size="6" placeholder="x  ,  y"/>
           <button class="marginInput" type="button" onclick="executar()">Executar</button>
           <br/><br/>
         </form>

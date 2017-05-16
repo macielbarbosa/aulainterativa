@@ -7,6 +7,7 @@ window.onload = function() {
 
 function figurinha(){
 	ggb = document.v39T8kF8;
+	dados = document.getElementById('dados');
 	figura = dados.elements[0].value;
 	visibilidadeFalse();
 	visibilidadeTrue(figura);
@@ -25,6 +26,14 @@ function select(elemento,escalar){
 	}
 	else
 		escalar.style.display = 'none';
+}
+
+function permicao(){
+	var operador2 = document.getElementById('dados').elements[3].value;
+	if(operador2 == 'nenhum')
+		alert('Selecione antes a segunda operação!');
+	else
+		return;
 }
 
 function executar(){
@@ -49,11 +58,14 @@ function executar(){
 	}
 	if(operador3!='nenhum'){
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
+		tempo*=1.5;
 	}
 	//escalaGrafico();
 	txtCalculo(operador1,operador2,operador3);
 	document.getElementById('demo').style.display = 'block';
 	MathJax.Hub.Typeset(); //atualizar notacao asciimath
+	if(dados.elements[7].checked)
+		setTimeout(function(){translacao(),tempo);
 }
 
 function operacao(operador,escalar,operacao){
@@ -478,6 +490,15 @@ function cisalhamentoV(P,escalar){
 		ggb.evalCommand('slide'+op+' = '+escalar);
 	}
 	ggb.evalCommand('StartAnimation[slide'+op+']');
+}
+
+function translacao(P,x,y){	
+	ggb.evalCommand('A\' = (x(A)+'+x+',y(A)+'+y+')');
+	ggb.evalCommand('B\' = (x(B)+'+x+',y(B)+'+y+')');
+	ggb.evalCommand('C\' = (x(C)+'+x+',y(C)+'+y+')');
+	ggb.evalCommand('D\' = (x(D)+'+x+',y(D)+'+y+')');
+	ggb.evalCommand('E\' = (x(E)+'+x+',y(E)+'+y+')');
+	ggb.evalCommand('F\' = (x(F)+'+x+',y(F)+'+y+')');
 }
 
 function visibilidadeFalse(){
