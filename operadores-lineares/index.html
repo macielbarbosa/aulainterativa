@@ -116,14 +116,18 @@
         <div id="demo">
           <h4>Cálculo das operações</h4>
           As transformações lineares feitas em cada operação são:<br/><br/>
-          `T:"&real;&sup2;"rarr"&real;&sup2;"`<br><br>
-          `p = (x,y)`<br><br>
-          Reflexão no eixo x `rArr T(p) = (x,-y)`<br/><br/>
-          Reflexão no eixo y `rArr T(p) = (-x,y)`<br/><br/>
-          Dilatação/contração `rArr T(p) = a(x,y), a in R`<br/><br/>
-          Rotação `rArr T(p) = (xcostheta+ysintheta, ycostheta-xsintheta), -360"&deg;">theta>360"&deg;"`<br/><br/>
-          Cisalhamento no eixo x `rArr T(p) = (x+alphay,y), alpha in R`<br/><br/>
-          Cisalhamento no eixo y `rArr T(p) = (x,y+alphax), alpha in R`<br/><br/>
+          <div class="marginLeft">  
+            `T:"&real;&sup2;"rarr"&real;&sup2;"`<br><br>
+            `p = (x,y)`<br><br>
+          </div>
+          Reflexão no eixo x `rArr Ref_x(p) = (x,-y)`<br/><br/>
+          Reflexão no eixo y `rArr Ref_y(p) = (-x,y)`<br/><br/>
+          Dilatação/contração `rArr Dil(p) = a(x,y), a in R`<br/><br/>
+          Rotação `rArr Rot(p) = (xcostheta+ysintheta, ycostheta-xsintheta), -180"&deg;"<=theta<=180"&deg;"`<br/><br/>
+          Cisalhamento horizontal `rArr Cis_h(p) = (x+alphay,y), alpha in R`<br/><br/>
+          Cisalhamento vertical `rArr Cis_v(p) = (x,y+alphax), alpha in R`<br/><br/>
+          Na operação realizada temos para cada ponto:<br><br>
+          <span id="calculo"></span>
         </div>
       </div>
       <div class="col-sm-6">

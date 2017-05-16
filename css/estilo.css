@@ -119,3 +119,7 @@ span#v3{
 #escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3{
 	display: none;
 }
+
+.marginLeft{
+	margin-left: 80px;
+}

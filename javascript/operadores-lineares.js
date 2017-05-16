@@ -37,20 +37,26 @@ function executar(){
 	var escalar2 = dados.elements[4].value;
 	var escalar3 = dados.elements[6].value;
 	var tempo = 1500;
+	var calculo = document.getElementById('calculo');
 	if(entradaInvalida(operador1,operador2,operador3,escalar1,escalar2,escalar3)){
 		alert('ENTRADA INVALIDA\nDigite um parâmetro numérico para a operação\nValores flutuantes separado por ponto (.)');
 		return;
 	}
 	//resetCoordenadas();
 	operacao(operador1,escalar1,'operacao1');
+	calculo.innerHTML = strOperador(operador1) + '(p)';
 	if(operador2!="nenhum"){
 		setTimeout(function(){operacao(operador2,escalar2,'operacao2');},tempo);
 		tempo*=2;
+		calculo.innerHTML = '(' + strOperador(operador2) + '`@`' + strOperador(operador1) + ')(p)';
 	}
-	if(operador3!='nenhum')
+	if(operador3!='nenhum'){
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
+		calculo.innerHTML = '(' + strOperador(operador3) + '`@`' + strOperador(operador2) + '`@`' + strOperador(operador1) + ')(p)'
+	}
 	//escalaGrafico();
 	document.getElementById('demo').style.display = 'block';
+	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
 
 function operacao(operador,escalar,operacao){
@@ -598,3 +604,24 @@ function modulo(x,y){
 	py = ggb.getValue(y);
 	return Math.sqrt(px*px+py*py);
 }*/
+
+function strOperador(operador){
+	if(operador=='reflexaoX'){
+		return '`Ref_x`';
+	}
+	else if(operador=='reflexaoY'){
+		return '`Ref_y`';
+	}
+	else if(operador=='dilatacao'){
+		return '`Dil`';
+	}
+	else if(operador=='rotacao'){
+		return '`Rot`';
+	}
+	else if(operador=='cisalhamentoH'){
+		return '`Cis_h`';
+	}
+	else if(operador=='cisalhamentoV'){
+		return '`Cis_v`';
+	}
+}
