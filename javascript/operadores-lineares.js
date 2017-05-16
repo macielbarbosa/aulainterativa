@@ -37,24 +37,21 @@ function executar(){
 	var escalar2 = dados.elements[4].value;
 	var escalar3 = dados.elements[6].value;
 	var tempo = 1500;
-	var calculo = document.getElementById('calculo');
 	if(entradaInvalida(operador1,operador2,operador3,escalar1,escalar2,escalar3)){
 		alert('ENTRADA INVALIDA\nDigite um parâmetro numérico para a operação\nValores flutuantes separado por ponto (.)');
 		return;
 	}
 	//resetCoordenadas();
 	operacao(operador1,escalar1,'operacao1');
-	calculo.innerHTML = strOperador(operador1) + '(p)';
 	if(operador2!="nenhum"){
 		setTimeout(function(){operacao(operador2,escalar2,'operacao2');},tempo);
 		tempo*=2;
-		calculo.innerHTML = '(' + strOperador(operador2) + '`@`' + strOperador(operador1) + ')(p)';
 	}
 	if(operador3!='nenhum'){
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
-		calculo.innerHTML = '(' + strOperador(operador3) + '`@`' + strOperador(operador2) + '`@`' + strOperador(operador1) + ')(p)'
 	}
 	//escalaGrafico();
+	txtCalculo(operador1,operador2,operador3);
 	document.getElementById('demo').style.display = 'block';
 	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
@@ -576,6 +573,33 @@ function entradaInvalida(op1,op2,op3,e1,e2,e3){
 	return false;
 }
 
+function txtCalculo(operador1,operador2,operador3){
+	var calculo = document.getElementById('calculo');
+	calculo.innerHTML = strOperador(operador1) + '`(P)`';
+	if(operador2!="nenhum"){
+		calculo.innerHTML = '`(`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P))`';
+	}
+	if(operador3!='nenhum'){
+		calculo.innerHTML = '`(`' + strOperador(operador3) + '`@`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P)))`';
+	}
+}
+
+function strOperador(operador){
+	if(operador=='reflexaoX')
+		return '`Ref_x`';
+	else if(operador=='reflexaoY')
+		return '`Ref_y`';
+	else if(operador=='dilatacao')
+		return '`Dil`';
+	else if(operador=='rotacao')
+		return '`Rot`';
+	else if(operador=='cisalhamentoH')
+		return '`Cis_h`';
+	else if(operador=='cisalhamentoV')
+		return '`Cis_v`';
+}
+
+
 /*function resetCoordenadas(){
 	var coordenada = ['ax1','ax2','ax3','ay1','ay2','ay3','bx1','bx2','bx3','by1','by2','by3','cx1','cx2','cx3','cy1','cy2','cy3','dx1','dx2','dx3','dy1','dy2','dy3','ex1','ex2','ex3','ey1','ey2','ey3','fx1','fx2','fx3','fy1','fy2','fy3'];
 	for(var i=0; i<coordenada.length; i++)
@@ -603,25 +627,34 @@ function modulo(x,y){
 	px = ggb.getValue(x);
 	py = ggb.getValue(y);
 	return Math.sqrt(px*px+py*py);
-}*/
-
-function strOperador(operador){
-	if(operador=='reflexaoX'){
-		return '`Ref_x`';
-	}
-	else if(operador=='reflexaoY'){
-		return '`Ref_y`';
-	}
-	else if(operador=='dilatacao'){
-		return '`Dil`';
-	}
-	else if(operador=='rotacao'){
-		return '`Rot`';
-	}
-	else if(operador=='cisalhamentoH'){
-		return '`Cis_h`';
-	}
-	else if(operador=='cisalhamentoV'){
-		return '`Cis_v`';
-	}
 }
+
+function x(operador){
+	if(operador=='reflexaoX')
+		return '`x`';
+	else if(operador=='reflexaoY')
+		return '`-x`';
+	else if(operador=='dilatacao')
+		return '`x`';
+	else if(operador=='rotacao')
+		return '`xcostheta+ysintheta`';
+	else if(operador=='cisalhamentoH')
+		return '`x+alphay`';
+	else if(operador=='cisalhamentoV')
+		return '`x';
+}
+
+function y(operador){
+	if(operador=='reflexaoX')
+		return '`-y`';
+	else if(operador=='reflexaoY')
+		return '`y`';
+	else if(operador=='dilatacao')
+		return '`y`';
+	else if(operador=='rotacao')
+		return '`ycostheta-xsintheta`';
+	else if(operador=='cisalhamentoH')
+		return '`y`';
+	else if(operador=='cisalhamentoV')
+		return '`y+alphax';
+}*/
