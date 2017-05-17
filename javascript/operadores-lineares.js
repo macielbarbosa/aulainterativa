@@ -16,25 +16,34 @@ function figurinha(){
 function select(elemento,escalar){
 	var operador = elemento.value;
 	var elemEscalar = document.getElementById(escalar);
-	var operador2 = dados.elements[3].value;
-	var operador3 = dados.elements[5].value;
-	if(escalar=='escalar3' && operador2=='nenhum'){
-		alert('Selecione antes a segunda operação!');
-		return;
-	}
+	var operador3 = dados.elements[5];
 	if(escalar=='escalar2' && operador=='nenhum'){
-		operador3 = 'nenhum';
+		operador3.value = 'nenhum';
+		document.getElementById('escalar3').style.display = 'none';
 	}
+	elemEscalar.style.display = 'inline';
+	elemEscalar.value = '';
 	if(operador=='dilatacao' || operador=='cisalhamentoH' || operador=='cisalhamentoV'){
-		elemEscalar.style.display = 'inline';
 		elemEscalar.setAttribute('placeholder','Escalar');
+		elemEscalar.setAttribute('title','Parâmetro da operação');
 	}
 	else if(operador=='rotacao'){
-		elemEscalar.style.display = 'inline';
 		elemEscalar.setAttribute('placeholder','Graus');
+		elemEscalar.setAttribute('title','Parâmetro da rotação em graus');
+	}
+	else if(operador=='translacao'){
+		elemEscalar.setAttribute('placeholder','x , y');
+		elemEscalar.setAttribute('title','Vetor deslocamento com coordenadas x, y');
 	}
 	else
 		elemEscalar.style.display = 'none';
+}
+
+function permicao(){
+	var operador2 = dados.elements[3].value;
+	if(operador2=='nenhum'){
+		alert('Selecione antes a segunda operação!');
+	}
 }
 
 function executar(){
@@ -46,40 +55,31 @@ function executar(){
 	var escalar1 = dados.elements[2].value;
 	var escalar2 = dados.elements[4].value;
 	var escalar3 = dados.elements[6].value;
-	var tempo = 1500;
+	var tempo = 1200;
 	if(entradaInvalida(operador1,operador2,operador3,escalar1,escalar2,escalar3)){
 		alert('ENTRADA INVALIDA\nDigite um parâmetro numérico para a operação\nValores flutuantes separado por ponto (.)');
 		return;
 	}
 	//resetCoordenadas();
-	operacao(operador1,escalar1,'operacao1');
+	visibilidadeLinha(false);
+	setTimeout(function(){visibilidadeLinha(true);},tempo);
+	setTimeout(function(){operacao(operador1,escalar1,'operacao1');},tempo);
+	tempo+=1200;
 	if(operador2!="nenhum"){
 		setTimeout(function(){operacao(operador2,escalar2,'operacao2');},tempo);
-		tempo*=2;
+		tempo+=1200;
 	}
 	if(operador3!='nenhum'){
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
-		tempo*=1.5;
 	}
 	//escalaGrafico();
 	txtCalculo(operador1,operador2,operador3);
 	document.getElementById('demo').style.display = 'block';
 	MathJax.Hub.Typeset(); //atualizar notacao asciimath
-
-	if(dados.elements[7].checked){
-		var coordenadas = dados.elements[8].value;
-		ggb.evalCommand('translacao = ('+coordenadas+')');
-		var x = ggb.getXcoord('translacao');
-		var y = ggb.getYcoord('translacao');
-		alert(x);
-		alert(y);
-		setTimeout(function(){translacao(x,y);},tempo);
-	}
 }
 
 function operacao(operador,escalar,operacao){
 	defineLinha(operacao,figura);
-	visibilidadeLinha();
 	if(operador=='nenhum'){	
 		return;
 	}
@@ -261,6 +261,39 @@ function operacao(operador,escalar,operacao){
 			cisalhamentoV('D',escalar);
 			cisalhamentoV('E',escalar);
 			cisalhamentoV('F',escalar);
+		}
+	}
+	else if(operador=='translacao'){
+		ggb.evalCommand('translacao = ('+ escalar+')');
+		var x = ggb.getXcoord('translacao');
+		var y = ggb.getYcoord('translacao');
+		if(figura=='vetor')
+			translacao('A',x,y);
+		else if(figura=='triangulo'){
+			translacao('A',x,y);
+			translacao('B',x,y);
+			translacao('C',x,y);
+		}
+		else if(figura=='retangulo'){
+			translacao('A',x,y);
+			translacao('B',x,y);
+			translacao('C',x,y);
+			translacao('D',x,y);
+		}
+		else if(figura=='pentagono'){
+			translacao('A',x,y);
+			translacao('B',x,y);
+			translacao('C',x,y);
+			translacao('D',x,y);
+			translacao('E',x,y);
+		}
+		else if(figura=='hexagono'){
+			translacao('A',x,y);
+			translacao('B',x,y);
+			translacao('C',x,y);
+			translacao('D',x,y);
+			translacao('E',x,y);
+			translacao('F',x,y);
 		}
 	}
 }
@@ -501,13 +534,16 @@ function cisalhamentoV(P,escalar){
 	ggb.evalCommand('StartAnimation[slide'+op+']');
 }
 
-function translacao(x,y){	
-	ggb.evalCommand('A\' = (ax'+op+'+'+x+',ay'+op+'+'+y+')');
-	ggb.evalCommand('B\' = (bx'+op+'+'+x+',by'+op+'+'+y+')');
-	ggb.evalCommand('C\' = (cx'+op+'+'+x+',cy'+op+'+'+y+')');
-	ggb.evalCommand('D\' = (dx'+op+'+'+x+',dy'+op+'+'+y+')');
-	ggb.evalCommand('E\' = (ex'+op+'+'+x+',ey'+op+'+'+y+')');
-	ggb.evalCommand('F\' = (fx'+op+'+'+x+',fy'+op+'+'+y+')');
+function translacao(P,x,y){
+	var p = P.toLowerCase();
+	if(op==1){	
+		ggb.evalCommand(p+'x'+op+' = x('+P+') +'+x);
+		ggb.evalCommand(p+'y'+op+' = y('+P+') +'+y);
+	}
+	else{
+		ggb.evalCommand(p+'x'+op+' = '+p+'x'+(op-1)+'+'+x);
+		ggb.evalCommand(p+'y'+op+' = '+p+'y'+(op-1)+'+'+y);
+	}
 }
 
 function visibilidadeFalse(){
@@ -553,40 +589,40 @@ function visibilidadeTrue(figura){
 	}
 }
 
-function visibilidadeLinha(){
+function visibilidadeLinha(visibilidade){
 	if(figura=='vetor'){
-		ggb.setVisible('vetor\'',true);
-		ggb.setVisible('A\'',true);
+		ggb.setVisible('vetor\'',visibilidade);
+		ggb.setVisible('A\'',visibilidade);
 	}
 	else if(figura=='triangulo'){
-		ggb.setVisible('triangulo\'',true);
-		ggb.setVisible('A\'',true);
-		ggb.setVisible('B\'',true);
-		ggb.setVisible('C\'',true);
+		ggb.setVisible('triangulo\'',visibilidade);
+		ggb.setVisible('A\'',visibilidade);
+		ggb.setVisible('B\'',visibilidade);
+		ggb.setVisible('C\'',visibilidade);
 	}
 	else if(figura=='retangulo'){
-		ggb.setVisible('quadrado\'',true);
-		ggb.setVisible('A\'',true);
-		ggb.setVisible('B\'',true);
-		ggb.setVisible('C\'',true);
-		ggb.setVisible('D\'',true);
+		ggb.setVisible('quadrado\'',visibilidade);
+		ggb.setVisible('A\'',visibilidade);
+		ggb.setVisible('B\'',visibilidade);
+		ggb.setVisible('C\'',visibilidade);
+		ggb.setVisible('D\'',visibilidade);
 	}
 	else if(figura=='pentagono'){
-		ggb.setVisible('pentagono\'',true);
-		ggb.setVisible('A\'',true);
-		ggb.setVisible('B\'',true);
-		ggb.setVisible('C\'',true);
-		ggb.setVisible('D\'',true);
-		ggb.setVisible('E\'',true);
+		ggb.setVisible('pentagono\'',visibilidade);
+		ggb.setVisible('A\'',visibilidade);
+		ggb.setVisible('B\'',visibilidade);
+		ggb.setVisible('C\'',visibilidade);
+		ggb.setVisible('D\'',visibilidade);
+		ggb.setVisible('E\'',visibilidade);
 	}
 	else if(figura=='hexagono'){
-		ggb.setVisible('hexagono\'',true);
-		ggb.setVisible('A\'',true);
-		ggb.setVisible('B\'',true);
-		ggb.setVisible('C\'',true);
-		ggb.setVisible('D\'',true);
-		ggb.setVisible('E\'',true);
-		ggb.setVisible('F\'',true);
+		ggb.setVisible('hexagono\'',visibilidade);
+		ggb.setVisible('A\'',visibilidade);
+		ggb.setVisible('B\'',visibilidade);
+		ggb.setVisible('C\'',visibilidade);
+		ggb.setVisible('D\'',visibilidade);
+		ggb.setVisible('E\'',visibilidade);
+		ggb.setVisible('F\'',visibilidade);
 	}
 }
 
@@ -627,6 +663,8 @@ function strOperador(operador){
 		return '`Cis_h`';
 	else if(operador=='cisalhamentoV')
 		return '`Cis_v`';
+	else if(operador=='translacao')
+		return '`trans`';
 }
 
 
