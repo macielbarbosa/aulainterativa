@@ -15,25 +15,26 @@ function figurinha(){
 
 function select(elemento,escalar){
 	var operador = elemento.value;
-	var escalar = document.getElementById(escalar);
+	var elemEscalar = document.getElementById(escalar);
+	var operador2 = dados.elements[3].value;
+	var operador3 = dados.elements[5].value;
+	if(escalar=='escalar3' && operador2=='nenhum'){
+		alert('Selecione antes a segunda operação!');
+		return;
+	}
+	if(escalar=='escalar2' && operador=='nenhum'){
+		operador3 = 'nenhum';
+	}
 	if(operador=='dilatacao' || operador=='cisalhamentoH' || operador=='cisalhamentoV'){
-		escalar.style.display = 'inline';
-		escalar.setAttribute('placeholder','Escalar');
+		elemEscalar.style.display = 'inline';
+		elemEscalar.setAttribute('placeholder','Escalar');
 	}
 	else if(operador=='rotacao'){
-		escalar.style.display = 'inline';
-		escalar.setAttribute('placeholder','Graus');
+		elemEscalar.style.display = 'inline';
+		elemEscalar.setAttribute('placeholder','Graus');
 	}
 	else
-		escalar.style.display = 'none';
-}
-
-function permicao(){
-	var operador2 = document.getElementById('dados').elements[3].value;
-	if(operador2 == 'nenhum')
-		alert('Selecione antes a segunda operação!');
-	else
-		return;
+		elemEscalar.style.display = 'none';
 }
 
 function executar(){

@@ -60,7 +60,8 @@
           Selecione um ou mais operadores:
           <br/><br/>
           <select class="marginInput" onchange="select(this,'escalar1')">
-            <option value="reflexaoX">Reflexão no eixo X</option>
+            <option value="nenhum">Nenhum</option>
+            <option value="reflexaoX" selected>Reflexão no eixo X</option>
             <option value="reflexaoY">Reflexão no eixo Y</option>
             <option value="dilatacao">Dilatação/Contração</option>
             <option value="rotacao">Rotação</option>
@@ -80,7 +81,7 @@
           </select>
           <input class="marginInput" id="escalar2" size="3"/>
           <br><br>
-          <select class="marginInput" onclick="permicao()" onchange="select(this,'escalar3')">
+          <select class="marginInput" onchange="select(this,'escalar3')">
             <option value="nenhum" selected>Nenhum</option>
             <option value="reflexaoX">Reflexão no eixo X</option>
             <option value="reflexaoY">Reflexão no eixo Y</option>
