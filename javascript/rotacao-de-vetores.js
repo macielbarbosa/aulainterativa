@@ -227,23 +227,23 @@ function matrizesRotacao(){
 		composicao.innerHTML = '`v\' = R_alpha(v)`';
 		eqRot.innerHTML = '`v\' = R_alpha"&nbsp;"v`';
 		if(ny && rotY){
-			composicao.innerHTML = '`v\' = R_beta(R_alpha(v)) = (R_beta@R_alpha)(v)`';
+			composicao.innerHTML = '`v\' = (R_beta@R_alpha)(v) = R_beta(R_alpha(v))`';
 			eqRot.innerHTML = '`v\' = R_betaR_alpha"&nbsp;"v`';
 		}
 		else if(nx && rotX){
-			composicao.innerHTML = '`v\' = R_gamma(R_alpha(v)) = (R_gamma@R_alpha)(v)`';
+			composicao.innerHTML = '`v\' = (R_gamma@R_alpha)(v) = R_gamma(R_alpha(v))`';
 			eqRot.innerHTML = '`v\' = R_gammaR_alpha"&nbsp;"v`';
 		}
 		if(ny && rotY && nx && rotX){
+			composicao.innerHTML = '`v\' = (R_gamma@R_beta@R_alpha)(v) = R_gamma(R_beta(R_alpha(v)))`';
 			eqRot.innerHTML = '`v\' = R_gammaR_betaR_alpha"&nbsp;"v`';
-			composicao.innerHTML = '`v\' = R_gamma(R_beta(R_alpha(v))) = (R_gamma@R_beta@R_alpha)(v)`';
 		}
 	}
 	else if(ny && rotY) {
 		composicao.innerHTML = '`v\' = R_beta(v)`';
 		eqRot.innerHTML = '`v\' = R_beta"&nbsp;"v`';
 		if(nx && rotX){
-			composicao.innerHTML = '`v\' = R_gamma(R_beta(v)) = (R_gamma@R_beta)(v)`';
+			composicao.innerHTML = '`v\' = (R_gamma@R_beta)(v) = R_gamma(R_beta(v))`';
 			eqRot.innerHTML = '`v\' = R_gammaR_beta"&nbsp;"v`';
 		}
 	}
@@ -260,7 +260,7 @@ function coordenadasV(){
 	for(var i=0; i<coordenadas.length; i++){
 		if(i!=coordenadas.length-1 && coordenadas.charAt(i)=='.' && coordenadas.charAt(i+1)=='.')
 			return false;
-		else if(coordenadas.charAt(i)==' ' || coordenadas.charAt(i)=='.')
+		else if(coordenadas.charAt(i)==' ' || coordenadas.charAt(i)=='.' || coordenadas.charAt(i)=='-')
 			continue;
 		else if(coordenadas.charAt(i)==',')
 			virgulas++;

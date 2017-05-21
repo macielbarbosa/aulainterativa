@@ -447,7 +447,7 @@ function coordenadasValida(coords){
 	for(var i=0; i<coords.length; i++){
 		if(i!=coords.length-1 && coords.charAt(i)=='.' && coords.charAt(i+1)=='.')
 			return false;
-		else if(coords.charAt(i)==' ' || coords.charAt(i)=='.')
+		else if(coords.charAt(i)==' ' || coords.charAt(i)=='.' || coords.charAt(i)=='-')
 			continue;
 		else if(coords.charAt(i)==',')
 			virgulas++;
