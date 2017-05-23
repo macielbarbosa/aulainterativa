@@ -662,84 +662,12 @@ function txtCalculo(operador1,operador2,operador3){
 	var calculoPonto = document.getElementById('calculoPonto');
 	var pontoSorteado;
 	calculo.innerHTML = strOperador(operador1) + '`(P)`';
-	if(figura=='vetor'){
-		pontoAnalizado.innerHTML = 'B';
-		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord('B')+','+ggb.getYcoord('B')+') = ('+coordX('B',operador1)+','+coordY('B',operador1)+')`';
-	}
-	else if(figura=='triangulo'){
-		pontoSorteado = sortPonto(2,3);
-		pontoAnalizado.innerHTML = pontoSorteado;
-		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(pontoSorteado,operador1)+','+coordY(pontoSorteado,operador1)+')`';
-	}
-	else if(figura=='retangulo'){
-		pontoSorteado = sortPonto(2,4);
-		pontoAnalizado.innerHTML = pontoSorteado;
-		calculoPonto.innerHTML = '´´';
-	}
-	else if(figura=='pentagono'){
-		pontoSorteado = sortPonto(2,5);
-		pontoAnalizado.innerHTML = pontoSorteado;
-		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(pontoSorteado,operador1)+','+coordY(pontoSorteado,operador1)+')`';
-	}
-	else if(figura=='hexagono'){
-		pontoSorteado = sortPonto(2,6);
-		pontoAnalizado.innerHTML = pontoSorteado;
-		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(pontoSorteado,operador1)+','+coordY(pontoSorteado,operador1)+')`';
-	}
 
 	if(operador2!="nenhum"){
 		calculo.innerHTML = '`(`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P))`';
-		if(figura=='vetor'){
-			pontoAnalizado.innerHTML = 'B';
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='triangulo'){
-			pontoSorteado = sortPonto(2,3);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='retangulo'){
-			pontoSorteado = sortPonto(2,4);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='pentagono'){
-			pontoSorteado = sortPonto(2,5);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='hexagono'){
-			pontoSorteado = sortPonto(2,6);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
 	}
 	if(operador3!='nenhum'){
 		calculo.innerHTML = '`(`' + strOperador(operador3) + '`@`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P)))`';
-		if(figura=='vetor'){
-			pontoAnalizado.innerHTML = 'B';
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='triangulo'){
-			pontoSorteado = sortPonto(2,3);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='retangulo'){
-			pontoSorteado = sortPonto(2,4);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='pentagono'){
-			pontoSorteado = sortPonto(2,5);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
-		else if(figura=='hexagono'){
-			pontoSorteado = sortPonto(2,6);
-			pontoAnalizado.innerHTML = pontoSorteado;
-			calculoPonto.innerHTML = '´´';
-		}
 	}
 }
 
@@ -760,7 +688,138 @@ function strOperador(operador){
 		return '`trans`';
 }
 
-/*function resetCoordenadas(){
+/*function txtCalculo(operador1,operador2,operador3){
+	var calculo = document.getElementById('calculo');
+	var pontoAnalizado = document.getElementById('pontoAnalizado');
+	var calculoPonto = document.getElementById('calculoPonto');
+	var pontoSorteado;
+	calculo.innerHTML = strOperador(operador1) + '`(P)`';
+	if(figura=='vetor'){
+		pontoAnalizado.innerHTML = 'B';
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord('B')+','+ggb.getYcoord('B')+') = ('+coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1)+','+coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1)+')`';
+	}
+	else if(figura=='triangulo'){
+		pontoSorteado = sortPonto(2,3);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`';
+	}
+	else if(figura=='retangulo'){
+		pontoSorteado = sortPonto(2,4);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`';
+	}
+	else if(figura=='pentagono'){
+		pontoSorteado = sortPonto(2,5);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`';
+	}
+	else if(figura=='hexagono'){
+		pontoSorteado = sortPonto(2,6);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`';
+	}
+
+	if(operador2!="nenhum"){
+		calculo.innerHTML = '`(`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P))`';
+		if(figura=='vetor'){
+			pontoAnalizado.innerHTML = 'B';
+			calculoPonto.innerHTML = strOperador(operador2) + '`(' + strOperador(operador1) + '('+ggb.getXcoord('B')+','+ggb.getYcoord('B')+')) = '+strOperador(operador2)+'('+coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1)+','+coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1)+')`<br><br>= ('+coordX(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2)+')`';
+		}
+		else if(figura=='triangulo'){
+			pontoSorteado = sortPonto(2,3);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador2) + '`(' + strOperador(operador1) + '('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')) = '+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`<br><br>= ('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')`';
+		}
+		else if(figura=='retangulo'){
+			pontoSorteado = sortPonto(2,4);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador2) + '`(' + strOperador(operador1) + '('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')) = '+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`<br><br>= ('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')`';
+		}
+		else if(figura=='pentagono'){
+			pontoSorteado = sortPonto(2,5);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador2) + '`(' + strOperador(operador1) + '('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')) = '+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`<br><br>= ('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')`';
+		}
+		else if(figura=='hexagono'){
+			pontoSorteado = sortPonto(2,6);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador2) + '`(' + strOperador(operador1) + '('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')) = '+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')`<br><br>= ('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')`';
+		}
+	}
+	if(operador3!='nenhum'){
+		calculo.innerHTML = '`(`' + strOperador(operador3) + '`@`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P)))`';
+		if(figura=='vetor'){
+			pontoAnalizado.innerHTML = 'B';
+			calculoPonto.innerHTML = strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`('+ggb.getXcoord('B')+','+ggb.getYcoord('B')+')))<br><br>= '+strOperador(operador3)+'('+strOperador(operador2)+'('+coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1)+','+coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1)+')<br><br> = '+strOperador(operador3)+'('+coordX(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2)+')<br><br> = ('+coordX(coordX(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2),escalar3,operador3)+','+coordY(coordX(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),coordY(ggb.getXcoord('B'),ggb.getYcoord('B'),escalar1,operador1),escalar2,operador2),escalar3,operador3)+')`';
+		}
+		else if(figura=='triangulo'){
+			pontoSorteado = sortPonto(2,3);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')))<br><br>= '+strOperador(operador3)+'('+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')<br><br> = '+strOperador(operador3)+'('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')<br><br> = ('+coordX(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+','+coordY(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+')`';
+		}
+		else if(figura=='retangulo'){
+			pontoSorteado = sortPonto(2,4);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')))<br><br>= '+strOperador(operador3)+'('+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')<br><br> = '+strOperador(operador3)+'('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')<br><br> = ('+coordX(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+','+coordY(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+')`';
+		}
+		else if(figura=='pentagono'){
+			pontoSorteado = sortPonto(2,5);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')))<br><br>= '+strOperador(operador3)+'('+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')<br><br> = '+strOperador(operador3)+'('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')<br><br> = ('+coordX(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+','+coordY(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+')`';
+		}
+		else if(figura=='hexagono'){
+			pontoSorteado = sortPonto(2,6);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+')))<br><br>= '+strOperador(operador3)+'('+strOperador(operador2)+'('+coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+','+coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1)+')<br><br> = '+strOperador(operador3)+'('+coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+','+coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2)+')<br><br> = ('+coordX(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+','+coordY(coordX(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),coordY(coordX(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),coordY(ggb.getXcoord(pontoSorteado),ggb.getYcoord(pontoSorteado),escalar1,operador1),escalar2,operador2),escalar3,operador3)+')`';
+		}
+	}
+}
+
+function sortPonto(a,b){
+	var num = Math.floor((Math.random() * (b-1)) + a);
+	if(num==2)
+		return 'B';
+	else if(num==3)
+		return 'C';
+	else if(num==4)
+		return 'D';
+	else if(num==5)
+		return 'E';
+	else if(num==6)
+		return 'F';
+}
+
+function coordX(x,y,escalar,operador){
+	if(operador=='reflexaoX')
+		return x;
+	else if(operador=='reflexaoY')
+		return -x;
+	else if(operador=='dilatacao')
+		return escalar*x;
+	else if(operador=='rotacao')
+		return x*Math.cos(escalar)+y*Math.sin(escalar);
+	else if(operador=='cisalhamentoH')
+		return x+escalar*y;
+	else if(operador=='cisalhamentoV')
+		return x;
+}
+
+function coordY(x,y,escalar,operador){
+	if(operador=='reflexaoX')
+		return -y;
+	else if(operador=='reflexaoY')
+		return y;
+	else if(operador=='dilatacao')
+		return escalar*y;
+	else if(operador=='rotacao')
+		return y*Math.cos(escalar)-x*Math.sin(escalar);
+	else if(operador=='cisalhamentoH')
+		return y;
+	else if(operador=='cisalhamentoV')
+		return y+escalar*x;
+}
+
+function resetCoordenadas(){
 	var coordenada = ['ax1','ax2','ax3','ay1','ay2','ay3','bx1','bx2','bx3','by1','by2','by3','cx1','cx2','cx3','cy1','cy2','cy3','dx1','dx2','dx3','dy1','dy2','dy3','ex1','ex2','ex3','ey1','ey2','ey3','fx1','fx2','fx3','fy1','fy2','fy3'];
 	for(var i=0; i<coordenada.length; i++)
 		ggb.evalCommand(coordenada[i]+'= 0');
