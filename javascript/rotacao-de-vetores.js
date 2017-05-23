@@ -52,6 +52,14 @@ function rotacionar(){
 	rotZ = document.getElementById('rotZ').checked;
 	rotY = document.getElementById('rotY').checked;
 	rotX = document.getElementById('rotX').checked;
+	if(!coordenadas || !coordenadasV()){
+		alert('ENTRADA INVÁLIDA\nPor favor, adicione as coordenadas númericas ( x , y , z ) do vetor v separadas por vírculas');
+		return;
+	}
+	if(entradaInvalida(nz,ny,nx)){
+		alert('Parâmetro de rotação inválido\nObs.: valores flutuantes devem ser separado por ponto (.)');
+		return;
+	}
 	plotV();
 	if(nz && rotZ){
 		rotacionarZ();
@@ -75,6 +83,7 @@ function rotacionar(){
 	document.getElementById("v'").style.display = 'block';
 	document.getElementById('nota-modulo').style.display = 'inline';
 	document.getElementById("demo").style.display = 'block';
+	document.getElementById("asteriscos").style.display = 'block';
 	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
 function rotacionarZ(){
@@ -268,4 +277,7 @@ function coordenadasV(){
 			letras++;
 	}
 	return virgulas==2 && letras==0;
+}
+function entradaInvalida(nz,ny,nx){
+	return isNaN(nz) || isNaN(ny) || isNaN(nx);
 }

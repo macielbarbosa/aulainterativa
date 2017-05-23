@@ -57,25 +57,23 @@ function executar(){
 	var escalar3 = dados.elements[6].value;
 	var tempo = 1200;
 	if(entradaInvalida(operador1,operador2,operador3,escalar1,escalar2,escalar3)){
-		alert('ENTRADA INVALIDA\nDigite um parâmetro numérico para a operação\nValores flutuantes separado por ponto (.)');
+		alert('ENTRADA INVALIDA\nDigite um parâmetro numérico para a operação\nObs: valores flutuantes separado por ponto (.)');
 		return;
 	}
-	//resetCoordenadas();
 	visibilidadeLinha(false);
 	setTimeout(function(){visibilidadeLinha(true);},500);
 	setTimeout(function(){operacao(operador1,escalar1,'operacao1');},500);
-	tempo+=1200;
+	tempo+=1000;
 	if(operador2!="nenhum"){
 		setTimeout(function(){operacao(operador2,escalar2,'operacao2');},tempo);
-		tempo+=1200;
+		tempo+=1500;
 	}
 	if(operador3!='nenhum'){
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
 	}
-	//escalaGrafico();
 	txtCalculo(operador1,operador2,operador3);
 	document.getElementById('demo').style.display = 'block';
-	MathJax.Hub.Typeset(); //atualizar notacao asciimathx
+	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
 
 function operacao(operador,escalar,operacao){
@@ -660,12 +658,88 @@ function entradaInvalida(op1,op2,op3,e1,e2,e3){
 
 function txtCalculo(operador1,operador2,operador3){
 	var calculo = document.getElementById('calculo');
+	var pontoAnalizado = document.getElementById('pontoAnalizado');
+	var calculoPonto = document.getElementById('calculoPonto');
+	var pontoSorteado;
 	calculo.innerHTML = strOperador(operador1) + '`(P)`';
+	if(figura=='vetor'){
+		pontoAnalizado.innerHTML = 'B';
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord('B')+','+ggb.getYcoord('B')+') = ('+coordX('B',operador1)+','+coordY('B',operador1)+')`';
+	}
+	else if(figura=='triangulo'){
+		pontoSorteado = sortPonto(2,3);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(pontoSorteado,operador1)+','+coordY(pontoSorteado,operador1)+')`';
+	}
+	else if(figura=='retangulo'){
+		pontoSorteado = sortPonto(2,4);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = '´´';
+	}
+	else if(figura=='pentagono'){
+		pontoSorteado = sortPonto(2,5);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(pontoSorteado,operador1)+','+coordY(pontoSorteado,operador1)+')`';
+	}
+	else if(figura=='hexagono'){
+		pontoSorteado = sortPonto(2,6);
+		pontoAnalizado.innerHTML = pontoSorteado;
+		calculoPonto.innerHTML = strOperador(operador1) + '`('+ggb.getXcoord(pontoSorteado)+','+ggb.getYcoord(pontoSorteado)+') = ('+coordX(pontoSorteado,operador1)+','+coordY(pontoSorteado,operador1)+')`';
+	}
+
 	if(operador2!="nenhum"){
 		calculo.innerHTML = '`(`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P))`';
+		if(figura=='vetor'){
+			pontoAnalizado.innerHTML = 'B';
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='triangulo'){
+			pontoSorteado = sortPonto(2,3);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='retangulo'){
+			pontoSorteado = sortPonto(2,4);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='pentagono'){
+			pontoSorteado = sortPonto(2,5);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='hexagono'){
+			pontoSorteado = sortPonto(2,6);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
 	}
 	if(operador3!='nenhum'){
 		calculo.innerHTML = '`(`' + strOperador(operador3) + '`@`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P)))`';
+		if(figura=='vetor'){
+			pontoAnalizado.innerHTML = 'B';
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='triangulo'){
+			pontoSorteado = sortPonto(2,3);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='retangulo'){
+			pontoSorteado = sortPonto(2,4);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='pentagono'){
+			pontoSorteado = sortPonto(2,5);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
+		else if(figura=='hexagono'){
+			pontoSorteado = sortPonto(2,6);
+			pontoAnalizado.innerHTML = pontoSorteado;
+			calculoPonto.innerHTML = '´´';
+		}
 	}
 }
 
@@ -685,7 +759,6 @@ function strOperador(operador){
 	else if(operador=='translacao')
 		return '`trans`';
 }
-
 
 /*function resetCoordenadas(){
 	var coordenada = ['ax1','ax2','ax3','ay1','ay2','ay3','bx1','bx2','bx3','by1','by2','by3','cx1','cx2','cx3','cy1','cy2','cy3','dx1','dx2','dx3','dy1','dy2','dy3','ex1','ex2','ex3','ey1','ey2','ey3','fx1','fx2','fx3','fy1','fy2','fy3'];

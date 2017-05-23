@@ -116,7 +116,7 @@ span#v3{
 	margin-left: 40px;
 }
 
-#escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3{
+#escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3, #asteriscos{
 	display: none;
 }
 
