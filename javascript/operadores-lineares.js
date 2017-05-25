@@ -73,6 +73,7 @@ function executar(){
 	}
 	txtCalculo(operador1,operador2,operador3,escalar1,escalar2,escalar3);
 	document.getElementById('demo').style.display = 'block';
+	document.getElementById('asteriscos').style.display = 'block';
 	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
 
@@ -665,18 +666,21 @@ function txtCalculo(op1,op2,op3,e1,e2,e3){
 	var y = ggb.getYcoord(ponto);
 	var x1 = coordX(x,y,op1,e1);
 	var y1 = coordY(x,y,op1,e1);
+	var x2 = coordX(x1,y1,op2,e2);
+	var y2 = coordY(x1,y1,op2,e2);
+	var x3 = coordX(x2,y2,op3,e3);
+	var y3 = coordY(x2,y2,op3,e3);
 
 	calculo.innerHTML = '`' + strOperador(op1) + '(P)`';
-	calculoPonto.innerHTML = calculo.innerHTML.replace('P', x.toFixed(1)+','+y.toFixed(1)) + '`= ('+ x1.toFixed(1) +','+ y1.toFixed(1) +')`';
+	calculoPonto.innerHTML = calculo.innerHTML.replace('P', x.toFixed(1)+','+y.toFixed(1)) + '`= ('+ x1.toFixed(1) +','+ y1.toFixed(1) +')` <abrr title=\'Observação 1\'>`\" (*)\"`</abbr>';
 	if(op2!="nenhum"){
-		var x2 = coordX(x1,y1,op2,e2);
-		var y2 = coordY(x1,y1,op2,e2);
 		calculo.innerHTML = '`(' + strOperador(op2) + '@' + strOperador(op1) + ')(P) = ' + strOperador(op2) + '(' + strOperador(op1) + '(P))`';
 		calculoPonto.innerHTML = '`' + strOperador(op2) + '(' + strOperador(op1) + '('+x.toFixed(1)+','+y.toFixed(1)+'))';
-		calculoPonto.innerHTML += '`<br><br>`=` ' + calculoPonto.innerHTML.replace(strOperador(op1) + '('+x.toFixed(1)+','+y.toFixed(1)+')', x1.toFixed(1) +','+ y1.toFixed(1)) + '`<br><br>`= ('+x2.toFixed(1)+','+y2.toFixed(1)+')`'; 
+		calculoPonto.innerHTML += '`<br><br>`=` ' + calculoPonto.innerHTML.replace(strOperador(op1) + '('+x.toFixed(1)+','+y.toFixed(1)+')', x1.toFixed(1) +','+ y1.toFixed(1)) + '`<br><br>`= ('+x2.toFixed(1)+','+y2.toFixed(1)+')` <abrr title=\'Observação 1\'>`\" (*)\"`</abbr>';
 	}
 	if(op3!='nenhum'){
 		calculo.innerHTML = '`(' + strOperador(op3) + '@' + strOperador(op2) + '@' + strOperador(op1) + ')(P) = ' + strOperador(op3) + '(' + strOperador(op2) + '(' + strOperador(op1) + '(P)))`';
+		calculoPonto.innerHTML = '`' + strOperador(op3) + '(' + strOperador(op2) + '(' + strOperador(op1) + '('+x.toFixed(1)+','+y.toFixed(1)+')))`<br><br>`= ' + strOperador(op3) + '(' + strOperador(op2) + '(' + x1.toFixed(1) +','+ y1.toFixed(1) +'))`<br><br>`= ' + strOperador(op3) + '(' + x2.toFixed(1) +','+ y2.toFixed(1) + ')`<br><br>`= ('+x3.toFixed(1)+','+y3.toFixed(1)+')` <abrr title=\'Observação 1\'>`\" (*)\"`</abbr>';
 	}
 }
 
@@ -718,7 +722,9 @@ function sortPonto(){
 	}
 
 	var num = Math.floor((Math.random() * (b-1)) + a);
-	if(num==2)
+	if(num==1)
+		return 'A';
+	else if(num==2)
 		return 'B';
 	else if(num==3)
 		return 'C';
@@ -731,43 +737,57 @@ function sortPonto(){
 }
 
 function coordX(x,y,operador,escalar){
+	if(operador=='nenhum')
+		return null;
+	var coord;
 	if(operador=='reflexaoX')
-		return x;
+		coord = x;
 	else if(operador=='reflexaoY')
-		return -x;
+		coord = -x;
 	else if(operador=='dilatacao')
-		return escalar*x;
+		coord = escalar*x;
 	else if(operador=='rotacao')
-		return x*Math.cos(escalar)-y*Math.sin(escalar);
+		coord = x*Math.cos(escalar*Math.PI/180)-y*Math.sin(escalar*Math.PI/180);
 	else if(operador=='cisalhamentoH')
-		return (x+escalar*y);
+		coord = (x+escalar*y);
 	else if(operador=='cisalhamentoV')
-		return x;
+		coord = x;
 	else if(operador=='translacao'){
 		ggb.evalCommand('translacao = ('+ escalar+')');
 		var tx = ggb.getXcoord('translacao');
-		return x+tx;
+		coord = x+tx;
 	}
+	if(Math.abs(coord)<0.05)
+		return 0;
+	else
+		return coord;
 }
 
 function coordY(x,y,operador,escalar){
+	if(operador=='nenhum')
+		return null;
+	var coord;
 	if(operador=='reflexaoX')
-		return -y;
+		coord = -y;
 	else if(operador=='reflexaoY')
-		return y;
+		coord = y;
 	else if(operador=='dilatacao')
-		return (escalar*y);
+		coord = (escalar*y);
 	else if(operador=='rotacao')
-		return x*Math.sin(escalar)+y*Math.cos(escalar);
+		coord = x*Math.sin(escalar*Math.PI/180)+y*Math.cos(escalar*Math.PI/180);
 	else if(operador=='cisalhamentoH')
-		return y;
+		coord = y;
 	else if(operador=='cisalhamentoV')
-		return y+escalar*x;
+		coord = y+escalar*x;
 	else if(operador=='translacao'){
 		ggb.evalCommand('translacao = ('+ escalar+')');
 		var ty = ggb.getYcoord('translacao');
-		return y+ty;
+		coord = y+ty;
 	}
+	if(Math.abs(coord)<0.05)
+		return 0;
+	else
+		return coord;
 }
 
 /*function txtCalculo(operador1,operador2,operador3){
@@ -856,10 +876,6 @@ function coordY(x,y,operador,escalar){
 		}
 	}
 }
-
-
-
-
 
 function resetCoordenadas(){
 	var coordenada = ['ax1','ax2','ax3','ay1','ay2','ay3','bx1','bx2','bx3','by1','by2','by3','cx1','cx2','cx3','cy1','cy2','cy3','dx1','dx2','dx3','dy1','dy2','dy3','ex1','ex2','ex3','ey1','ey2','ey3','fx1','fx2','fx3','fy1','fy2','fy3'];
