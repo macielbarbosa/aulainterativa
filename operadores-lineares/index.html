@@ -118,9 +118,9 @@
         <div id="demo">
           <h4>Cálculo da operação</h4>
           Na operação realizada temos para cada ponto P:<br><br>
-          <div class="marginLeft">
-            <span id="calculo"></span>
-          </div><br>
+          <div class="marginLeft" id="calculo"></div><br>
+          Seja P = <span id="ponto"></span>:<br><br>
+          <div class="marginLeft" id="calculoPonto"></div><br>
           Para cada um das transformações lineares `T` abaixo:<br/><br>
           <div class="marginLeft">  
             `T:"&real;&sup2;"rarr"&real;&sup2;"`<br><br>
@@ -133,7 +133,7 @@
           <b>Dilatação/contração</b><br>
           `rArr Dil(P) = a(x,y), a in R`<br/><br/>
           <b>Rotação</b><br>
-          `rArr Rot(P) = (xcostheta+ysintheta, ycostheta-xsintheta), -180"&deg;"<=theta<=180"&deg;"`<br/><br/>
+          `rArr Rot(P) = (xcostheta-ysintheta, xsintheta+ycostheta), -180"&deg;"<=theta<=180"&deg;"`<br/><br/>
           <b>Cisalhamento horizontal</b><br>
           `rArr Cis_h(P) = (x+alphay,y), alpha in R`<br/><br/>
           <b>Cisalhamento vertical</b><br>

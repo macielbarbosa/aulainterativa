@@ -71,7 +71,7 @@ function executar(){
 	if(operador3!='nenhum'){
 		setTimeout(function(){operacao(operador3,escalar3,'operacao3');},tempo);
 	}
-	txtCalculo(operador1,operador2,operador3);
+	txtCalculo(operador1,operador2,operador3,escalar1,escalar2,escalar3);
 	document.getElementById('demo').style.display = 'block';
 	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
@@ -656,36 +656,118 @@ function entradaInvalida(op1,op2,op3,e1,e2,e3){
 	return false;
 }
 
-function txtCalculo(operador1,operador2,operador3){
+function txtCalculo(op1,op2,op3,e1,e2,e3){
 	var calculo = document.getElementById('calculo');
-	var pontoAnalizado = document.getElementById('pontoAnalizado');
+	var ponto = sortPonto();
+	document.getElementById('ponto').innerHTML = ponto;
 	var calculoPonto = document.getElementById('calculoPonto');
-	var pontoSorteado;
-	calculo.innerHTML = strOperador(operador1) + '`(P)`';
+	var x = ggb.getXcoord(ponto);
+	var y = ggb.getYcoord(ponto);
+	var x1 = coordX(x,y,op1,e1);
+	var y1 = coordY(x,y,op1,e1);
 
-	if(operador2!="nenhum"){
-		calculo.innerHTML = '`(`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P))`';
+	calculo.innerHTML = '`' + strOperador(op1) + '(P)`';
+	calculoPonto.innerHTML = calculo.innerHTML.replace('P', x.toFixed(1)+','+y.toFixed(1)) + '`= ('+ x1.toFixed(1) +','+ y1.toFixed(1) +')`';
+	if(op2!="nenhum"){
+		var x2 = coordX(x1,y1,op2,e2);
+		var y2 = coordY(x1,y1,op2,e2);
+		calculo.innerHTML = '`(' + strOperador(op2) + '@' + strOperador(op1) + ')(P) = ' + strOperador(op2) + '(' + strOperador(op1) + '(P))`';
+		calculoPonto.innerHTML = '`' + strOperador(op2) + '(' + strOperador(op1) + '('+x.toFixed(1)+','+y.toFixed(1)+'))';
+		calculoPonto.innerHTML += '`<br><br>`=` ' + calculoPonto.innerHTML.replace(strOperador(op1) + '('+x.toFixed(1)+','+y.toFixed(1)+')', x1.toFixed(1) +','+ y1.toFixed(1)) + '`<br><br>`= ('+x2.toFixed(1)+','+y2.toFixed(1)+')`'; 
 	}
-	if(operador3!='nenhum'){
-		calculo.innerHTML = '`(`' + strOperador(operador3) + '`@`' + strOperador(operador2) + '`@`' + strOperador(operador1) + '`)(P)` = ' + strOperador(operador3) + '`(`' + strOperador(operador2) + '`(`' + strOperador(operador1) + '`(P)))`';
+	if(op3!='nenhum'){
+		calculo.innerHTML = '`(' + strOperador(op3) + '@' + strOperador(op2) + '@' + strOperador(op1) + ')(P) = ' + strOperador(op3) + '(' + strOperador(op2) + '(' + strOperador(op1) + '(P)))`';
 	}
 }
 
 function strOperador(operador){
 	if(operador=='reflexaoX')
-		return '`Ref_x`';
+		return 'Ref_x';
 	else if(operador=='reflexaoY')
-		return '`Ref_y`';
+		return 'Ref_y';
 	else if(operador=='dilatacao')
-		return '`Dil`';
+		return 'Dil';
 	else if(operador=='rotacao')
-		return '`Rot`';
+		return 'Rot';
 	else if(operador=='cisalhamentoH')
-		return '`Cis_h`';
+		return 'Cis_h';
 	else if(operador=='cisalhamentoV')
-		return '`Cis_v`';
+		return 'Cis_v';
 	else if(operador=='translacao')
-		return '`trans`';
+		return 'trans';
+}
+
+function sortPonto(){
+	if(figura=='vetor')
+		return 'B';
+	else if(figura=='triangulo'){
+		a = 2;
+		b = 3;
+	}
+	else if(figura=='retangulo'){
+		a = 2;
+		b = 4;
+	}
+	else if(figura=='pentagono'){
+		a = 1;
+		b = 5;
+	}
+	else if(figura=='hexagono'){
+		a = 1;
+		b = 6;
+	}
+
+	var num = Math.floor((Math.random() * (b-1)) + a);
+	if(num==2)
+		return 'B';
+	else if(num==3)
+		return 'C';
+	else if(num==4)
+		return 'D';
+	else if(num==5)
+		return 'E';
+	else if(num==6)
+		return 'F';
+}
+
+function coordX(x,y,operador,escalar){
+	if(operador=='reflexaoX')
+		return x;
+	else if(operador=='reflexaoY')
+		return -x;
+	else if(operador=='dilatacao')
+		return escalar*x;
+	else if(operador=='rotacao')
+		return x*Math.cos(escalar)-y*Math.sin(escalar);
+	else if(operador=='cisalhamentoH')
+		return (x+escalar*y);
+	else if(operador=='cisalhamentoV')
+		return x;
+	else if(operador=='translacao'){
+		ggb.evalCommand('translacao = ('+ escalar+')');
+		var tx = ggb.getXcoord('translacao');
+		return x+tx;
+	}
+}
+
+function coordY(x,y,operador,escalar){
+	if(operador=='reflexaoX')
+		return -y;
+	else if(operador=='reflexaoY')
+		return y;
+	else if(operador=='dilatacao')
+		return (escalar*y);
+	else if(operador=='rotacao')
+		return x*Math.sin(escalar)+y*Math.cos(escalar);
+	else if(operador=='cisalhamentoH')
+		return y;
+	else if(operador=='cisalhamentoV')
+		return y+escalar*x;
+	else if(operador=='translacao'){
+		ggb.evalCommand('translacao = ('+ escalar+')');
+		var ty = ggb.getYcoord('translacao');
+		return y+ty;
+	}
 }
 
 /*function txtCalculo(operador1,operador2,operador3){
@@ -775,49 +857,9 @@ function strOperador(operador){
 	}
 }
 
-function sortPonto(a,b){
-	var num = Math.floor((Math.random() * (b-1)) + a);
-	if(num==2)
-		return 'B';
-	else if(num==3)
-		return 'C';
-	else if(num==4)
-		return 'D';
-	else if(num==5)
-		return 'E';
-	else if(num==6)
-		return 'F';
-}
 
-function coordX(x,y,escalar,operador){
-	if(operador=='reflexaoX')
-		return x;
-	else if(operador=='reflexaoY')
-		return -x;
-	else if(operador=='dilatacao')
-		return escalar*x;
-	else if(operador=='rotacao')
-		return x*Math.cos(escalar)+y*Math.sin(escalar);
-	else if(operador=='cisalhamentoH')
-		return x+escalar*y;
-	else if(operador=='cisalhamentoV')
-		return x;
-}
 
-function coordY(x,y,escalar,operador){
-	if(operador=='reflexaoX')
-		return -y;
-	else if(operador=='reflexaoY')
-		return y;
-	else if(operador=='dilatacao')
-		return escalar*y;
-	else if(operador=='rotacao')
-		return y*Math.cos(escalar)-x*Math.sin(escalar);
-	else if(operador=='cisalhamentoH')
-		return y;
-	else if(operador=='cisalhamentoV')
-		return y+escalar*x;
-}
+
 
 function resetCoordenadas(){
 	var coordenada = ['ax1','ax2','ax3','ay1','ay2','ay3','bx1','bx2','bx3','by1','by2','by3','cx1','cx2','cx3','cy1','cy2','cy3','dx1','dx2','dx3','dy1','dy2','dy3','ex1','ex2','ex3','ey1','ey2','ey3','fx1','fx2','fx3','fy1','fy2','fy3'];
