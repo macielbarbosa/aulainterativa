@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset='UTF-8'/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Indepedência Linear</title>
+	<script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+  	</script>
+  	<script src="http://www.geogebra.org/scripts/deployggb.js"></script>
+	<script src = "../javascript/independencia.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/estilo.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/template.css">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		      	<span class="icon-bar"></span>
+		      	<span class="icon-bar"></span>
+		      	<span class="icon-bar"></span>                        
+		      </button>
+		      <a class="navbar-brand navbar-logo" href="../index.html#myPage">Aula Interativa</a>
+		    </div>
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="../index.html#sobre">SOBRE</a></li>
+		        <li><a href="../index.html#algebra-linear">ÁLGEBRA LINEAR</a></li>
+		        <li><a href="../index.html#calculo">CÁLCULO</a></li>
+		        <li><a href="../index.html#contato">CONTATO</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+	</header>
+		<div class="container">
+			<h1>Independência Linear</h1><br>
+		</div>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					Seja `v, u` &isin; &real;&sup2;:
+					<form id="entrada2" class="formulario">
+						`v` = (
+						<input type="text" name="vetorV" size="6" placeholder="x  ,  y"/>
+						)<br/><br/>
+						`u` = (
+						<input type="text" name="vetorU" size="6" placeholder="x  ,  y"/>
+						)<br/><br/>
+						<abbr title="Verifica se v e u são linearmente dependentes ou independentes"><button type="button" onclick="verificar2()">Verificar</button></abbr>
+					</form>
+					<div id="resposta2">
+						<p class="recuo">
+							Para `v` = (<span id="vx"></span>, <span id="vy"></span>) e `u` = (<span id="ux"></span>, </span><span id="uy"></span>) o conjunto de vetores `S = {v,u}` é <span id="resultado2"></span>, pois <span id="justificativa2"></span><br/><br>
+							<span id="prova2"></span><br>
+							<p class="teorema" id="vetorNulo">
+								<b>TEOREMA</b><br/><i>Um conjunto finito de vetores que contém o vetor nulo é linearmente dependente.</i>
+							</p>
+							<p class="teorema" id="naoMultiplos">
+								<b>TEOREMA</b><br/><i>Um conjunto de exatamente dois vetores é linearmente independente se, e somente se, nenhum do dois vetores é um múltiplo escalar do outro.</i>
+							</p>
+							<p class="teorema" id="multiplos">
+								<b>TEOREMA</b><br/><i>Um conjunto de exatamente dois vetores é linearmente dependente se, e somente se, um dos vetores é um múltiplo escalar do outro.</i>
+							</p>
+						</p>
+						Adicionando `w` ao conjunto de vetores `S`:
+						<form id="entrada3"  class="formulario">
+							`w` = (
+							<input type="text" name="vetorW" size="6" placeholder="x  ,  y"/>
+							)<br/><br/>
+							<abbr title="Verifica se {v,u,w} são LD ou LI"><button type="button" onclick="verificar3()">Verificar</button></abbr>
+						</form>
+					</div>	
+				</div>
+				<div class="col-sm-6">
+					<div id="applet_container"></div>
+					<img src="../imagens/mouse-click.png" style="margin-left: 35%;" /><b style="font-size: 8pt">Visualização 3D </b>
+					<img src="../imagens/mouse-scroll.png"><b style="font-size: 8pt;"> Zoom</b>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">	
+					<div id="resposta3">
+						<p class="recuo">
+							Para <b>z</b> = (<span id="wx"></span>, <span id="wy"></span>) o conjunto de vetores `S = {v,u,w}` é <ins>linearmente dependente</ins> (<abbr title='Linearmente dependente'>LD</abbr>), pois um conjunto com três ou mais vetores no &real;&sup2; sempre é <abbr title='Linearmente dependente'>LD</abbr>.
+							<p class="teorema">	
+								<b>TEOREMA</b><br/>
+								<i>Seja S = {<b>v</b><small><sub>1</sub></small>, <b>v</b><small><sub>2</sub></small>,..., <b>v</b><sub>r</sub>} um conjunto de vetores em <b>R</b><sup>n</sup>. Se r > n, então S é linearmente independente.</i>
+							</p>
+							<p class="recuo">
+								Assim, pode-se expressar um vetor de `S` como uma combinação linear dos outros vetores:
+							</p>
+							<span id="prova3" style="margin-left: 40px"></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div>
+						<br>
+						<p class="caption">Vídeo explicativo do canal <a href='https://www.youtube.com/channel/UCdv5kM0ZID619s3kNUIlBdg' target="_blank"><cite>O Estudante</cite></a></p>
+						<div class="embed-responsive embed-responsive-16by9">
+				    	<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/HhhBL1p8LFU"></iframe>
+				    </div>
+					</div>
+				</div>
+			</div>
+		</div>				
+	</section>
+</body>
+</html>

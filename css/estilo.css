@@ -29,7 +29,7 @@ p{
 	text-align: justify;
 }
 
-form{
+.formulario{
 	margin: 25px 50px 25px 50px;
 }
 
@@ -44,30 +44,6 @@ p.teorema{
 	margin-left: 50px;
 }
 
-span#prova2{
-	display: none;
-}
-
-p#vetorNulo{
-	display: none;
-}
-
-p#multiplos{
-	display: none;
-}
-
-p#naoMultiplos{
-	display: none;
-}	
-
-div#resposta2{
-	display: none;
-}
-
-div#resposta3{
-	display: none;
-}
-
 p.caption{
 	text-align: right;
 	font-size: 10pt;
@@ -80,43 +56,9 @@ button#btnExercicios{
 	margin-left: 170px;
 }
 
-div#grafico{
-	overflow: scroll;
-	width: auto;
-	height: 465px;
-	margin-bottom: 20px; 
-	border: 1px solid gray;
-	position: relative;
-	box-shadow: 0px 0px 10px gray;
-}
-
-canvas{
-	position: absolute;
-	top: 21px;
-	left: 21px;
-}
-
-img#plano{
-	position: relative;
-	top: 1px;
-	left: 0px;
-}
-
 p#vetores{
 	text-align: center;
 	display: none;
-}
-
-b#red{
-	color: red;
-}
-
-b#blue{
-	color: blue;
-}
-
-b#green{
-	color: green;
 }
 
 div#vetores{
@@ -143,15 +85,23 @@ span#v3{
 	display: none;
 }
 
-.overline{
-	text-decoration: overline;
-}
-
 .calculo{
 	margin-left: 10%;
 	font-size: 12pt;
 }
 
-button.rotacao{
+.marginInput{
 	margin-left: 40px;
+}
+
+.marginLeft{
+	margin-left: 80px;
+}
+
+#asteriscos{
+	margin-top: 80px;
+}
+
+#escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3, #asteriscos{
+	display: none;
 }
