@@ -19,12 +19,6 @@ nav.navbar{
 	padding-right: 2%;
 }
 
-#logo{
-	font-family: chawp;
-	font-size: 15pt;
-	color: black;
-}
-
 p{
 	text-align: justify;
 }
@@ -51,11 +45,6 @@ p.caption{
 	margin-left: 60px;
 }
 
-button#btnExercicios{
-	margin-top: 20px;
-	margin-left: 170px;
-}
-
 p#vetores{
 	text-align: center;
 	display: none;
@@ -66,12 +55,6 @@ div#vetores{
 	text-align: center;
 	padding-left: 10px;
 	padding-right: 0px;
-}
-
-span#v3{
-	display: none;
-	margin: 0px;
-	padding: 0px;
 }
 
 .vetor{
