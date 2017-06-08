@@ -14,6 +14,7 @@ function figura(fig){
 	formulario();
 	btnActive();
 	setggb();
+	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
 
 function btnActive(){
@@ -28,7 +29,8 @@ function setggb(){
 	
 	if(conica=='elipse'){
 		ggb.setVisible('assintotas',false);
-		ggb.setVisible('eixos',true);
+		ggb.setVisible('eixosEH',true);
+		ggb.setVisible('eixosParabola',false);
 		ggb.setVisible('elipse',true);
 		ggb.setVisible('hiperbole',false);
 		ggb.setVisible('parabola',false);
@@ -37,31 +39,33 @@ function setggb(){
 		ggb.setVisible('aHiperbole',false);
 		ggb.setVisible('A',false);
 		ggb.setVisible('B',false);
-		ggb.setVisible('f',false);
-		ggb.setVisible('f1',true);
-		ggb.setVisible('f2',true);
-		ggb.setVisible('p',true);
+		ggb.setVisible('F',false);
+		ggb.setVisible('F1',true);
+		ggb.setVisible('F2',true);
 		ggb.setVisible('d1',true);
 		ggb.setVisible('d2',true);
 		ggb.setVisible('s1',false);
 		ggb.setVisible('s2',false);
 		ggb.setVisible('dados',true);
-		ggb.setVisible('definicao',true);
-		ggb.setVisible('pontos',true);
 
 		ggb.evalCommand('assintotas = false');
-		ggb.evalCommand('aElipse = 3');
-		ggb.evalCommand('p = Point[elipse]');
-		ggb.evalCommand('dados = TableText[{{\"b=\" + (SemiMinorAxisLength[elipse])}, {\"c=\" + (Length[Segment[Midpoint[f1, f2], f1]])}, {\"e =\" + (Eccentricity[elipse])}}, \"c|_|\"]');
+		ggb.evalCommand('aElipse = 2');
+		ggb.evalCommand('F1 = (-1,0)');
+		ggb.evalCommand('F2 = (1,0)');
+		ggb.evalCommand('P = Point[elipse]');
+		ggb.evalCommand('dados = TableText[{{\"b=\" + b}, {\"c=\" + c}, {\"e =\" + (Eccentricity[elipse])}}, \"c|_|\"]');
 		ggb.evalCommand('definicao = TableText[{{\"d(P,F1)\", d1}, {\"d(P,F2)\", d2}, {\"soma\", d1 + d2}}, \"c|_|\"]');
-		ggb.evalCommand('pontos = TableText[{{\"F1\" + f1}, {\"F2\" + f2}, {\"Centro\" + (Midpoint[f1, f2])}, {\"P\" + p}}]');
+		ggb.evalCommand('formRotEH = Text[elipse]');
+		ggb.evalCommand('formulaEH = FormulaText[\"\frac{\" + (If[Line[f1, f2] ∥ xAxis ∨ Line[f1, f2] ∥ yAxis, If[x(c) ≟ 0, \"x^2\", \"(x\" + xCentro + \")^2\"], \"x\'^2\"]) + \"}{\" + (If[Line[f1, f2] ∥ xAxis ∨ (¬(Line[f1, f2] ∥ xAxis)) ∧ (¬(Line[f1, f2] ∥ yAxis)), a², b²]) + \"}+\frac{\" + (If[Line[f1, f2] ∥ xAxis ∨ Line[f1, f2] ∥ yAxis, If[y(c) ≟ 0, \"y^2\", \"(y\" + yCentro + \") ^2\"], \"y\'^2\"]) + \"}{\" + (If[Line[f1, f2] ∥ xAxis ∨ (¬(Line[f1, f2] ∥ xAxis)) ∧ (¬(Line[f1, f2] ∥ yAxis)), b², a²]) + \"}=1\"]');
+		ggb.evalCommand('pontos = TableText[{{\"F1\" + f1}, {\"F2\" + f2}, {\"C\" + (Midpoint[f1, f2])}, {\"P\" + p}}]');
 
 		a = 'aElipse';
 		ggb.renameObject('aElipse','a');
 	}
 	else if(conica=='hiperbole'){
 		ggb.setVisible('assintotas',true);
-		ggb.setVisible('eixos',true);
+		ggb.setVisible('eixosEH',true);
+		ggb.setVisible('eixosParabola',false);
 		ggb.setVisible('elipse',false);
 		ggb.setVisible('hiperbole',true);
 		ggb.setVisible('parabola',false);
@@ -70,31 +74,33 @@ function setggb(){
 		ggb.setVisible('aHiperbole',true);
 		ggb.setVisible('A',false);
 		ggb.setVisible('B',false);
-		ggb.setVisible('f',false);
-		ggb.setVisible('f1',true);
-		ggb.setVisible('f2',true);
-		ggb.setVisible('p',true);
+		ggb.setVisible('F',false);
+		ggb.setVisible('F1',true);
+		ggb.setVisible('F2',true);
 		ggb.setVisible('d1',true);
 		ggb.setVisible('d2',true);
 		ggb.setVisible('s1',false);
 		ggb.setVisible('s2',false);
 		ggb.setVisible('dados',true);
-		ggb.setVisible('definicao',true);
-		ggb.setVisible('pontos',true);
 
 		ggb.evalCommand('assintotas = false');
 		ggb.evalCommand('aHiperbole = 1');
-		ggb.evalCommand('p = Point[hiperbole]');
-		ggb.evalCommand('dados = TableText[{{\"b=\" + (SemiMinorAxisLength[hiperbole])}, {\"c=\" + (Length[Segment[Midpoint[f1, f2], f1]])}, {\"e =\" + (Eccentricity[hiperbole])}}, \"c|_|\"]');
+		ggb.evalCommand('F1 = (-2,0)');
+		ggb.evalCommand('F2 = (2,0)');
+		ggb.evalCommand('P = Point[hiperbole]');
+		ggb.evalCommand('dados = TableText[{{\"b=\" + (SemiMinorAxisLength[hiperbole])}, {\"c=\" + c}, {\"e =\" + (Eccentricity[hiperbole])}}, \"c|_|\"]');
 		ggb.evalCommand('definicao = TableText[{{\"d(P,F1)\", d1}, {\"d(P,F2)\", d2}, {\"diferença\", abs(d1-d2)}}, \"c|_|\"]');
-		ggb.evalCommand('pontos = TableText[{{\"F1\" + f1}, {\"F2\" + f2}, {\"Centro\" + (Midpoint[f1, f2])}, {\"P\" + p}}]');
+		ggb.evalCommand('formRotEH = Text[hiperbole]');
+		ggb.evalCommand('formulaEH = FormulaText[\"\frac{\" + (If[Line[f1, f2] ∥ xAxis ∨ Line[f1, f2] ∥ yAxis, If[x(c) ≟ 0, \"x^2\", \"(x\" + xCentro + \")^2\"], \"x\'^2\"]) + \"}{\" + (If[Line[f1, f2] ∥ xAxis ∨ (¬(Line[f1, f2] ∥ xAxis)) ∧ (¬(Line[f1, f2] ∥ yAxis)), a², b²]) + \"}-\frac{\" + (If[Line[f1, f2] ∥ xAxis ∨ Line[f1, f2] ∥ yAxis, If[y(c) ≟ 0, \"y^2\", \"(y\" + yCentro + \") ^2\"], \"y\'^2\"]) + \"}{\" + (If[Line[f1, f2] ∥ xAxis ∨ (¬(Line[f1, f2] ∥ xAxis)) ∧ (¬(Line[f1, f2] ∥ yAxis)), b², a²]) + \"}=1\"]');
+		ggb.evalCommand('pontos = TableText[{{\"F1\" + f1}, {\"F2\" + f2}, {\"C\" + C}, {\"P\" + p}}]');
 
 		a = 'aHiperbole';
 		ggb.renameObject('aHiperbole','a');
 	}
 	else if(conica=='parabola'){
 		ggb.setVisible('assintotas',false);
-		ggb.setVisible('eixos',false);
+		ggb.setVisible('eixosEH',false);
+		ggb.setVisible('eixosParabola',true);
 		ggb.setVisible('elipse',false);
 		ggb.setVisible('hiperbole',false);
 		ggb.setVisible('parabola',true);
@@ -103,21 +109,19 @@ function setggb(){
 		ggb.setVisible('aHiperbole',false);
 		ggb.setVisible('A',true);
 		ggb.setVisible('B',true);
-		ggb.setVisible('f',true);
-		ggb.setVisible('f1',false);
-		ggb.setVisible('f2',false);
-		ggb.setVisible('p',true);
+		ggb.setVisible('F',true);
+		ggb.setVisible('F1',false);
+		ggb.setVisible('F2',false);
 		ggb.setVisible('d1',false);
 		ggb.setVisible('d2',false);
 		ggb.setVisible('s1',true);
 		ggb.setVisible('s2',true);
 		ggb.setVisible('dados',false);
-		ggb.setVisible('definicao',true);
-		ggb.setVisible('pontos',true);
 
 		ggb.evalCommand('assintotas = false');
 		ggb.evalCommand('eixos = false');
-		ggb.evalCommand('p = Point[parabola]');
+		ggb.evalCommand('F = (0,1)');
+		ggb.evalCommand('P = Point[parabola]');
 		ggb.evalCommand('definicao = TableText[{{\"d(P,F)\", s1}, {\"d(P,r)\", s2}}, \"c|_|\"]');
 		ggb.evalCommand('pontos = TableText[{{\"F\" + f}, {\"r:\" + diretriz}, {\"P\" + p}}]');
 	}
@@ -130,26 +134,30 @@ function formulario(){
 	var definicao = document.getElementById('definicao');
 	var formulas = document.getElementById('formulas');
 	var dados = document.getElementById('dados');
+	var tituloDados = document.getElementById('tituloDados');
 
 	if(conica=='elipse'){
-		formulario = 'Formulário da elipse';
-		parametros = '`a rarr` semi-eixo maior<br>`F_1 rarr` foco 1<br>`F_2 rarr` foco 2<br>`C=(x_0,y_0)rarr`centro<br>`P=(x,y)rarr`um ponto da elipse';
-		definicao = '`d(P,F_1)+d(P,F_2)=2a`';
-		formulas = ' Não rotacionada com "a" no eixo x:<br>`rArr (x-x_0)^2/a^2+(y-y_0)^2/b^2=1`<br><br>Não rotacionada com "a" no eixo y:<br>`rArr (x-x_0)^2/b^2+(y-y_0)^2/a^2=1`<br><br>Em relação a base {x\',y\'}:<br>`rArr (x\')^2/a^2+(y\')^2/b^2=1`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+Bxy+Cy^2+Dx+Ey+F=0`<br>';
-		dados = '`b=sqrt(a^2-c^2)rarr`semi-eixo menor<br>`c=sqrt(a^2-b^2)rarr`distância entre o centro e um dos focos<br>`e=c/a rarr`excenticidade<br>';
+		formulario.innerHTML = 'Formulário da elipse';
+		parametros.innerHTML = '`a rarr`semi-eixo maior<br>`c=sqrt(a^2-b^2)rarr`distância entre o centro e um dos focos.<br>`C=(x_0,y_0) rarr`centro<br>`F_1=(x_0-c,y_0) rarr`foco 1`**`<br>`F_2=(x_0+c,y_0) rarr`foco 2`**`<br>`P=(x,y) rarr`ponto da elipse<br>`V_1=(x_0-a,y_0) rarr` vértice 1`**`<br>`V_2=(x_0+a,y_0) rarr` vértice 2`**`<br><br>`\"Eixo focal\" rarr`eixo por onde passa o centro e os focos.<br><br>`**` Em relação ao eixo focal no eixo x.';
+		definicao.innerHTML = '`d(P,F_1)+d(P,F_2)=2a`';
+		formulas.innerHTML = ' Não rotacionada com "a" no eixo x:<br>`rArr (x-x_0)^2/a^2+(y-y_0)^2/b^2=1`<br><br>Não rotacionada com "a" no eixo y:<br>`rArr (x-x_0)^2/b^2+(y-y_0)^2/a^2=1`<br><br>Em relação a base {x\',y\'}:<br>`rArr (x\')^2/a^2+(y\')^2/b^2=1`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+Bxy+Cy^2+Dx+Ey+F=0`<br>';
+		tituloDados.style.display = 'inline	';
+		dados.innerHTML = '`b=sqrt(a^2-c^2) rarr`semi-eixo menor<br>`c=sqrt(a^2-b^2) rarr`distância entre o centro e um dos focos<br>`e=c/a rarr`excenticidade<br>';
 	}
 	if(conica=='hiperbole'){
-		formulario = 'Formulário da hipérbole';
-		parametros = '`a rarr` distância entre um dos vértice e o centro<br>`F_1 rarr` foco 1<br>`F_2 rarr` foco 2<br>`C=(x_0,y_0)rarr`centro<br>`P=(x,y)rarr`um ponto da hipérbole';
-		definicao = '`|d(P,F_1)|-|d(P,F_2)|=2a`';
-		formulas = ' Não rotacionada com "a" no eixo x:<br>`rArr (x-x_0)^2/a^2-(y-y_0)^2/b^2=1`<br><br>Não rotacionada com "a" no eixo y:<br>`rArr (x-x_0)^2/b^2-(y-y_0)^2/a^2=1`<br><br>Em relação a base {x\',y\'}:<br>`rArr (x\')^2/a^2-(y\')^2/b^2=1`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+Bxy+Cy^2+Dx+Ey+F=0`<br>'
-		dados = '`c=sqrt(a^2-b^2)rarr`distância entre o centro e um dos focos<br>`b=sqrt(a^2+c^2)rarr`semi-eixo menor<br>`e=c/a rarr`excenticidade<br>';
+		formulario.innerHTML = 'Formulário da hipérbole';
+		parametros.innerHTML = '`C=(x_0,y_0) rarr`centro<br>`a rarr`distância entre um dos vértices e o centro.<br>`V_1=(x_0-a,y_0) rarr`vértice 1`**`<br>`V_2=(x_0+a,y_0) rarr`vértice 2`**`<br>`c=sqrt(a^2-b^2) rarr`distância entre o centro e um dos focos.<br>`F_1=(x_0-c,y_0) rarr`foco 1`**`<br>`F_2=(x_0+c,y_0) rarr`foco 2`**`<br>`P=(x,y) rarr`ponto da hipérbole<br><br>`\"Eixo focal \" rarr` eixo por onde passa o centro e os focos.<br><br>`**`Em relação ao eixo focal no eixo x';
+		definicao.innerHTML = '`|d(P,F_1)|-|d(P,F_2)|=2a`';
+		formulas.innerHTML = ' Não rotacionada com "a" no eixo x:<br>`rArr (x-x_0)^2/a^2-(y-y_0)^2/b^2=1`<br><br>Não rotacionada com "a" no eixo y:<br>`rArr (x-x_0)^2/b^2-(y-y_0)^2/a^2=1`<br><br>Em relação a base {x\',y\'}:<br>`rArr (x\')^2/a^2-(y\')^2/b^2=1`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+Bxy+Cy^2+Dx+Ey+F=0`<br>';
+		tituloDados.style.display = 'inline	';
+		dados.innerHTML = '`c=sqrt(a^2-b^2) rarr`distância entre o centro e um dos focos<br>`b=sqrt(a^2+c^2) rarr`semi-eixo menor<br>`e=c/a rarr`excenticidade<br>';
 	}
 	if(conica=='parabola'){
-		formulario = 'Formulário da Parábola';
-		parametros = '`F_1 rarr`foco<br>`r rarr`reta diretriz<br>`P=(x,y)rarr`um ponto da parábola';
-		definicao = '`d(P,F)=d(P,r)`';
-		formulas = ' Não rotacionada com "r" paralela ao eixo x:<br>`rArr x^2=4py`<br><br>Não rotacionada com "r" paralela ao eixo y:<br>`rArr (x-x_0)^2/b^2+(y-y_0)^2/a^2=1`<br><br>Em relação a base {x\',y\'}:<br>`rArr (x\')^2/a^2+(y\')^2/b^2=1`<br>';
-		dados = '`c rarr`distância entre o centro e um dos focos<br>`b rarr`semi-eixo menor`=sqrt(a^2-c^2)`<br>`e rarr`excenticidade`=c/a`<br>';
+		formulario.innerHTML = 'Formulário da Parábola';
+		parametros.innerHTML = '`V=(x_0,y_0) rarr` vértice<br>`p rarr` distância entre o vértice e o foco.<br>`F=(x_0,y_0+p) rarr`foco`**`<br>`r rarr`reta diretriz<br>`P=(x,y)rarr`ponto da parábola<br><br>`\"Eixo focal\" rarr`eixo por onde passa o centro e o foco.<br><br>`**` Em relação ao eixo focal no eixo y.';
+		definicao.innerHTML = '`d(P,F)=d(P,r) `';
+		formulas.innerHTML = ' Não rotacionada com "r" paralela ao eixo x:<br>`rArr (x-x_0)^2=4p(y-y_0)`<br><br>Não rotacionada com "r" paralela ao eixo y:<br>`rArr (y-y_0)^2=4p(x-x_0)`<br><br>Em relação a base {x\',y\'}:<br>`rArr (x\')^2=4py\'`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+2Bxy+Cy^2+Dx+Ey+F=0`<br>com, `b^2=ac, a+c!=0`<br>';
+		tituloDados.style.display = 'none';
+		dados.innerHTML = ' ';
 	}
 }
