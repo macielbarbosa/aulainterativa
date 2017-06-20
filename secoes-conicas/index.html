@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset='UTF-8'/>
+  <title>Seções Cônicas</title>
+  <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://www.geogebra.org/scripts/deployggb.js"></script>
+  <script src="../javascript/secoes-conicas.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="../css/template.css">
+  <style>
+    h1{display: inline; margin-right: 12%;}
+    .navbar{margin-bottom: 20px}
+    .btn-group{margin-bottom: 20px}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+            <a class="navbar-brand navbar-logo" href="../index.html#myPage">Aula Interativa</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../index.html#sobre">SOBRE</a></li>
+            <li><a href="../index.html#algebra-linear">ÁLGEBRA LINEAR</a></li>
+            <li><a href="../index.html#calculo">CÁLCULO</a></li>
+            <li><a href="../index.html#contato">CONTATO</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <h1>Seções Cônicas</h1>
+    <div class="btn-group btn-group-lg" role="group" aria-label="...">
+      <button id="btn-elipse" type="button" class="btn btn-default active" onclick="figura('elipse')">Elipse</button>
+      <button id="btn-hiperbole" type="button" class="btn btn-default" onclick="figura('hiperbole')">Hipérbole</button>
+      <button id="btn-parabola" type="button" class="btn btn-default" onclick="figura('parabola')">Parábola</button>
+    </div>
+    <div class="row">
+      <div class="col-sm-12" id="applet_container"></div>
+      <img src="../imagens/mouse-click.png" style="margin-left: 80%;" /><b style="font-size: 8pt">Visualização</b>
+      <img src="../imagens/mouse-scroll.png"><b style="font-size: 8pt;"> Zoom</b>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <br><h4 id="formulario">Formulário da Elipse</h4><br>
+        <div class="col-sm-6">
+          <b>Parâmetros</b><br><br>
+          <span id="parametros">
+            `a rarr` semi-eixo maior<br>
+            `b rarr` semi-eixo menor<br>
+            `c=sqrt(a^2-b^2) rarr`distância entre o centro e um dos focos.<br>
+            `C=(x_0,y_0) rarr`centro<br>
+            `F_1=(x_0-c,y_0) rarr`foco 1`**`<br>
+            `F_2=(x_0+c,y_0) rarr`foco 2`**`<br>
+            `P=(x,y) rarr`um ponto da elipse<br>
+            `V_1=(x_0-a,y_0) rarr` vértice 1`**`<br>
+            `V_2=(x_0+a,y_0) rarr` vértice 2`**`<br><br>
+            `"Eixo focal "rarr` eixo por onde passa o centro e os focos.<br><br>
+            `**`Em relação ao eixo focal no eixo x.
+          </span><br><br>
+          <b>Definição</b><br><br>
+          <span id="definicao">
+            `d(P,F_1)+d(P,F_2)=2a`
+          </span><br><br>
+        </div>
+        <div class="col-sm-6">
+          <span id="formulas">
+            <b>Fórmulas</b><br><br>
+            Semi-eixo maior paralelo ao eixo x:<br>
+            `rArr (x-x_0)^2/a^2+(y-y_0)^2/b^2=1`<br><br>
+            Semi-eixo menor paralelo ao eixo y:<br>
+            `rArr (x-x_0)^2/b^2+(y-y_0)^2/a^2=1`<br><br>
+            Em relação a base `{x',y'}`:<br>
+            `rArr (x')^2/a^2+(y')^2/b^2=1`<br><br>
+            Formulação geral:<br>
+            `rArr Q(x,y)=ax^2+by^2+2cxy+dx+ey+f=0`<br>
+            com `c^2-ab&lt;0`<br>
+          </span><br>
+          <span id="excentricidade"><b>Excentricidade</b><br><br>
+          `e=c/a, 0&lt;e&lt;1`
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <br><br>
+        <p class="caption">Vídeo explicativa do canal <a href='https://www.youtube.com/channel/UCXj2oSzwg6G0iBjKg33joMQ' target="_blank"><cite>Khan Academy em Português</cite></a></p>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe id="video" class="embed-responsive-item" src="https://www.youtube.com/embed/xt_fEudWkgI?ecver=2"></iframe>
+        </div>
+      </div>
+    </div>
+  <br><br><br>
+</body>
+</html>
