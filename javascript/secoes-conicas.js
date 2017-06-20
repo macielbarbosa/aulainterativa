@@ -151,30 +151,29 @@ function formulario(){
 	var definicao = document.getElementById('definicao');
 	var formulas = document.getElementById('formulas');
 	var dados = document.getElementById('dados');
-	var tituloDados = document.getElementById('tituloDados');
+	var excentricidade = document.getElementById('excentricidade');
 
 	if(conica=='elipse'){
 		formulario.innerHTML = 'Formulário da elipse';
-		parametros.innerHTML = '`a rarr`semi-eixo maior<br>`c=sqrt(a^2-b^2)rarr`distância entre o centro e um dos focos.<br>`C=(x_0,y_0) rarr`centro<br>`F_1=(x_0-c,y_0) rarr`foco 1`**`<br>`F_2=(x_0+c,y_0) rarr`foco 2`**`<br>`P=(x,y) rarr`ponto da elipse<br>`V_1=(x_0-a,y_0) rarr` vértice 1`**`<br>`V_2=(x_0+a,y_0) rarr` vértice 2`**`<br><br>`\"Eixo focal\" rarr`eixo por onde passa o centro e os focos.<br><br>`**` Em relação ao eixo focal no eixo x.';
+		parametros.innerHTML = '`a rarr`semi-eixo maior<br>`b rarr` semi-eixo menor<br>`c=sqrt(a^2-b^2)rarr`distância entre o centro e um dos focos.<br>`C=(x_0,y_0) rarr`centro<br>`F_1=(x_0-c,y_0) rarr`foco 1`**`<br>`F_2=(x_0+c,y_0) rarr`foco 2`**`<br>`P=(x,y) rarr`ponto da elipse<br>`V_1=(x_0-a,y_0) rarr` vértice 1`**`<br>`V_2=(x_0+a,y_0) rarr` vértice 2`**`<br><br>`\"Eixo focal\" rarr`eixo por onde passa o centro e os focos.<br><br>`**` Em relação ao eixo focal no eixo x.';
 		definicao.innerHTML = '`d(P,F_1)+d(P,F_2)=2a`';
-		formulas.innerHTML = ' Não rotacionada com `a` no eixo x:<br>`rArr (x-x_0)^2/a^2+(y-y_0)^2/b^2=1`<br><br>Não rotacionada com `a` no eixo y:<br>`rArr (x-x_0)^2/b^2+(y-y_0)^2/a^2=1`<br><br>Em relação a base `{x\',y\'}`:<br>`rArr (x\')^2/a^2+(y\')^2/b^2=1`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+Bxy+Cy^2+Dx+Ey+F=0`<br>';
-		tituloDados.style.display = 'inline	';
-		dados.innerHTML = '`b=sqrt(a^2-c^2) rarr`semi-eixo menor<br>`c=sqrt(a^2-b^2) rarr`distância entre o centro e um dos focos<br>`e=c/a rarr`excenticidade<br>';
+		formulas.innerHTML = 'Semi-eixo maior paralelo ao eixo x:<br>	`rArr (x-x_0)^2/a^2+(y-y_0)^2/b^2=1`<br><br>Semi-eixo menor paralelo ao eixo y:<br>`rArr (x-x_0)^2/b^2+(y-y_0)^2/a^2=1`<br><br>Em relação a base `{x\',y\'}`:<br>`rArr (x\')^2/a^2+(y\')^2/b^2=1`<br><br>Formulação geral:<br>`rArr Q(x,y)=ax^2+by^2+2cxy+dx+ey+f=0`<br>`c^2-ab&lt;0`<br>';
+		excenticidade.style.display = 'inline';
+		excentricidade.innerHTML = '<b>Excentricidade</b><br><br>`e=c/a, 0&lt;e&lt;1';
 	}
 	if(conica=='hiperbole'){
 		formulario.innerHTML = 'Formulário da hipérbole';
 		parametros.innerHTML = '`C=(x_0,y_0) rarr`centro<br>`a rarr`distância entre um dos vértices e o centro.<br>`V_1=(x_0-a,y_0) rarr`vértice 1`**`<br>`V_2=(x_0+a,y_0) rarr`vértice 2`**`<br>`c=sqrt(a^2-b^2) rarr`distância entre o centro e um dos focos.<br>`F_1=(x_0-c,y_0) rarr`foco 1`**`<br>`F_2=(x_0+c,y_0) rarr`foco 2`**`<br>`P=(x,y) rarr`ponto da hipérbole<br><br>`\"Eixo focal \" rarr` eixo por onde passa o centro e os focos.<br><br>`**`Em relação ao eixo focal no eixo x';
 		definicao.innerHTML = '`|d(P,F_1)|-|d(P,F_2)|=2a`';
-		formulas.innerHTML = ' Não rotacionada com `a` no eixo x:<br>`rArr (x-x_0)^2/a^2-(y-y_0)^2/b^2=1`<br><br>Não rotacionada com `a` no eixo y:<br>`rArr (x-x_0)^2/b^2-(y-y_0)^2/a^2=1`<br><br>Em relação a base `{x\',y\'}`:<br>`rArr (x\')^2/a^2-(y\')^2/b^2=1`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+Bxy+Cy^2+Dx+Ey+F=0`<br>';
-		tituloDados.style.display = 'inline	';
-		dados.innerHTML = '`c=sqrt(a^2-b^2) rarr`distância entre o centro e um dos focos<br>`b=sqrt(a^2+c^2) rarr`semi-eixo menor<br>`e=c/a rarr`excenticidade<br>';
+		formulas.innerHTML = 'Eixo focal paralelo ao eixo x:<br>`rArr (x-x_0)^2/a^2-(y-y_0)^2/b^2=1`<br><br>Eixo focal paralelo ao eixo y:<br>`rArr (x-x_0)^2/b^2-(y-y_0)^2/a^2=1`<br><br>Em relação a base `{x\',y\'}`:<br>`rArr (x\')^2/a^2-(y\')^2/b^2=1`<br><br>Formulação geral:<br>`rArr Q(x,y)=ax^2+by^2+2cxy+dx+ey+f=0`<br>`c^2-ab&gt;0`<br>';
+		excentricidade.style.display = 'inline';
+		excentricidade.innerHTML = '<b>Excentricidade</b><br><br>`e=c/a>1`';
 	}
 	if(conica=='parabola'){
 		formulario.innerHTML = 'Formulário da Parábola';
 		parametros.innerHTML = '`V=(x_0,y_0) rarr` vértice<br>`p rarr` distância entre o vértice e o foco.<br>`F=(x_0,y_0+p) rarr`foco`**`<br>`r rarr`reta diretriz<br>`P=(x,y)rarr`ponto da parábola<br><br>`\"Eixo focal\" rarr`eixo por onde passa o centro e o foco.<br><br>`**` Em relação ao eixo focal no eixo y.';
 		definicao.innerHTML = '`d(P,F)=d(P,r) `';
 		formulas.innerHTML = ' Não rotacionada com `r` paralela ao eixo x:<br>`rArr (x-x_0)^2=4p(y-y_0)`<br><br>Não rotacionada com `r` paralela ao eixo y:<br>`rArr (y-y_0)^2=4p(x-x_0)`<br><br>Em relação a base `{x\',y\'}`:<br>`rArr (x\')^2=4py\'`<br><br>Rotacionada (formulação geral):<br>`rArr Ax^2+2Bxy+Cy^2+Dx+Ey+F=0`<br>com, `b^2=ac, a+c!=0`<br>';
-		tituloDados.style.display = 'none';
-		dados.innerHTML = ' ';
+		excentricidade.style.display = 'none';
 	}
 }
