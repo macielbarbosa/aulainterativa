@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset='UTF-8'/>
+	<title>Interseção de planos cartesianos com Quádricas</title>
+	<link rel="stylesheet" type="text/css" href="../css/estilo.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+	<script src="../javascript/intersecao-quadricas.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="../css/template.css">
+  <style type="text/css">
+  		select#quadrica {margin-right: 20px}
+  		.fonte8 {font-size: 8pt}
+  		#valorPlano {display: inline}
+  		#a {
+  			display: inline-block;
+  			margin-left: 5px;
+  		}
+  		#plano {margin-right: 10px}
+  		#valorRange {margin-left: 8px}
+  </style>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+		  	<div class="container">
+		    	<div class="navbar-header">
+		      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>                        
+		      		</button>
+		      		<a class="navbar-brand navbar-logo" href="../index.html#myPage">Aula Interativa</a>
+		    	</div>
+		    	<div class="collapse navbar-collapse" id="myNavbar">
+		      		<ul class="nav navbar-nav navbar-right">
+		        		<li><a href="../index.html#sobre">SOBRE</a></li>
+		        		<li><a href="../index.html#algebra-linear">ÁLGEBRA LINEAR</a></li>
+		        		<li><a href="../index.html#calculo">CÁLCULO</a></li>
+		        		<li><a href="../index.html#contato">CONTATO</a></li>
+		      		</ul>
+		    	</div>
+		  	</div>
+		</nav>
+	</header>
+	<div class="container">
+		<h1>Interseção de planos cartesianos com quádricas</h1><br>
+		<div class="row" align="middle">
+			<div class="col-sm-4">
+				<span>Plano:</span>
+				<select id="plano" onchange="setPlano()">
+					<option value="planoZ" selected>z</option>
+					<option value="planoY">y</option>
+					<option value="planoX">x</option>
+				</select>=
+				<div id="a"><input type="range" id='range' min="-5" max="5" oninput="setValorPlano()"></div><span id="valorRange">0</span>
+			</div>
+			<div class="col-sm-4">
+				Quádrica:
+				<select id="quadrica" onchange="setQuadrica()">
+					<option value="cone" selected>Cone</option>
+					<option value="elipsoide">Elipsoide</option>
+					<option value="paraboloideEliptico">Paraboloide elíptico</option>
+					<option value="paraboloideHiperbolico">Paraboloide hiperbólico</option>
+					<option value="paraboloideRevolucao">Paraboloide de revolução</option>
+					<option value="hiperboloideUmaFolha">Hiperboloide de uma folha</option>
+					<option value="hiperboloideDuasFolhas">Hiperboloide de duas folhas</option>
+					<option value="cilindroEliptico">Cilindro elíptico</option>
+					<option value="cilindroParabolico">Cilindro parabólico</option>
+					<option value="cilindroHiperbolico">Cilindro hiperbólico</option>
+				</select>
+			</div>
+			<div class="col-sm-4">
+				<span id="formula">`rArr x^2/a^2+y^2/b^2-z^2/c^2=0`</span>
+			</div>
+		</div>
+		<br>
+		<div class="row" align="middle">
+				<div id="geogebra"></div>
+			<img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
+			<img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
+		</div>
+	</div>
+</body>
+</html>
