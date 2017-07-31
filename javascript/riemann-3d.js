@@ -28,7 +28,7 @@ function ggbOnInit(){
 	ggb.enableRightClick(false);
 	ggb.enableLabelDrags(false);
 	ggb.setCoordSystem(-4,4,-4,4,-4,4);
-	riemann(0,4,0,4,6,6);
+	riemann(0,4,0,4,1,1);
 	ggb.evalCommand('zFuncao = funcao(0,0)');
 }
 
