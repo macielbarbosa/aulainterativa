@@ -13,10 +13,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
-	<script src="../javascript/riemann-3d.js"></script>
+	<script src="riemann-3d.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   	<link rel="stylesheet" type="text/css" href="../css/template.css">
+  	<style type="text/css">
+  		.inline-block {
+  			display: inline-block;
+  		}
+  		#valorN, #valorM {margin-left: 8px}
+  </style>
 </head>
 <body>
 	<header>
@@ -46,8 +52,21 @@
 		<div class="row" align="middle">
 			<div class="col-sm-6">
 				`f(x,y)=`
-				<input id="funcao" type="text" placeholder="4-x^2/16-y^2/16"/>
-				Domínio
+				<input id="funcao" type="text" value="4-x^2/16-y^2/16" onchange="setParticoes()" />
+				<br><br><b>Domínio</b>
+				<br><br>`xmin=`
+				<input type="text" id="xmin" size="3" value="0" onchange="setParticoes()">
+				<br><br>`xmax=`
+				<input type="text" id="xmax" size="3" value="4" onchange="setParticoes()">
+				<br><br>`ymin=`
+				<input type="text" id="ymin" size="3" value="0" onchange="setParticoes()">
+				<br><br>`ymax=`
+				<input type="text" id="ymax" size="3" value="4" onchange="setParticoes()">
+				<br><br><b>Partições</b>
+				<br><br>Partições em x:<br>`n=`
+				<div class="inline-block"><input type="range" id='n' min="1" max="10" value="1" oninput="setParticoes()"></div><span id="valorN">1</span>
+				<br><br>Partições em y:<br>`m=`
+				<div class="inline-block"><input type="range" id='m' min="1" max="10" value="1" oninput="setParticoes()"></div><span id="valorM">1</span>
 			</div>
 			<div class="col-sm-6">
 				<div id="geogebra"></div>
