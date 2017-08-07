@@ -49,7 +49,10 @@ window.onload = function() {
 	document.getElementById('m2').value = '1';
 	document.getElementById('n1').value = '1';
 	document.getElementById('m1').value = '1';
-
+	document.getElementById('sup1').checked = false;
+	document.getElementById('sup2').checked = false;
+	document.getElementById('inf1').checked = true;
+	document.getElementById('inf2').checked = true;
 }
 
 var ggb1 = document.ggb1;
@@ -83,31 +86,63 @@ function setParticoes2(){
 	var ymin = document.getElementById('ymin').value;
 	var ymax = document.getElementById('ymax').value;
 	ggb2.evalCommand('funcao = Function('+funcao+', '+xmin+','+xmax+', '+ymin+', '+ymax+')');
-	riemann(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
+	//ggb2.evalCommandCAS('integral = Integral(Integral(funcao,y,'+ymin+','+ymax+'),x, '+xmin+', '+xmax+')');
+	//document.getElementById('valorExato').innerHTML = ggb2.getValue('integral');
+	riemann2(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
 }
 
 function riemann1(px,py){
 	var integral;
 	var dx = 4/px;
 	var dy = 4/py;
-	for(var j=0; j<=4-dy; j+=dy){
-		for(var i=0; i<=4-dx; i+=dx){
-			ggb1.evalCommand('zFuncao = funcao('+(i+dx)+','+(j+dy)+')');
-			ggb1.evalCommand('Prism(('+(i+dx)+','+(j+dy)+',0),('+i+','+(j+dy)+',0),('+i+','+j+',0),('+(i+dx)+','+j+',0),('+(i+dx)+','+(j+dy)+','+ggb1.getValue('zFuncao')+'))');
-		}
+	if(document.getElementById('inf1').checked){
+		for(var j=0; j<=4-dy; j+=dy)
+			for(var i=0; i<=4-dx; i+=dx){
+				ggb1.evalCommand('zFuncao = funcao('+(i+dx)+','+(j+dy)+')');
+				ggb1.evalCommand('Prism(('+(i+dx)+','+(j+dy)+',0),('+i+','+(j+dy)+',0),('+i+','+j+',0),('+(i+dx)+','+j+',0),('+(i+dx)+','+(j+dy)+','+ggb1.getValue('zFuncao')+'))');
+			}
+	}
+	else{
+		for(var j=0; j<=4-dy; j+=dy)
+			for(var i=0; i<=4-dx; i+=dx){
+				ggb1.evalCommand('zFuncao = funcao('+(i)+','+(j)+')');
+				ggb1.evalCommand('Prism(('+(i)+','+(j)+',0),('+i+','+(j+dy)+',0),('+(i+dx)+','+(j+dy)+',0),('+(i+dx)+','+j+',0),('+(i)+','+(j)+','+ggb1.getValue('zFuncao')+'))');
+			}
 	}
 }
 
 function riemann2(xmin,xmax,ymin,ymax,px,py){
-	var integral;
+	var integral=0;
+	var menor,maior;
 	var dx = (xmax-xmin)/px;
 	var dy = (ymax-ymin)/py;
-	for(var j=ymin; j<=ymax-dy; j+=dy){
-		for(var i=xmin; i<=xmax-dx; i+=dx){
-			ggb2.evalCommand('zFuncao = funcao('+(i+dx)+','+(j+dy)+')');
-			ggb2.evalCommand('Prism(('+(i+dx)+','+(j+dy)+',0),('+i+','+(j+dy)+',0),('+i+','+j+',0),('+(i+dx)+','+j+',0),('+(i+dx)+','+(j+dy)+','+ggb1.getValue('zFuncao')+'))');
+	if(document.getElementById('inf2').checked){
+		for(var j=ymin; j<=ymax-dy; j+=dy){
+			for(var i=xmin; i<=xmax-dx; i+=dx){
+				ggb2.evalCommand('z1 = funcao('+(i)+','+(j)+')');
+				ggb2.evalCommand('z2 = funcao('+(i+dx)+','+(j)+')');
+				ggb2.evalCommand('z3 = funcao('+(i)+','+(j+dy)+')');
+				ggb2.evalCommand('z4 = funcao('+(i+dx)+','+(j+dy)+')');
+				menor = menorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+				ggb2.evalCommand('Prism(('+(i+dx)+','+(j+dy)+',0),('+i+','+(j+dy)+',0),('+i+','+j+',0),('+(i+dx)+','+j+',0),('+(i+dx)+','+(j+dy)+','+menor+'))');
+				integral += dx*dy*menor;
+			}
 		}
 	}
+	else{
+		for(var j=ymin; j<=ymax-dy; j+=dy){
+			for(var i=xmin; i<=xmax-dx; i+=dx){
+				ggb2.evalCommand('z1 = funcao('+(i)+','+(j)+')');
+				ggb2.evalCommand('z2 = funcao('+(i+dx)+','+(j)+')');
+				ggb2.evalCommand('z3 = funcao('+(i)+','+(j+dy)+')');
+				ggb2.evalCommand('z4 = funcao('+(i+dx)+','+(j+dy)+')');
+				maior = maiorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+				ggb2.evalCommand('Prism(('+(i+dx)+','+(j+dy)+',0),('+i+','+(j+dy)+',0),('+i+','+j+',0),('+(i+dx)+','+j+',0),('+(i+dx)+','+(j+dy)+','+maior+'))');
+				integral += dx*dy*maior;
+			}
+		}
+	}
+	document.getElementById('valorAproximado').innerHTML = integral.toFixed(2);
 }
 
 function setValorN1(){
@@ -132,4 +167,26 @@ function setValorM2(){
 	var m = document.getElementById('m2').value;
 	var valorM = document.getElementById('valorM2');
 	valorM.innerHTML = m;
+}
+
+function menorValor(v1,v2,v3,v4){
+	if(v1<=v2 && v1<=v3 && v1<=v4)
+		return v1;
+	if(v2<=v1 && v2<=v3 && v2<=v4)
+		return v2;
+	if(v3<=v1 && v3<=v2 && v3<=v4)
+		return v3;
+	else
+		return v4;
+}
+
+function maiorValor(v1,v2,v3,v4){
+	if(v1>=v2 && v1>=v3 && v1>=v4)
+		return v1;
+	if(v2>=v1 && v2>=v3 && v2>=v4)
+		return v2;
+	if(v3>=v1 && v3>=v2 && v3>=v4)
+		return v3;
+	else
+		return v4;
 }

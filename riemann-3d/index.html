@@ -17,6 +17,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   	<link rel="stylesheet" type="text/css" href="../css/template.css">
+  	<script type="text/javascript" id="WolframAlphaScriptf5f3cbf14f4f5d6d2085bf2d0fb76e8a" src="//www.wolframalpha.com/widget/widget.jsp?id=f5f3cbf14f4f5d6d2085bf2d0fb76e8a&theme=gray&output=popup"></script>
   	<style type="text/css">
   		.inline-block {
   			display: inline-block;
@@ -29,7 +30,7 @@
 		}
 		th, td {
 		    padding: 5px;
-		    text-align: left;    
+		    text-align: center;    
 		}
   </style>
 </head>
@@ -61,26 +62,14 @@
 		<h3>Exemplo</h3>
 		<div id="exemplo" class="row" align="middle">
 			<div class="col-sm-6">
-				<br><br><b>Tipo de integração</b><br><br>
-				<input type="radio" name="tipoInt1" id="inf" checked> Integração inferior<br>
-				<input type="radio" name="tipoInt1" id="sup"> Integração superior<br><br><br>	
+				<br><br><br><br><b>Tipo de integração</b><br><br>
+				<input type="radio" name="tipoInt1" id="inf1" onchange="setParticoes1()" checked> Integração inferior<br>
+				<input type="radio" name="tipoInt1" id="sup1" onchange="setParticoes1()"> Integração superior<br><br><br>	
 				<b>Partições</b><br><br>
 				Partições em x:<br>`n=`
 				<div class="inline-block"><input type="range" id='n1' min="1" max="10" value="1" onchange="setParticoes1()" oninput="setValorN1()"></div><span id="valorN1"> 1</span>
 				<br><br>Partições em y:<br>`m=`
 				<div class="inline-block"><input type="range" id='m1' min="1" max="10" value="1" onchange="setParticoes1()" oninput="setValorM1()"></div><span id="valorM1"> 1</span><br><br><br>
-				<table>
-					<tr>
-						<td>Integração inferior</td>
-						<td>Integração superior</td>
-						<td>Valor exato</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td>53,33</td>
-					</tr>
-				</table>
 
 			</div>
 			<div class="col-sm-6">
@@ -91,22 +80,41 @@
 		<h3>Agora é a sua vez!</h3><br>
 		<div class="row" align="middle">
 			<div class="col-sm-6">
-				`f(x,y)=`
-				<input id="funcao" type="text" value="4-x^2/16-y^2/16" onchange="setParticoes()" />
-				<br><br><b>Domínio</b>
-				<br><br>`xmin=`
-				<input type="text" id="xmin" size="3" value="0" onchange="setParticoes()">
-				<br><br>`xmax=`
-				<input type="text" id="xmax" size="3" value="4" onchange="setParticoes()">
-				<br><br>`ymin=`
-				<input type="text" id="ymin" size="3" value="0" onchange="setParticoes()">
-				<br><br>`ymax=`
-				<input type="text" id="ymax" size="3" value="4" onchange="setParticoes()">
-				<br><br><b>Partições</b>
-				<br><br>Partições em x:<br>`n=`
-				<div class="inline-block"><input type="range" id='n2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorN2()"></div><span id="valorN2"> 1</span>
-				<br><br>Partições em y:<br>`m=`
-				<div class="inline-block"><input type="range" id='m2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorM2()"></div><span id="valorM2"> 1</span>
+				<br><br>`f(x,y)=`
+				<input id="funcao" type="text" value="4-x^2/16-y^2/16" onchange="setParticoes2()" /><br><br>
+				<div class="row">
+					<div class="col-sm-6">
+						<b>Domínio</b>
+						<br><br>`xmin=`
+						<input type="text" id="xmin" size="3" value="0" onchange="setParticoes2()">
+						<br><br>`xmax=`
+						<input type="text" id="xmax" size="3" value="4" onchange="setParticoes2()">
+						<br><br>`ymin=`
+						<input type="text" id="ymin" size="3" value="0" onchange="setParticoes2()">
+						<br><br>`ymax=`
+						<input type="text" id="ymax" size="3" value="4" onchange="setParticoes2()">
+					</div>
+					<div class="col-sm-6">
+						<b>Tipo de integração</b><br><br>
+						<input type="radio" name="tipoInt2" id="inf2" onchange="setParticoes2()" checked> Integração inferior<br>
+						<input type="radio" name="tipoInt2" id="sup2" onchange="setParticoes2()"> Integração superior<br><br>
+						<b>Partições</b>
+						<br><br>Partições em x:<br>`n=`
+						<div class="inline-block"><input type="range" id='n2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorN2()"></div><span id="valorN2"> 1</span>
+						<br><br>Partições em y:<br>`m=`
+						<div class="inline-block"><input type="range" id='m2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorM2()"></div><span id="valorM2"> 1</span>
+					</div>
+				</div><br><br>
+				<table>
+					<tr>
+						<td>Somatório dos prismas</td>
+						<td>Valor exato da área</td>
+					</tr>
+					<tr>
+						<td id="valorAproximado"></td>
+						<td id="valorExato">indeterminado</td>
+					</tr>
+				</table>
 			</div>
 			<div class="col-sm-6">
 				<div id="geogebra2"></div>
