@@ -21,7 +21,16 @@
   		.inline-block {
   			display: inline-block;
   		}
-  		#valorN, #valorM {margin-left: 8px}
+  		#valorN1, #valorM1, #valorN2, #valorM2 {margin-left: 8px}
+  		#exemplo {margin-bottom: 30px}
+  		table, th, td {
+		    border: 1px solid black;
+		    border-collapse: collapse;
+		}
+		th, td {
+		    padding: 5px;
+		    text-align: left;    
+		}
   </style>
 </head>
 <body>
@@ -48,7 +57,38 @@
 		</nav>
 	</header>
 	<div class="container">
-		<h1>Soma de Riemann em três dimensões</h1><br>
+		<h1>Soma de Riemann em três dimensões</h1>
+		<h3>Exemplo</h3>
+		<div id="exemplo" class="row" align="middle">
+			<div class="col-sm-6">
+				<br><br><b>Tipo de integração</b><br><br>
+				<input type="radio" name="tipoInt1" id="inf" checked> Integração inferior<br>
+				<input type="radio" name="tipoInt1" id="sup"> Integração superior<br><br><br>	
+				<b>Partições</b><br><br>
+				Partições em x:<br>`n=`
+				<div class="inline-block"><input type="range" id='n1' min="1" max="10" value="1" onchange="setParticoes1()" oninput="setValorN1()"></div><span id="valorN1"> 1</span>
+				<br><br>Partições em y:<br>`m=`
+				<div class="inline-block"><input type="range" id='m1' min="1" max="10" value="1" onchange="setParticoes1()" oninput="setValorM1()"></div><span id="valorM1"> 1</span><br><br><br>
+				<table>
+					<tr>
+						<td>Integração inferior</td>
+						<td>Integração superior</td>
+						<td>Valor exato</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td>53,33</td>
+					</tr>
+				</table>
+
+			</div>
+			<div class="col-sm-6">
+				<div id="geogebra1"></div>
+				<img src="../imagens/mouse-click-right.png"/><b class="fonte8"> Visualização</b>
+			</div>
+		</div>
+		<h3>Agora é a sua vez!</h3><br>
 		<div class="row" align="middle">
 			<div class="col-sm-6">
 				`f(x,y)=`
@@ -64,12 +104,12 @@
 				<input type="text" id="ymax" size="3" value="4" onchange="setParticoes()">
 				<br><br><b>Partições</b>
 				<br><br>Partições em x:<br>`n=`
-				<div class="inline-block"><input type="range" id='n' min="1" max="10" value="1" oninput="setParticoes()"></div><span id="valorN">1</span>
+				<div class="inline-block"><input type="range" id='n2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorN2()"></div><span id="valorN2"> 1</span>
 				<br><br>Partições em y:<br>`m=`
-				<div class="inline-block"><input type="range" id='m' min="1" max="10" value="1" oninput="setParticoes()"></div><span id="valorM">1</span>
+				<div class="inline-block"><input type="range" id='m2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorM2()"></div><span id="valorM2"> 1</span>
 			</div>
 			<div class="col-sm-6">
-				<div id="geogebra"></div>
+				<div id="geogebra2"></div>
 				<img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
 				<img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
 			</div>
