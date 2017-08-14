@@ -62,8 +62,8 @@
 		<div id="exemplo" class="row" align="middle">
 			<div class="col-sm-6">
 				<br><br><br><br><b>Tipo de integração</b><br><br>
-				<input type="radio" name="tipoInt1" id="inf1" onchange="setParticoes1()" checked> Integração inferior<br>
-				<input type="radio" name="tipoInt1" id="sup1" onchange="setParticoes1()"> Integração superior<br><br><br>	
+				<input type="radio" name="tipoInt1" id="inf1" onchange="setParticoes1()" checked> Integração por soma inferior<br>
+				<input type="radio" name="tipoInt1" id="sup1" onchange="setParticoes1()"> Integração por soma superior<br><br><br>	
 				<b>Partições</b><br><br>
 				Partições em x:<br>`n=`
 				<div class="inline-block"><input type="range" id='n1' min="1" max="10" value="1" onchange="setParticoes1()" oninput="setValorN1()"></div><span id="valorN1"> 1</span>
@@ -80,38 +80,43 @@
 		<div class="row" align="middle">
 			<div class="col-sm-6">
 				<br><br>`f(x,y)=`
-				<input id="funcao" type="text" value="4-x^2/16-y^2/16" onchange="setParticoes2()" /><br><br>
+				<input id="funcao" type="text" value="4-x^2/16-y^2/16" onchange="setParticoes2(false)" />
+				<button onclick="setParticoes2()">OK</button><br><br>
 				<div class="row">
 					<div class="col-sm-6">
 						<b>Domínio</b>
 						<br><br>`xmin=`
-						<input type="text" id="xmin" size="3" value="0" onchange="setParticoes2()">
+						<input type="text" id="xmin" size="3" value="0" onchange="setParticoes2(false)">
 						<br><br>`xmax=`
-						<input type="text" id="xmax" size="3" value="4" onchange="setParticoes2()">
+						<input type="text" id="xmax" size="3" value="4" onchange="setParticoes2(false)">
 						<br><br>`ymin=`
-						<input type="text" id="ymin" size="3" value="0" onchange="setParticoes2()">
+						<input type="text" id="ymin" size="3" value="0" onchange="setParticoes2(false)">
 						<br><br>`ymax=`
-						<input type="text" id="ymax" size="3" value="4" onchange="setParticoes2()">
+						<input type="text" id="ymax" size="3" value="4" onchange="setParticoes2(false)">
+						<br><br>
+						<button onclick="setParticoes2()">OK</button>
 					</div>
 					<div class="col-sm-6">
 						<b>Tipo de integração</b><br><br>
-						<input type="radio" name="tipoInt2" id="inf2" onchange="setParticoes2()" checked> Integração inferior<br>
-						<input type="radio" name="tipoInt2" id="sup2" onchange="setParticoes2()"> Integração superior<br><br>
+						<input type="radio" name="tipoInt2" id="inf2" onchange="setParticoes2(true)" checked> Integração por soma inferior<br>
+						<input type="radio" name="tipoInt2" id="sup2" onchange="setParticoes2(true)"> Integração por soma superior<br><br>
 						<b>Partições</b>
 						<br><br>Partições em x:<br>`n=`
-						<div class="inline-block"><input type="range" id='n2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorN2()"></div><span id="valorN2"> 1</span>
+						<div class="inline-block"><input type="range" id='n2' min="1" max="10" value="1" onchange="setParticoes2(false)" oninput="setValorN2()"></div><span id="valorN2"> 1</span>
 						<br><br>Partições em y:<br>`m=`
-						<div class="inline-block"><input type="range" id='m2' min="1" max="10" value="1" onchange="setParticoes2()" oninput="setValorM2()"></div><span id="valorM2"> 1</span>
+						<div class="inline-block"><input type="range" id='m2' min="1" max="10" value="1" onchange="setParticoes2(false)" oninput="setValorM2()"></div><span id="valorM2"> 1</span>
 					</div>
 				</div><br><br>
 				<table>
 					<tr>
-						<td>Somatório dos prismas</td>
-						<td>Valor exato da área</td>
+						<td>Soma inferior</td>
+						<td>Valor exato</td>
+						<td>Soma superior</td>
 					</tr>
 					<tr>
-						<td id="valorAproximado"></td>
+						<td id="valorInferior"></td>
 						<td id="valorExato">indeterminado</td>
+						<td id="valorSuperior"></td>
 					</tr>
 				</table>
 			</div>

@@ -76,7 +76,9 @@ function setParticoes1(){
 	riemann1(Number(n),Number(m));
 }
 
-function setParticoes2(){
+function setParticoes2(check){
+	document.getElementById('valorInferior').innerHTML = "<i>calculando...</i>";
+	document.getElementById('valorSuperior').innerHTML = "<i>calculando...</i>";
 	ggb2.reset();
 	var funcao = document.getElementById('funcao').value;
 	var n = document.getElementById('n2').value;
@@ -85,10 +87,15 @@ function setParticoes2(){
 	var xmax = document.getElementById('xmax').value;
 	var ymin = document.getElementById('ymin').value;
 	var ymax = document.getElementById('ymax').value;
+	var inferior = document.getElementById('inf2').checked;
+	
 	ggb2.evalCommand('funcao = Function('+funcao+', '+xmin+','+xmax+', '+ymin+', '+ymax+')');
 	//ggb2.evalCommandCAS('integral = Integral(Integral(funcao,y,'+ymin+','+ymax+'),x, '+xmin+', '+xmax+')');
 	//document.getElementById('valorExato').innerHTML = ggb2.getValue('integral');
-	riemann2(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
+	if((check&&inferior)||!check)
+		integracaoInferior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
+	if((check&&!inferior)||!check)
+		integracaoSuperior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
 }
 
 function riemann1(px,py){
@@ -111,38 +118,44 @@ function riemann1(px,py){
 	}
 }
 
-function riemann2(xmin,xmax,ymin,ymax,px,py){
-	var integral=0;
-	var menor,maior;
+function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 	var dx = (xmax-xmin)/px;
 	var dy = (ymax-ymin)/py;
-	if(document.getElementById('inf2').checked){
-		for(var j=ymin; j<=ymax-dy; j+=dy){
-			for(var i=xmin; i<=xmax-dx; i+=dx){
-				ggb2.evalCommand('z1 = funcao('+(i)+','+(j)+')');
-				ggb2.evalCommand('z2 = funcao('+(i+dx)+','+(j)+')');
-				ggb2.evalCommand('z3 = funcao('+(i)+','+(j+dy)+')');
-				ggb2.evalCommand('z4 = funcao('+(i+dx)+','+(j+dy)+')');
-				menor = menorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+	var menor, somaInferior = 0;
+	var inferior = document.getElementById('inf2').checked;
+	for(var j=ymin; j<=ymax-dy; j+=dy){
+		for(var i=xmin; i<=xmax-dx; i+=dx){
+			ggb2.evalCommand('z1 = funcao('+(i)+','+(j)+')');
+			ggb2.evalCommand('z2 = funcao('+(i+dx)+','+(j)+')');
+			ggb2.evalCommand('z3 = funcao('+(i)+','+(j+dy)+')');
+			ggb2.evalCommand('z4 = funcao('+(i+dx)+','+(j+dy)+')');
+			menor = menorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+			somaInferior += dx*dy*menor;
+			if(inferior)
 				ggb2.evalCommand('Prism(('+(i+dx)+','+(j+dy)+',0),('+i+','+(j+dy)+',0),('+i+','+j+',0),('+(i+dx)+','+j+',0),('+(i+dx)+','+(j+dy)+','+menor+'))');
-				integral += dx*dy*menor;
-			}
 		}
 	}
-	else{
-		for(var j=ymin; j<=ymax-dy; j+=dy){
-			for(var i=xmin; i<=xmax-dx; i+=dx){
-				ggb2.evalCommand('z1 = funcao('+(i)+','+(j)+')');
-				ggb2.evalCommand('z2 = funcao('+(i+dx)+','+(j)+')');
-				ggb2.evalCommand('z3 = funcao('+(i)+','+(j+dy)+')');
-				ggb2.evalCommand('z4 = funcao('+(i+dx)+','+(j+dy)+')');
-				maior = maiorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+	document.getElementById('valorInferior').innerHTML = somaInferior.toFixed(2);
+}
+
+function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
+	var dx = (xmax-xmin)/px;
+	var dy = (ymax-ymin)/py;
+	var maior, somaSuperior = 0;
+	var superior = document.getElementById('sup2').checked;
+	for(var j=ymin; j<=ymax-dy; j+=dy){
+		for(var i=xmin; i<=xmax-dx; i+=dx){
+			ggb2.evalCommand('z1 = funcao('+(i)+','+(j)+')');
+			ggb2.evalCommand('z2 = funcao('+(i+dx)+','+(j)+')');
+			ggb2.evalCommand('z3 = funcao('+(i)+','+(j+dy)+')');
+			ggb2.evalCommand('z4 = funcao('+(i+dx)+','+(j+dy)+')');
+			maior = maiorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+			somaSuperior += dx*dy*maior;
+			if(superior)
 				ggb2.evalCommand('Prism(('+(i+dx)+','+(j+dy)+',0),('+i+','+(j+dy)+',0),('+i+','+j+',0),('+(i+dx)+','+j+',0),('+(i+dx)+','+(j+dy)+','+maior+'))');
-				integral += dx*dy*maior;
-			}
 		}
 	}
-	document.getElementById('valorAproximado').innerHTML = integral.toFixed(2);
+	document.getElementById('valorSuperior').innerHTML = somaSuperior.toFixed(2);
 }
 
 function setValorN1(){
