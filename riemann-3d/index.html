@@ -62,16 +62,16 @@
 		<div id="exemplo" class="row" align="middle">
 			<div class="col-sm-6">
 				<br><br>
-				Seja `f(x,y)` uma função de duas variáveis.
-				<br><br><b>Tipo de integração</b><br><br>
-				<input type="radio" name="tipoInt1" id="inf1" onchange="setParticoes1()" checked> Integração por soma inferior<br>
-				<input type="radio" name="tipoInt1" id="sup1" onchange="setParticoes1()"> Integração por soma superior<br><br><br>	
+				Seja `z=f(x,y)` uma função de duas variáveis.
+				<br><br><b>Tipo de integração</b>(*)<br><br>
+				<input type="radio" name="tipoInt1" id="inf1" checked><abbr title="Em relação ao vértice da partição com menor valor f(x,y)"> Integração por soma inferior</abbr><br>
+				<input type="radio" name="tipoInt1" id="sup1"><abbr title="Em relação ao vértice da partição com maior valor f(x,y)"> Integração por soma superior</abbr><br><br><br>	
 				<b>Partições</b><br><br>
 				Partições em x:<br>`n=`
-				<div class="inline-block"><input type="range" id='n1' min="1" max="10" value="1" onchange="setParticoes1()" oninput="setValorN1()"></div><span id="valorN1"> 1</span>
+				<div class="inline-block"><input type="range" id='n1' min="1" max="10" value="1" oninput="setValorN1()"></div><span id="valorN1"> 1</span>
 				<br><br>Partições em y:<br>`m=`
-				<div class="inline-block"><input type="range" id='m1' min="1" max="10" value="1" onchange="setParticoes1()" oninput="setValorM1()"></div><span id="valorM1"> 1</span><br><br><br>
-
+				<div class="inline-block"><input type="range" id='m1' min="1" max="10" value="1" oninput="setValorM1()"></div><span id="valorM1"> 1</span><br><br>
+				<button onclick="setParticoes1()">OK</button><br><br>
 			</div>
 			<div class="col-sm-6">
 				<div id="geogebra1"></div>
@@ -82,33 +82,32 @@
 		<div class="row" align="middle">
 			<div class="col-sm-6">
 				<br><br>`f(x,y)=`
-				<input id="funcao" type="text" value="4-x^2/16-y^2/16" onchange="setParticoes2(false)" />
-				<button onclick="setParticoes2()">OK</button><br><br>
+				<input id="funcao" type="text" value="4-x^2/16-y^2/16"/>
 				<div class="row">
+					<br>
 					<div class="col-sm-6">
 						<b>Domínio</b>
 						<br><br>`xmin=`
-						<input type="text" id="xmin" size="3" value="0" onchange="setParticoes2(false)">
+						<input type="text" id="xmin" size="3" value="0">
 						<br><br>`xmax=`
-						<input type="text" id="xmax" size="3" value="4" onchange="setParticoes2(false)">
+						<input type="text" id="xmax" size="3" value="4">
 						<br><br>`ymin=`
-						<input type="text" id="ymin" size="3" value="0" onchange="setParticoes2(false)">
+						<input type="text" id="ymin" size="3" value="0">
 						<br><br>`ymax=`
-						<input type="text" id="ymax" size="3" value="4" onchange="setParticoes2(false)">
-						<br><br>
-						<button onclick="setParticoes2()">OK</button>
+						<input type="text" id="ymax" size="3" value="4">
 					</div>
 					<div class="col-sm-6">
-						<b>Tipo de integração</b><br><br>
-						<input type="radio" name="tipoInt2" id="inf2" onchange="setParticoes2(true)" checked> Integração por soma inferior<br>
-						<input type="radio" name="tipoInt2" id="sup2" onchange="setParticoes2(true)"> Integração por soma superior<br><br>
+						<b>Tipo de integração</b>(*)<br><br>
+						<input type="radio" name="tipoInt2" id="inf2" checked><abbr title="Em relação ao vértice da partição com menor valor f(x,y)"> Integração por soma inferior</abbr><br>
+						<input type="radio" name="tipoInt2" id="sup2"><abbr title="Em relação ao vértice da partição com maior valor f(x,y)"> Integração por soma superior</abbr><br><br>
 						<b>Partições</b>
 						<br><br>Partições em x:<br>`n=`
-						<div class="inline-block"><input type="range" id='n2' min="1" max="10" value="1" onchange="setParticoes2(false)" oninput="setValorN2()"></div><span id="valorN2"> 1</span>
+						<div class="inline-block"><input type="range" id='n2' min="1" max="10" value="1" oninput="setValorN2()"></div><span id="valorN2"> 1</span>
 						<br><br>Partições em y:<br>`m=`
-						<div class="inline-block"><input type="range" id='m2' min="1" max="10" value="1" onchange="setParticoes2(false)" oninput="setValorM2()"></div><span id="valorM2"> 1</span>
+						<div class="inline-block"><input type="range" id='m2' min="1" max="10" value="1" oninput="setValorM2()"></div><span id="valorM2"> 1</span><br><br>
 					</div>
-				</div><br><br>
+					<button onclick="setParticoes2()">CALCULAR</button><br><br>
+				</div><br>
 				<table>
 					<tr>
 						<td>Soma inferior</td>
@@ -117,7 +116,7 @@
 					</tr>
 					<tr>
 						<td id="valorInferior"></td>
-						<td id="valorExato">indeterminado</td>
+						<td id="valorExato"></td>
 						<td id="valorSuperior"></td>
 					</tr>
 				</table>
@@ -126,6 +125,8 @@
 				<div id="geogebra2"></div>
 				<img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
 				<img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
+				<br><br>
+				(*)Em relação aos valores f(x,y) dos vértices das partições.
 			</div>
 		</div>
 	</div>
