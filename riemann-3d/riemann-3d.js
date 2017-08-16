@@ -57,6 +57,7 @@ window.onload = function() {
 
 var ggb1 = document.ggb1;
 var ggb2 = document.ggb2;
+var x1,x2,y1,y2,z1,z2; //variaveis da escala do grafico
 
 function ggbOnInit(){
 	ggb1 = document.ggb1;
@@ -79,7 +80,6 @@ function setParticoes1(){
 }
 
 function setParticoes2(){
-	ggb2.reset();
 	var funcao = document.getElementById('funcao').value;
 	var n = document.getElementById('n2').value;
 	var m = document.getElementById('m2').value;
@@ -89,12 +89,22 @@ function setParticoes2(){
 	var ymax = document.getElementById('ymax').value;
 	var inferior = document.getElementById('inf2').checked;
 	
+	x1 = xmin;
+	x2 = xmax;
+	y1 = ymin;
+	y2 = ymax;
+	z1 = 0;
+	z2 = 0;
+
+	ggb2.reset();
 	ggb2.evalCommand('funcao = Function('+funcao+', '+xmin+','+xmax+', '+ymin+', '+ymax+')');
 	ggb2.evalCommand('inty = Integral('+funcao+', y)');
 	ggb2.setVisible('inty',false);
 	ggb2.evalCommand('def = Integral(inty(x,'+ymax+') - inty(x,'+ymin+'),'+xmin+','+xmax+')');
+
 	integracaoInferior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
 	integracaoSuperior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
+	ggb2.setCoordSystem(x1,x2,y1,y2,z1,z2);
 	document.getElementById('valorExato').innerHTML = ggb2.getValue('def').toFixed(2);
 }
 
@@ -134,6 +144,7 @@ function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 			ggb2.evalCommand('z4 = funcao('+(pi+dx)+','+(pj+dy)+')');
 			menor = menorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
 			somaInferior += dx*dy*menor;
+			testeEscala(menor);
 			if(inferior)
 				ggb2.evalCommand('Prism(('+(pi+dx)+','+(pj+dy)+',0),('+pi+','+(pj+dy)+',0),('+pi+','+pj+',0),('+(pi+dx)+','+pj+',0),('+(pi+dx)+','+(pj+dy)+','+menor+'))');
 		}
@@ -155,6 +166,7 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 			ggb2.evalCommand('z4 = funcao('+(pi+dx)+','+(pj+dy)+')');
 			maior = maiorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
 			somaSuperior += dx*dy*maior;
+			testeEscala(maior);
 			if(superior)
 				ggb2.evalCommand('Prism(('+(pi+dx)+','+(pj+dy)+',0),('+pi+','+(pj+dy)+',0),('+pi+','+pj+',0),('+(pi+dx)+','+pj+',0),('+(pi+dx)+','+(pj+dy)+','+maior+'))');
 		}
@@ -205,4 +217,11 @@ function maiorValor(v1,v2,v3,v4){
 		return v3;
 	else
 		return v4;
+}
+
+function testeEscala(valor){
+	if(valor>z2)
+		z2 = valor;
+	if(valor<z1)
+		z1 = valor;
 }
