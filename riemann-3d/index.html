@@ -118,10 +118,24 @@
 			</div>
 		</div>
 		<br>
-		<div align="middle">
-			<h3>Como foi calculado?</h3>
-			<br>
-			Inicialmente o domínio é particionado com `n` células em `x` e `m` células em y.
+		<div class="row" align="middle">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8" align="middle">
+				<h3>Como foi calculado?</h3>
+				<br>
+				<div class="col-sm-8">
+					<p style="padding-top: 10%" class="recuo">A Soma de Riemann em três dimenções pode ser obtida com partições de tamanhos aleatórios (dx X dy) e altura dos prismas f(x,y) em função de qualquer ponto (x,y) de cada partição de acordo com a figura ao lado. O valor da integral é obtido quando o número de partições tendem ao infinito.</p><br>
+				</div>
+				<div class="col-sm-4">
+					<img width="150" src="../imagens/prisma.PNG">
+				</div>
+				<p class="recuo">Porém, a fim de simplificar os cálculos optamos pelo seguinte método:</p><br>
+				<p class="recuo">Inicialmente o domínio é particionado, uniformimente, com `n` células em `x` e `m` células em `y`, de forma que cada partição possua a mesma dimensão. Sendo assim, `dx` e `dy` são constantes com `dx = (xmax-xmin)/n` e `dy = (ymax-ymin)/m`.</p><br>
+				<img width="300" src="../imagens/particoes.PNG"><br>
+				<p class="recuo">Em seguida, é calculado um prisma para cada partição. Esse possui base `dx xx dy` e altura de acordo com o valor máximo ou mínimo de cada vértice da partição, de acordo com a escolha feita.</p>
+				<img width="500" src="../imagens/tipos-soma.PNG">
+			</div>
+			<div class="col-sm-2"></div>
 		</div>
 	</div>
 </body>
