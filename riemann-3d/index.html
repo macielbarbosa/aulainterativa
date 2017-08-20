@@ -66,7 +66,7 @@
 				<img src="../imagens/mouse-click-right.png"/><b class="fonte8"> Visualização</b>
 			</div>
 		</div>
-		<h3>Determine os valores</h3><br>
+		<h3>Integral dupla por Soma de Riemann</h3><br>
 		<div class="row" align="middle">
 			<div class="col-sm-6">
 				<br><br>`f(x,y)=`
@@ -75,13 +75,13 @@
 					<br>
 					<div class="col-sm-6">
 						<b>Domínio</b>
-						<br><br>`xmin=`
+						<br><br>`x_min=`
 						<input type="text" id="xmin" size="3" value="0">
-						<br><br>`xmax=`
+						<br><br>`x_max=`
 						<input type="text" id="xmax" size="3" value="4">
-						<br><br>`ymin=`
+						<br><br>`y_min=`
 						<input type="text" id="ymin" size="3" value="0">
-						<br><br>`ymax=`
+						<br><br>`y_max=`
 						<input type="text" id="ymax" size="3" value="4">
 					</div>
 					<div class="col-sm-6">
@@ -114,26 +114,36 @@
 				<img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
 				<img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
 				<br><br>
-				(*)Em relação aos valores f(x,y) dos vértices das partições.
+				(*)Em relação aos valores f(x,y) dos vértices das células.
 			</div>
 		</div>
 		<br>
-		<div class="row" align="middle">
+		<div class="row">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-8" align="middle">
+			<div class="col-sm-8">
 				<h3>Como foi calculado?</h3>
 				<br>
-				<div class="col-sm-8">
-					<p style="padding-top: 10%" class="recuo">A Soma de Riemann em três dimenções pode ser obtida com partições de tamanhos aleatórios (dx X dy) e altura dos prismas f(x,y) em função de qualquer ponto (x,y) de cada partição de acordo com a figura ao lado. O valor da integral é obtido quando o número de partições tendem ao infinito.</p><br>
-				</div>
-				<div class="col-sm-4">
-					<img width="150" src="../imagens/prisma.PNG">
+				<div class="row">
+					<div class="col-sm-8">
+						<p style="padding-top: 10%" class="recuo">A Soma de Riemann em três dimenções pode ser obtida com células de tamanho arbitrário `[x_i,x_(i+1)]xx[y_i,y_(i+1)]` e altura dos prismas `f(x"*",y"*")` em função de um ponto qualquer `(x"*",y"*")` de cada partição, de acordo com a figura ao lado. O valor da integral `intint_D f(x,y)dxdy` em `D=[x_min,x_max]xx[y_min,y_max]` é obtido quando o número de partições em `x` e `y` tendem ao infinito.</p><br>
+					</div>
+					<div class="col-sm-4">
+						<img width="200" src="../imagens/prisma.PNG">
+					</div>
 				</div>
 				<p class="recuo">Porém, a fim de simplificar os cálculos optamos pelo seguinte método:</p><br>
-				<p class="recuo">Inicialmente o domínio é particionado, uniformimente, com `n` células em `x` e `m` células em `y`, de forma que cada partição possua a mesma dimensão. Sendo assim, `dx` e `dy` são constantes com `dx = (xmax-xmin)/n` e `dy = (ymax-ymin)/m`.</p><br>
-				<img width="300" src="../imagens/particoes.PNG"><br>
-				<p class="recuo">Em seguida, é calculado um prisma para cada partição. Esse possui base `dx xx dy` e altura de acordo com o valor máximo ou mínimo de cada vértice da partição, de acordo com a escolha feita.</p>
-				<img width="500" src="../imagens/tipos-soma.png">
+				<p class="recuo">Inicialmente o domínio é particionado, homogeneamente, com `n` partições em `x` e `m` em `y`, de forma que cada célula possui a mesma dimensão `Deltax xx Deltay`, sendo `Deltax = (x_max-x_min)/n` e `Deltay = (y_max-y_min)/m`.</p><br>
+				<div align="middle">
+					<img width="300" src="../imagens/particoes.PNG"><br>
+				</div>
+				<p class="recuo">Em seguida, é calculado um prisma para cada célula. A altura `f(x,y)` de cada prisma é determinado de acordo com o tipo de integração escolhido:</p>
+				<ul>
+					<li><b>Integração por soma inferior</b>: a altura do prisma é o <ins>menor</ins> valor da função entre os vértices da célula;</li>
+					<li><b>Integração por soma superior</b>: a altura do prisma é o <ins>maior</ins> valor da função entre os vértices da célula;</li>
+				</ul>
+				<div align="middle">
+					<img width="500" src="../imagens/tipos-soma.png">
+				</div>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>

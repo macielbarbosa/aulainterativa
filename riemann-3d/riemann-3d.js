@@ -58,18 +58,20 @@ window.onload = function() {
 var ggb1 = document.ggb1;
 var ggb2 = document.ggb2;
 var x1,x2,y1,y2,z1,z2; //variaveis da escala do grafico
+var setggb2 = false;
 
 function ggbOnInit(){
 	ggb1 = document.ggb1;
+	ggb2 = document.ggb2;
 	ggb1.enableRightClick(false);
 	ggb1.enableLabelDrags(false);
 	ggb1.setCoordSystem(0,4,0,4,0,4);
-	ggb2 = document.ggb2;
+
 	ggb2.enableRightClick(false);
 	ggb2.enableLabelDrags(false);
-	ggb2.setCoordSystem(-4,4,-4,4,-4,4);
 	ggb2.evalCommand('inty = Integral(4-x^2/16-y^2/16, y)');
-	//ggb2.setVisible('inty',false);
+	if(!setggb2)
+		ggb2.setCoordSystem(-4,4,-4,4,-4,4);
 }
 
 function setParticoes1(){
@@ -106,6 +108,7 @@ function setParticoes2(){
 	integracaoSuperior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
 	ggb2.setCoordSystem(x1,x2,y1,y2,z1,z2);
 	document.getElementById('valorExato').innerHTML = ggb2.getValue('def').toFixed(2);
+	setggb2 = true;
 }
 
 function riemann1(px,py){
