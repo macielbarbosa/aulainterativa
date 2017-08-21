@@ -14,6 +14,8 @@ input{
 	text-align: center;
 }
 
+figcaption {font-size: 8pt}
+
 nav.navbar{
 	padding-left: 2%;
 	padding-right: 2%;
