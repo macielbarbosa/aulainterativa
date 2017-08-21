@@ -66,7 +66,7 @@
 				<img src="../imagens/mouse-click-right.png"/><b class="fonte8"> Visualização</b>
 			</div>
 		</div>
-		<h3>Integral dupla por Soma de Riemann</h3><br>
+		<h3>Integração dupla por Soma de Riemann</h3><br>
 		<div class="row" align="middle">
 			<div class="col-sm-6">
 				<br><br>`f(x,y)=`
@@ -120,23 +120,16 @@
 		<br>
 		<div class="row">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-8">
-				<h3>Como foi calculado?</h3>
+			<div class="col-sm-8" align="middle">
+				<h3>Método do cálculo</h3>
 				<br>
-				<div class="row">
-					<div class="col-sm-8">
-						<p style="padding-top: 10%" class="recuo">A Soma de Riemann em três dimenções pode ser obtida com células de tamanho arbitrário `[x_i,x_(i+1)]xx[y_i,y_(i+1)]` e altura dos prismas `f(x"*",y"*")` em função de um ponto qualquer `(x"*",y"*")` de cada partição, de acordo com a figura ao lado. O valor da integral `intint_D f(x,y)dxdy` em `D=[x_min,x_max]xx[y_min,y_max]` é obtido quando o número de partições em `x` e `y` tendem ao infinito.</p><br>
-					</div>
-					<div class="col-sm-4">
-						<img width="200" src="../imagens/prisma.PNG">
-					</div>
-				</div>
-				<p class="recuo">Porém, a fim de simplificar os cálculos optamos pelo seguinte método:</p><br>
-				<p class="recuo">Inicialmente o domínio é particionado, homogeneamente, com `n` partições em `x` e `m` em `y`, de forma que cada célula possui a mesma dimensão `Deltax xx Deltay`, sendo `Deltax = (x_max-x_min)/n` e `Deltay = (y_max-y_min)/m`.</p><br>
-				<div align="middle">
-					<img width="300" src="../imagens/particoes.PNG"><br>
-				</div>
-				<p class="recuo">Em seguida, é calculado um prisma para cada célula. A altura `f(x,y)` de cada prisma é determinado de acordo com o tipo de integração escolhido:</p>
+				<p class="recuo">Considere a função `f = RR^2rarrRR//z=f(x,y)`. Queremos calcular a integral dupla `intint_D f(x,y)dxdy` no retângulo `[x_min,x_max]xx[y_min,y_max]`.</p><br>
+				<p class="recuo"><ins>O procedimento</ins>: considere que a função seja contínua pelo menos no domínio `D`. O retângulo `D` é particionado da seguinte forma:</p>
+				<img src="../imagens/dominio.png" width="400"><br>
+				<p class="recuo">
+					Dessa forma, `intint_D f(x,y)dxdy=sum_(i=1)^nsum_(j=1)^(m)f(x_i^(**),y_j^(**))Deltax_iDeltay_j` quando `n,mrarroo`, se o limite existir.
+
+				</p>
 				<ul>
 					<li><b>Integração por soma inferior</b>: a altura do prisma é o <ins>menor</ins> valor da função entre os vértices da célula;</li>
 					<li><b>Integração por soma superior</b>: a altura do prisma é o <ins>maior</ins> valor da função entre os vértices da célula;</li>
