@@ -41,10 +41,10 @@ window.onload = function() {
 	ggbApplet1.inject('geogebra1','preferHTML5');
 	ggbApplet2.inject('geogebra2','preferHTML5');
 	document.getElementById('funcao').value = '4-x^2/16-y^2/16';
-	document.getElementById('xmin').value = '0';
-	document.getElementById('xmax').value = '4';
-	document.getElementById('ymin').value = '0';
-	document.getElementById('ymax').value = '4';
+	document.getElementById('xmin').value = 0;
+	document.getElementById('xmax').value = 4;
+	document.getElementById('ymin').value = 0;
+	document.getElementById('ymax').value = 4;
 	document.getElementById('n2').value = '1';
 	document.getElementById('m2').value = '1';
 	document.getElementById('n1').value = '1';
@@ -91,6 +91,11 @@ function setParticoes2(){
 	var ymax = document.getElementById('ymax').value;
 	var inferior = document.getElementById('inf2').checked;
 	
+	if(entradaInvalida(funcao,xmin,xmax,ymin,ymax)){
+		alert("ops");
+		return;
+	}
+
 	x1 = xmin;
 	x2 = xmax;
 	y1 = ymin;
@@ -106,7 +111,7 @@ function setParticoes2(){
 
 	integracaoInferior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
 	integracaoSuperior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
-	ggb2.setCoordSystem(x1,x2,y1,y2,z1,z2);
+	ggb2.setCoordSystem(Number(x1),Number(x2),Number(y1),Number(y2),z1,z2);
 	document.getElementById('valorExato').innerHTML = ggb2.getValue('def').toFixed(2);
 	setggb2 = true;
 }
@@ -139,8 +144,8 @@ function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 	var inferior = document.getElementById('inf2').checked;
 	var i,j,pi,py;
 
-	for(j=1, pj=0; j<=py; j++, pj+=dy)
-		for(i=1, pi=0; i<=px; i++, pi+=dx){
+	for(j=1, pj=ymin; j<=py; j++, pj+=dy)
+		for(i=1, pi=xmin; i<=px; i++, pi+=dx){
 			ggb2.evalCommand('z1 = funcao('+(pi)+','+(pj)+')');
 			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+(pj)+')');
 			ggb2.evalCommand('z3 = funcao('+(pi)+','+(pj+dy)+')');
@@ -161,8 +166,8 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 	var superior = document.getElementById('sup2').checked;
 	var i,j,pi,py;
 
-	for(j=1, pj=0; j<=py; j++, pj+=dy)
-		for(i=1, pi=0; i<=px; i++, pi+=dx){
+	for(j=1, pj=ymin; j<=py; j++, pj+=dy)
+		for(i=1, pi=xmin; i<=px; i++, pi+=dx){
 			ggb2.evalCommand('z1 = funcao('+(pi)+','+(pj)+')');
 			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+(pj)+')');
 			ggb2.evalCommand('z3 = funcao('+(pi)+','+(pj+dy)+')');
@@ -174,6 +179,25 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 				ggb2.evalCommand('Prism(('+(pi+dx)+','+(pj+dy)+',0),('+pi+','+(pj+dy)+',0),('+pi+','+pj+',0),('+(pi+dx)+','+pj+',0),('+(pi+dx)+','+(pj+dy)+','+maior+'))');
 		}
 	document.getElementById('valorSuperior').innerHTML = somaSuperior.toFixed(2);
+}
+
+function entradaInvalida(funcao,xmin,xmax,ymin,ymax){
+	var x=false, y=false;
+	for(var i=0; i<funcao.length; i++){
+		if(funcao[i]=='x')
+			x=true;
+		else if(funcao[i]=='y')
+			y=true;
+	}
+	if(!x||!y){
+		alert('A função deve ter x e y como parâmetro.')
+		return true;
+	}
+	else if(isNaN(xmin)||isNaN(xmax)||isNaN(ymin)||isNaN(ymax)){
+		alert('Domínio com entrada inválida.');
+		return true
+	}
+	return false;
 }
 
 function setValorN1(){

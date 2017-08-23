@@ -45,7 +45,7 @@
 		</nav>
 	</header>
 	<div class="container">
-		<h1>Soma de Riemann em três dimensões</h1>
+		<h1>Integração dupla por Soma de Riemann</h1>
 		<h3>Exemplo</h3>
 		<div id="exemplo" class="row" align="middle">
 			<div class="col-sm-6">
@@ -66,7 +66,7 @@
 				<img src="../imagens/mouse-click-right.png"/><b class="fonte8"> Visualização</b>
 			</div>
 		</div>
-		<h3>Integração dupla por Soma de Riemann</h3><br>
+		<h3>Calculando a Soma de Riemann</h3><br>
 		<div class="row" align="middle">
 			<div class="col-sm-6">
 				<br><br>`f(x,y)=`
@@ -124,17 +124,14 @@
 				<h3>Método do cálculo</h3>
 				<br>
 				<p class="recuo">Considere a função `f = RR^2rarrRR//z=f(x,y)`. Queremos calcular a integral dupla `intint_D f(x,y)dxdy` no retângulo `[x_min,x_max]xx[y_min,y_max]`.</p><br>
-				<p class="recuo"><ins>O procedimento</ins>: considere que a função seja contínua pelo menos no domínio `D`. O retângulo `D` é particionado homogeneamente, com `n` partições em `x` e `m` em `y`, formando células de dimensão `[Deltax]xx[Deltay]` tal que `Deltax=(x_max-x_min)/n` e `Deltay=(y_max-y_min)/m`.</p>
+				<p class="recuo"><ins>O procedimento</ins>: considere que a função seja contínua pelo menos no domínio `D`. O retângulo `D` é particionado de acordo com a seguinte figura:</p>
 				<figure>
 					<img src="../imagens/dominio.png" width="75%">
-					<figcaption>Domínio `D` homogeneamente particionado e o respectivo `DeltaV_(ij)`.</figcaption>
+					<figcaption>Domínio `D` particionado e o respectivo `DeltaV_(ij)`.</figcaption>
 				</figure>
-				
 				<br>
-				<p class="recuo">
-					Dessa forma, `intint_D f(x,y)dxdy=sum_(i=1)^nsum_(j=1)^(m)DeltaV_(ij)=sum_(i=1)^nsum_(j=1)^(m)f(x_i^(**),y_j^(**))DeltaxDeltay` quando `n,mrarroo`, se o limite existir.
-				</p>
-				<br>
+				<p class="recuo">Dessa forma, `intint_D f(x,y)dxdy=sum_(i=1)^nsum_(j=1)^(m)DeltaV_(ij)=sum_(i=1)^nsum_(j=1)^(m)f(x_i^(**),y_j^(**))DeltaxDeltay` quando `n,mrarroo`, se o limite existir.</p>
+				<p class="recuo">Para facilitar os cálculos, optamos por particionar o domínio homogeneamente, com `n` partições em `x` e `m` em `y`, formando células de dimensão `[Deltax]xx[Deltay]`, tal que `Deltax=(x_max-x_min)/n` e `Deltay=(y_max-y_min)/m`.</p>
 				<p class="recuo">Em seguida, é calculado a altura `f(x_i^**,y_j^**)` de cada prisma `DeltaV_(ij)`, de acordo com o tipo de integração escolhido:</p>
 				<ul>
 					<li><p><b>Integração por soma inferior</b>: a altura do prisma é o <ins>menor</ins> valor da função entre os vértices da célula;<p></li>
@@ -143,9 +140,12 @@
 				<div align="middle">
 					<img width="60%" src="../imagens/tipos-soma.png">
 				</div>
+				<br>
+				<p>OBS.: O caso específico escolhido não afeta o resultado final da integral, pois quando o número de partições tendem ao infinito não importa como o domínio foi particionado ou qual ponto foi utilizado para obter a altura de cada prisma. O método escolhido pode apenas interferir na velocidade em que a soma converge para o valor real.</p>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
+		<br><br>
 	</div>
 </body>
 </html>
