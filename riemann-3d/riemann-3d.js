@@ -1,4 +1,4 @@
-var param1 = {
+﻿var param1 = {
 	"id":"ggb1",
 	"width":600,
 	"height":500,
@@ -92,7 +92,6 @@ function setParticoes2(){
 	var inferior = document.getElementById('inf2').checked;
 	
 	if(entradaInvalida(funcao,xmin,xmax,ymin,ymax)){
-		alert("ops");
 		return;
 	}
 
