@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 	<meta charset='UTF-8'/>
-	<title>Projeção</title>
+	<title>Projeção de sólidos</title>
 	<link rel="stylesheet" type="text/css" href="../css/estilo.css">
 	<link rel="stylesheet" type="text/css" href="../css/riemann-3d.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,8 +45,20 @@
 		</nav>
 	</header>
 	<div class="container">
-	<br><br>
-		<div id="geogebra"></div>
+	<h1>Projeção de sólidos nos planos cartesianos</h1>
+	<br>
+		<div class="row"  align="middle">
+			Sólido: 
+			<select id="solido" onchange="setggb()">
+				<option value="esfera">esfera</option>
+				<option value="cone">cone</option>
+				<option value="cilindro">cilindro</option>
+				<option value="piramide">pirâmide</option>
+			</select>
+			<br><br>
+			<div id="geogebra"></div>
+			<img src="../imagens/mouse-click-right.png"/><b class="fonte8"> Visualização</b>
+		</div>
 	</div>
 </body>
 </html>
