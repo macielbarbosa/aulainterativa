@@ -14,6 +14,8 @@ input{
 	text-align: center;
 }
 
+figcaption {font-size: 8pt}
+
 nav.navbar{
 	padding-left: 2%;
 	padding-right: 2%;
@@ -92,3 +94,5 @@ div#vetores{
 #escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3, #asteriscos{
 	display: none;
 }
+
+.fonte8 {font-size: 8pt}

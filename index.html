@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <meta content= "Aula Interativa é um projeto da Escola de Ciências e Tecnologia da UFRN que visa descomplicar o Cálculo e a Álgebra Linear através de gráficos dinâmicos." name="description">
   <title>Aula Interativa</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +11,7 @@
   <link href="css/template.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="javascript/template.js"></script>
+  <script src="template.js"></script>
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -108,8 +109,20 @@
 </div>
 
 <div id="calculo" class="container-fluid text-center">
-  <h2>CÁLCULO</h2><br>
-  <h4>Em breve</h4>
+  <h2>CÁLCULO</h2>
+  <br>
+  <div class="row slideanim">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4" align="middle">
+      <a href="riemann-3d" class="thumbnail">
+        <img src="imagens/icon-riemann.PNG">
+      </a>
+      <a href="riemann-3d">
+        <h4>Integração dupla por Soma de Riemann</h4>
+      </a>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
 </div>
 
 <div id="contato" class="container-fluid bg-grey">

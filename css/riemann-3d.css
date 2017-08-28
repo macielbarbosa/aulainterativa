@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.inline-block {display: inline-block;}
+
+ #valorN1, #valorM1, #valorN2, #valorM2 {margin-left: 8px}
+
+#exemplo {margin-bottom: 30px}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+	text-align: center;    
+}
+
+.padding-5{
+	padding: 5px;
+}
