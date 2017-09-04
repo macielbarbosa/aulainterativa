@@ -59,6 +59,7 @@ var ggb1 = document.ggb1;
 var ggb2 = document.ggb2;
 var x1,x2,y1,y2,z1,z2; //variaveis da escala do grafico
 var setggb2 = false;
+var tab1 = 1, tab2 = 1;
 
 function ggbOnInit(){
 	ggb1 = document.ggb1;
@@ -155,7 +156,7 @@ function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 			if(inferior)
 				ggb2.evalCommand('Prism(('+(pi+dx)+','+(pj+dy)+',0),('+pi+','+(pj+dy)+',0),('+pi+','+pj+',0),('+(pi+dx)+','+pj+',0),('+(pi+dx)+','+(pj+dy)+','+menor+'))');
 		}
-	document.getElementById('valorInferior').innerHTML = somaInferior.toFixed(2);
+	inserirInferior(somaInferior.toFixed(2));
 }
 
 function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
@@ -177,7 +178,7 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 			if(superior)
 				ggb2.evalCommand('Prism(('+(pi+dx)+','+(pj+dy)+',0),('+pi+','+(pj+dy)+',0),('+pi+','+pj+',0),('+(pi+dx)+','+pj+',0),('+(pi+dx)+','+(pj+dy)+','+maior+'))');
 		}
-	document.getElementById('valorSuperior').innerHTML = somaSuperior.toFixed(2);
+	inserirSuperior(somaSuperior.toFixed(2));
 }
 
 function entradaInvalida(funcao,xmin,xmax,ymin,ymax){
@@ -250,4 +251,54 @@ function testeEscala(valor){
 		z2 = valor;
 	if(valor<z1)
 		z1 = valor;
+}
+
+function inserirInferior(valor){
+	if(tab1==1){
+		document.getElementById('vi1').innerHTML = valor;
+		document.getElementById('np1').innerHTML = document.getElementById('n2').value;
+		document.getElementById('mp1').innerHTML = document.getElementById('m2').value;
+		tab1++;
+	}
+	else if(tab1==2){
+		document.getElementById('vi2').innerHTML = document.getElementById('vi1').innerHTML;
+		document.getElementById('vi1').innerHTML = valor;
+		document.getElementById('np2').innerHTML = document.getElementById('np1').innerHTML;
+		document.getElementById('mp2').innerHTML  = document.getElementById('mp1').innerHTML;
+		document.getElementById('np1').innerHTML = document.getElementById('n2').value;
+		document.getElementById('mp1').innerHTML = document.getElementById('m2').value;
+		tab1++;
+	}
+	else if(tab1==3){
+		document.getElementById('vi3').innerHTML = document.getElementById('vi2').innerHTML;
+		document.getElementById('vi2').innerHTML = document.getElementById('vi1').innerHTML;
+		document.getElementById('vi1').innerHTML = valor;
+		document.getElementById('np3').innerHTML = document.getElementById('np2').innerHTML;
+		document.getElementById('mp3').innerHTML  = document.getElementById('mp2').innerHTML;
+		document.getElementById('np2').innerHTML = document.getElementById('np1').innerHTML;
+		document.getElementById('mp2').innerHTML  = document.getElementById('mp1').innerHTML;
+		document.getElementById('np1').innerHTML = document.getElementById('n2').value;
+		document.getElementById('mp1').innerHTML = document.getElementById('m2').value;
+	}
+}
+
+function inserirSuperior(valor){
+	var aux1, aux2;
+	if(tab2==1){
+		document.getElementById('vs1').innerHTML = valor;
+		tab2++;
+	}
+	else if(tab2==2){
+		aux1 = document.getElementById('vs1').innerHTML;
+		document.getElementById('vs1').innerHTML = valor;
+		document.getElementById('vs2').innerHTML = aux1;
+		tab2++;
+	}
+	else if(tab2==3){
+		aux1 = document.getElementById('vs1').innerHTML;
+		aux2 = document.getElementById('vs2').innerHTML;
+		document.getElementById('vs1').innerHTML = valor;
+		document.getElementById('vs2').innerHTML = aux1;
+		document.getElementById('vs3').innerHTML = aux2;
+	}
 }
