@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset='UTF-8'/>
+	<title>Fluxo</title>
+	<link rel="stylesheet" type="text/css" href="../css/estilo.css">
+	<link rel="stylesheet" type="text/css" href="fluxo.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" async
+  		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+	<script src="fluxo.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  	<link rel="stylesheet" type="text/css" href="../css/template.css">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+		  	<div class="container">
+		    	<div class="navbar-header">
+		      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>                        
+		      		</button>
+		      		<a class="navbar-brand navbar-logo" href="../index.html#myPage">Aula Interativa</a>
+		    	</div>
+		    	<div class="collapse navbar-collapse" id="myNavbar">
+		      		<ul class="nav navbar-nav navbar-right">
+		        		<li><a href="../index.html#sobre">SOBRE</a></li>
+		        		<li><a href="../index.html#algebra-linear">ÁLGEBRA LINEAR</a></li>
+		        		<li><a href="../index.html#calculo">CÁLCULO</a></li>
+		        		<li><a href="../index.html#contato">CONTATO</a></li>
+		      		</ul>
+		    	</div>
+		  	</div>
+		</nav>
+	</header>
+	<div class="container">
+	<h1>Fluxo através de um plano</h1>
+	<br>
+		<div class="row">
+			<div class="col-sm-6">
+				<br><br>
+				Seja o fluxo `F:(x,y,z)|->F=(x,y,1)`
+				<br><br><br><br>
+				<div align="middle">
+					Área do plano =
+					<input type="number">
+					<br><br><br>
+					Ángulo em relação ao plano XY =
+					<div class="inline-block"><input type="range" id='angulo' min="-90" max="90" value="0" oninput="setAngulo(this.value)"></div><span id="valorAngulo"> 0°</span>
+					<br><br>
+				</div>
+			</div>
+			<div class="col-sm-6" align="middle">
+				<div id="geogebra"></div>
+				<img src="../imagens/mouse-click-right.png"/><b class="fonte8"> Visualização</b>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
