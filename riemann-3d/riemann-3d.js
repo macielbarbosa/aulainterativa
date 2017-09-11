@@ -62,6 +62,7 @@ var setggb2 = false;
 var tab1 = 1, tab2 = 1;
 var funcaoGlobal = '1-x^2/16-y^2/16';
 var gxmin = 0, gxmax = 1, gymin = 0, gymax = 1;
+var prisma;
 
 function ggbOnInit(){
 	ggb1 = document.ggb1;
@@ -162,7 +163,7 @@ function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 	var dy = (ymax-ymin)/py;
 	var menor, somaInferior = 0;
 	var inferior = document.getElementById('inf2').checked;
-	var i,j,pi,py;
+	var i,j,pi,py,v1,v2,v3,v4;
 
 	for(j=1, pj=ymin; j<=py; j++, pj+=dy){
 		if(j==py)
@@ -170,15 +171,20 @@ function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 		for(i=1, pi=xmin; i<=px; i++, pi+=dx){
 			if(i==pi)
 				pi = xmax-dx;
-			ggb2.evalCommand('z1 = funcao('+(pi)+','+(pj)+')');
-			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+(pj)+')');
-			ggb2.evalCommand('z3 = funcao('+(pi)+','+(pj+dy)+')');
-			ggb2.evalCommand('z4 = funcao('+(pi+dx)+','+(pj+dy)+')');
-			menor = menorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+
+			ggb2.evalCommand('z1 = funcao('+pi+','+pj+')');
+			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+pj+')');
+			ggb2.evalCommand('z3 = funcao('+(pi+dx)+','+(pj+dy)+')');
+			ggb2.evalCommand('z4 = funcao('+pi+','+(pj+dy)+')');
+			v1=ggb2.getValue('z1');
+			v2=ggb2.getValue('z2');
+			v3=ggb2.getValue('z3');
+			v4=ggb2.getValue('z4');
+			menor = menorValor(v1,v2,v3,v4,pi,pj,pi+dx,pj+dy);
 			somaInferior += dx*dy*menor;
 			testeEscala(menor);
 			if(inferior)
-				ggb2.evalCommand('Prism(('+(pi+dx)+','+(pj+dy)+',0),('+pi+','+(pj+dy)+',0),('+pi+','+pj+',0),('+(pi+dx)+','+pj+',0),('+(pi+dx)+','+(pj+dy)+','+menor+'))');
+				ggb2.evalCommand(prisma);
 		}
 	}
 	inserirInferior(somaInferior.toFixed(2));
@@ -189,7 +195,7 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 	var dy = (ymax-ymin)/py;
 	var maior, somaSuperior = 0;
 	var superior = document.getElementById('sup2').checked;
-	var i,j,pi,py;
+	var i,j,pi,py,v1,v2,v3,v4;
 
 	for(j=1, pj=ymin; j<=py; j++, pj+=dy){
 		if(j==py)
@@ -197,15 +203,19 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 		for(i=1, pi=xmin; i<=px; i++, pi+=dx){
 			if(i==px)
 				pi = xmax-dx;
-			ggb2.evalCommand('z1 = funcao('+(pi)+','+(pj)+')');
-			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+(pj)+')');
-			ggb2.evalCommand('z3 = funcao('+(pi)+','+(pj+dy)+')');
-			ggb2.evalCommand('z4 = funcao('+(pi+dx)+','+(pj+dy)+')');
-			maior = maiorValor(ggb2.getValue('z1'),ggb2.getValue('z2'),ggb2.getValue('z3'),ggb2.getValue('z4'));
+			ggb2.evalCommand('z1 = funcao('+pi+','+pj+')');
+			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+pj+')');
+			ggb2.evalCommand('z3 = funcao('+(pi+dx)+','+(pj+dy)+')');
+			ggb2.evalCommand('z4 = funcao('+pi+','+(pj+dy)+')');
+			v1=ggb2.getValue('z1');
+			v2=ggb2.getValue('z2');
+			v3=ggb2.getValue('z3');
+			v4=ggb2.getValue('z4');
+			maior = maiorValor(v1,v2,v3,v4,pi,pj,pi+dx,pj+dy);
 			somaSuperior += dx*dy*maior;
 			testeEscala(maior);
 			if(superior)
-				ggb2.evalCommand('Prism(('+(pi+dx)+','+(pj+dy)+',0),('+pi+','+(pj+dy)+',0),('+pi+','+pj+',0),('+(pi+dx)+','+pj+',0),('+(pi+dx)+','+(pj+dy)+','+maior+'))');
+				ggb2.evalCommand(prisma);
 		}
 	}
 	inserirSuperior(somaSuperior.toFixed(2));
@@ -254,32 +264,48 @@ function setValorM2(){
 	valorM.innerHTML = m;
 }
 
-function menorValor(v1,v2,v3,v4){
-	if(v1<=v2 && v1<=v3 && v1<=v4)
+function menorValor(v1,v2,v3,v4,pi,pj,dx,dy){
+	if(v1<v2 && v1<v3 && v1<v4){
+		prisma = 'Prism(('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+','+v1+'))';
 		return v1;
-	if(v2<=v1 && v2<=v3 && v2<=v4)
+	}
+	else if(v2<v1 && v2<v3 && v2<v4){
+		prisma = 'Prism(('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+','+v2+'))';
 		return v2;
-	if(v3<=v1 && v3<=v2 && v3<=v4)
+	}
+	else if (v3<v1 && v3<v2 && v3<v4){
+		prisma = 'Prism(('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+','+v3+'))';
 		return v3;
-	else
+	}
+	else{
+		prisma = 'Prism(('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+','+v4+'))';
 		return v4;
+	}
 }
 
-function maiorValor(v1,v2,v3,v4){
-	if(v1>=v2 && v1>=v3 && v1>=v4)
+function maiorValor(v1,v2,v3,v4,pi,pj,dx,dy){
+	if(v1>v2 && v1>v3 && v1>v4){
+		prisma = 'Prism(('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+','+v1+'))';
 		return v1;
-	if(v2>=v1 && v2>=v3 && v2>=v4)
+	}
+	else if(v2>v1 && v2>v3 && v2>v4){
+		prisma = 'Prism(('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+','+v2+'))';
 		return v2;
-	if(v3>=v1 && v3>=v2 && v3>=v4)
+	}
+	else if(v3>v1 && v3>v2 && v3>v4){
+		prisma = 'Prism(('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+','+v3+'))';
 		return v3;
-	else
+	}
+	else{
+		prisma = 'Prism(('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+','+v4+'))';
 		return v4;
+	}
 }
 
 function testeEscala(valor){
 	if(valor>z2)
 		z2 = valor;
-	if(valor<z1)
+	if (valor<z1)
 		z1 = valor;
 }
 
