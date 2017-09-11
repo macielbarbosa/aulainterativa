@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
 input[type="number"] {
-   width:100px;
+   width:80px;
+}
+
+#border{
+	border: 1px solid gray;
+	padding: 10px;
 }

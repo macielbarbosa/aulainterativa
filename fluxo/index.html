@@ -45,18 +45,36 @@
 	<h1>Fluxo através de um plano</h1>
 	<br>
 		<div class="row">
-			<div class="col-sm-6">
-				<br><br>
-				Seja o fluxo `F:(x,y,z)|->F=(x,y,1)`
-				<br><br><br><br>
-				<div align="middle">
-					Área do plano =
-					<input type="number">
-					<br><br><br>
-					Ángulo em relação ao plano XY =
-					<div class="inline-block"><input type="range" id='angulo' min="-90" max="90" value="0" oninput="setAngulo(this.value)"></div><span id="valorAngulo"> 0°</span>
+			<div class="col-sm-6" align="middle">
+				<br>
+				<p class="recuo">Seja o campo vetorial `vecF:(x,y,z)|->vecF=(x,y,F)`, em que F é o módulo do campo.</p>
+				<form oninput="setResultado(this.forca.value,this.area.value,this.theta.value)">
+					Módulo do campo
+					<br>
+					`F=` 
+					<input type="number" name="forca" value="1">
 					<br><br>
-				</div>
+					Área do plano
+					<br>
+					`A=` 
+					<input type="number" name="area" value="1">
+					<br><br>
+					Ángulo em relação ao plano XY
+					<br>
+					`theta=`
+					<div class="inline-block"><input type="range" id='angulo' min="-90" max="90" name="theta" value="0" oninput="setAngulo(this.value)"></div><span id="valorAngulo"> 0°</span>
+				</form>	
+				<br><br><br>
+				<p class="recuo">Logo, o fluxo `phi` através do plano é obtida da seguinte forma:</p>
+				`phi=intintvecF*dvecA`
+				<br>
+				`=intint|dA||F|cos(theta)=Fcos(theta)intintdA`
+				<br>
+				`rArrphi=Fcos(theta)A`
+				<br><br>
+				<p class="recuo">Dessa forma, no exemplo:</p>
+				<br>
+				<span id="border">`phi=`<span id="f">1</span><span id="t">cos(0)</span>`**`<span id="a">1</span>`=`<span id="resultado">1.000</span></span>
 			</div>
 			<div class="col-sm-6" align="middle">
 				<div id="geogebra"></div>
