@@ -1,4 +1,4 @@
-﻿var param1 = {
+var param1 = {
 	"id":"ggb1",
 	"width":600,
 	"height":500,
@@ -166,16 +166,11 @@ function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 	var i,j,pi,py,v1,v2,v3,v4;
 
 	for(j=1, pj=ymin; j<=py; j++, pj+=dy){
-		if(j==py)
-			pj = ymax-dy;
 		for(i=1, pi=xmin; i<=px; i++, pi+=dx){
-			if(i==pi)
-				pi = xmax-dx;
-
-			ggb2.evalCommand('z1 = funcao('+pi+','+pj+')');
-			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+pj+')');
-			ggb2.evalCommand('z3 = funcao('+(pi+dx)+','+(pj+dy)+')');
-			ggb2.evalCommand('z4 = funcao('+pi+','+(pj+dy)+')');
+			ggb2.evalCommand('z1 = funcao('+pi.toFixed(4)+','+pj.toFixed(4)+')');
+			ggb2.evalCommand('z2 = funcao('+(pi+dx).toFixed(4)+','+pj.toFixed(4)+')');
+			ggb2.evalCommand('z3 = funcao('+(pi+dx).toFixed(4)+','+(pj+dy).toFixed(4)+')');
+			ggb2.evalCommand('z4 = funcao('+pi.toFixed(4)+','+(pj+dy).toFixed(4)+')');
 			v1=ggb2.getValue('z1');
 			v2=ggb2.getValue('z2');
 			v3=ggb2.getValue('z3');
@@ -198,15 +193,11 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 	var i,j,pi,py,v1,v2,v3,v4;
 
 	for(j=1, pj=ymin; j<=py; j++, pj+=dy){
-		if(j==py)
-			pj = ymax-dy;
 		for(i=1, pi=xmin; i<=px; i++, pi+=dx){
-			if(i==px)
-				pi = xmax-dx;
-			ggb2.evalCommand('z1 = funcao('+pi+','+pj+')');
-			ggb2.evalCommand('z2 = funcao('+(pi+dx)+','+pj+')');
-			ggb2.evalCommand('z3 = funcao('+(pi+dx)+','+(pj+dy)+')');
-			ggb2.evalCommand('z4 = funcao('+pi+','+(pj+dy)+')');
+			ggb2.evalCommand('z1 = funcao('+pi.toFixed(4)+','+pj.toFixed(4)+')');
+			ggb2.evalCommand('z2 = funcao('+(pi+dx).toFixed(4)+','+pj.toFixed(4)+')');
+			ggb2.evalCommand('z3 = funcao('+(pi+dx).toFixed(4)+','+(pj+dy).toFixed(4)+')');
+			ggb2.evalCommand('z4 = funcao('+pi.toFixed(4)+','+(pj+dy).toFixed(4)+')');
 			v1=ggb2.getValue('z1');
 			v2=ggb2.getValue('z2');
 			v3=ggb2.getValue('z3');
@@ -266,38 +257,38 @@ function setValorM2(){
 
 function menorValor(v1,v2,v3,v4,pi,pj,dx,dy){
 	if(v1<v2 && v1<v3 && v1<v4){
-		prisma = 'Prism(('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+','+v1+'))';
+		prisma = 'Prism(('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+','+v1.toFixed(4)+'))';
 		return v1;
 	}
 	else if(v2<v1 && v2<v3 && v2<v4){
-		prisma = 'Prism(('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+','+v2+'))';
+		prisma = 'Prism(('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+','+v2.toFixed(4)+'))';
 		return v2;
 	}
 	else if (v3<v1 && v3<v2 && v3<v4){
-		prisma = 'Prism(('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+','+v3+'))';
+		prisma = 'Prism(('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+','+v3.toFixed(4)+'))';
 		return v3;
 	}
 	else{
-		prisma = 'Prism(('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+','+v4+'))';
+		prisma = 'Prism(('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+','+v4.toFixed(4)+'))';
 		return v4;
 	}
 }
 
 function maiorValor(v1,v2,v3,v4,pi,pj,dx,dy){
 	if(v1>v2 && v1>v3 && v1>v4){
-		prisma = 'Prism(('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+','+v1+'))';
+		prisma = 'Prism(('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+','+v1.toFixed(4)+'))';
 		return v1;
 	}
 	else if(v2>v1 && v2>v3 && v2>v4){
-		prisma = 'Prism(('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+','+v2+'))';
+		prisma = 'Prism(('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+','+v2.toFixed(4)+'))';
 		return v2;
 	}
 	else if(v3>v1 && v3>v2 && v3>v4){
-		prisma = 'Prism(('+dx+','+dy+',0),('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+','+v3+'))';
+		prisma = 'Prism(('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+','+v3.toFixed(4)+'))';
 		return v3;
 	}
 	else{
-		prisma = 'Prism(('+pi+','+dy+',0),('+pi+','+pj+',0),('+dx+','+pj+',0),('+dx+','+dy+',0),('+pi+','+dy+','+v4+'))';
+		prisma = 'Prism(('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+','+v4.toFixed(4)+'))';
 		return v4;
 	}
 }
