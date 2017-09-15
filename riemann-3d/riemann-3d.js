@@ -62,7 +62,6 @@ var setggb2 = false;
 var tab1 = 1, tab2 = 1;
 var funcaoGlobal = '1-x^2/16-y^2/16';
 var gxmin = 0, gxmax = 1, gymin = 0, gymax = 1;
-var prisma;
 
 function ggbOnInit(){
 	ggb1 = document.ggb1;
@@ -112,23 +111,7 @@ function setParticoes2(){
 	ggb2.setVisible('inty',false);
 	ggb2.evalCommand('def = Integral(inty(x,'+ymax+') - inty(x,'+ymin+'),'+xmin+','+xmax+')');
 
-	if(funcaoGlobal!=funcao || xmin!=gxmin || xmax!=gxmax || ymin!=gymin || ymax!=gymax){
-		document.getElementById('vi3').innerHTML = '--';
-		document.getElementById('vi2').innerHTML = '--';
-		document.getElementById('vs3').innerHTML = '--';
-		document.getElementById('vs2').innerHTML = '--';
-		document.getElementById('np3').innerHTML = '--';
-		document.getElementById('mp3').innerHTML  = '--';
-		document.getElementById('np2').innerHTML = '--';
-		document.getElementById('mp2').innerHTML  = '--';
-		funcaoGlobal = funcao;
-		tab1 = 1;
-		tab2 = 1;
-		gxmin=xmin;
-		gxmax=xmax;
-		gymin=ymin;
-		gymax=ymax;
-	}
+	reiniciarTabela(funcao,xmin,xmax,ymin,ymax);
 
 	integracaoInferior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
 	integracaoSuperior(Number(xmin),Number(xmax),Number(ymin),Number(ymax),Number(n),Number(m));
@@ -175,11 +158,11 @@ function integracaoInferior(xmin,xmax,ymin,ymax,px,py){
 			v2=ggb2.getValue('z2');
 			v3=ggb2.getValue('z3');
 			v4=ggb2.getValue('z4');
-			menor = menorValor(v1,v2,v3,v4,pi,pj,pi+dx,pj+dy);
+			menor = menorValor(v1,v2,v3,v4);
 			somaInferior += dx*dy*menor;
 			testeEscala(menor);
 			if(inferior)
-				ggb2.evalCommand(prisma);
+				ggb2.evalCommand('Prism(Polygon(('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+(pi+dx).toFixed(4)+','+pj.toFixed(4)+',0),('+(pi+dx).toFixed(4)+','+(pj+dy).toFixed(4)+',0),('+pi.toFixed(4)+','+(pj+dy).toFixed(4)+',0)),'+menor.toFixed(4)+')');
 		}
 	}
 	inserirInferior(somaInferior.toFixed(2));
@@ -202,11 +185,11 @@ function integracaoSuperior(xmin,xmax,ymin,ymax,px,py){
 			v2=ggb2.getValue('z2');
 			v3=ggb2.getValue('z3');
 			v4=ggb2.getValue('z4');
-			maior = maiorValor(v1,v2,v3,v4,pi,pj,pi+dx,pj+dy);
+			maior = maiorValor(v1,v2,v3,v4);
 			somaSuperior += dx*dy*maior;
 			testeEscala(maior);
 			if(superior)
-				ggb2.evalCommand(prisma);
+				ggb2.evalCommand('Prism(Polygon(('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+(pi+dx).toFixed(4)+','+pj.toFixed(4)+',0),('+(pi+dx).toFixed(4)+','+(pj+dy).toFixed(4)+',0),('+pi.toFixed(4)+','+(pj+dy).toFixed(4)+',0)),'+maior.toFixed(4)+')');
 		}
 	}
 	inserirSuperior(somaSuperior.toFixed(2));
@@ -255,42 +238,26 @@ function setValorM2(){
 	valorM.innerHTML = m;
 }
 
-function menorValor(v1,v2,v3,v4,pi,pj,dx,dy){
-	if(v1<v2 && v1<v3 && v1<v4){
-		prisma = 'Prism(('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+','+v1.toFixed(4)+'))';
+function menorValor(v1,v2,v3,v4){
+	if(v1<=v2 && v1<=v3 && v1<=v4)
 		return v1;
-	}
-	else if(v2<v1 && v2<v3 && v2<v4){
-		prisma = 'Prism(('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+','+v2.toFixed(4)+'))';
+	else if(v2<=v1 && v2<=v3 && v2<=v4)
 		return v2;
-	}
-	else if (v3<v1 && v3<v2 && v3<v4){
-		prisma = 'Prism(('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+','+v3.toFixed(4)+'))';
+	else if (v3<=v1 && v3<=v2 && v3<=v4)
 		return v3;
-	}
-	else{
-		prisma = 'Prism(('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+','+v4.toFixed(4)+'))';
+	else
 		return v4;
-	}
 }
 
-function maiorValor(v1,v2,v3,v4,pi,pj,dx,dy){
-	if(v1>v2 && v1>v3 && v1>v4){
-		prisma = 'Prism(('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+','+v1.toFixed(4)+'))';
+function maiorValor(v1,v2,v3,v4){
+	if(v1>=v2 && v1>=v3 && v1>=v4)
 		return v1;
-	}
-	else if(v2>v1 && v2>v3 && v2>v4){
-		prisma = 'Prism(('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+','+v2.toFixed(4)+'))';
+	else if(v2>=v1 && v2>=v3 && v2>=v4)
 		return v2;
-	}
-	else if(v3>v1 && v3>v2 && v3>v4){
-		prisma = 'Prism(('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+','+v3.toFixed(4)+'))';
+	else if(v3>=v1 && v3>=v2 && v3>=v4)
 		return v3;
-	}
-	else{
-		prisma = 'Prism(('+pi.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+pj.toFixed(4)+',0),('+dx.toFixed(4)+','+dy.toFixed(4)+',0),('+pi.toFixed(4)+','+dy.toFixed(4)+','+v4.toFixed(4)+'))';
+	else
 		return v4;
-	}
 }
 
 function testeEscala(valor){
@@ -343,5 +310,25 @@ function inserirSuperior(valor){
 		document.getElementById('vs3').innerHTML = document.getElementById('vs2').innerHTML;
 		document.getElementById('vs2').innerHTML = document.getElementById('vs1').innerHTML;
 		document.getElementById('vs1').innerHTML = valor;
+	}
+}
+
+function reiniciarTabela(funcao,xmin,xmax,ymin,ymax){
+	if(funcaoGlobal!=funcao || xmin!=gxmin || xmax!=gxmax || ymin!=gymin || ymax!=gymax){
+		document.getElementById('vi3').innerHTML = '--';
+		document.getElementById('vi2').innerHTML = '--';
+		document.getElementById('vs3').innerHTML = '--';
+		document.getElementById('vs2').innerHTML = '--';
+		document.getElementById('np3').innerHTML = '--';
+		document.getElementById('mp3').innerHTML  = '--';
+		document.getElementById('np2').innerHTML = '--';
+		document.getElementById('mp2').innerHTML  = '--';
+		funcaoGlobal = funcao;
+		tab1 = 1;
+		tab2 = 1;
+		gxmin=xmin;
+		gxmax=xmax;
+		gymin=ymin;
+		gymax=ymax;
 	}
 }
