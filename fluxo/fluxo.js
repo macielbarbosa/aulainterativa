@@ -1,4 +1,4 @@
-var param = {
+﻿var param = {
 	"id":"ggb",
 	"width":600,
 	"height":500,
@@ -30,6 +30,7 @@ function ggbOnInit(){
 	ggb.enableRightClick(false);
 	ggb.enableLabelDrags(false);
 	ggb.setCoordSystem(0,1,0,1,-1,1);
+	ggb.evalCommand('angulo='+document.getElementById('angulo').value+'°')
 	if(!ggbInit)
 		campo(1,1);
 }
