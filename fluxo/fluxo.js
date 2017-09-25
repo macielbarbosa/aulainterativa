@@ -29,7 +29,7 @@ function ggbOnInit(){
 	ggb = document.ggb;
 	ggb.enableRightClick(false);
 	ggb.enableLabelDrags(false);
-	ggb.setCoordSystem(0,1,0,1,-1,1);
+	ggb.setCoordSystem(0,1,-1,1,-1,1);
 	ggb.evalCommand('angulo='+document.getElementById('angulo').value+'°')
 	if(!ggbInit)
 		campo(1,1);
@@ -39,14 +39,14 @@ function campo(forca,area){
 	var i,j,k;
 	var d = area/(forca+1);
 	for(i=0; i<=area; i+=d){
-		for(j=0; j<=area; j+=d){
+		for(j=-area; j<=area; j+=d){
 			for(k=-area; k<=area; k++){
 				ggb.evalCommand('Translate(v,('+i.toFixed(2)+','+j.toFixed(2)+','+k.toFixed(2)+'))');
 			}
 		}
 	}
 	ggb.evalCommand('area='+area);
-	ggb.setCoordSystem(0,area,0,area,-area,area);
+	ggb.setCoordSystem(0,area,-area,area,-area,area);
 }
 
 function setAngulo(angulo){

@@ -70,10 +70,6 @@ div#vetores{
 	display: none;
 }
 
-#demo{
-	display: none;
-}
-
 .calculo{
 	margin-left: 10%;
 	font-size: 12pt;
@@ -91,10 +87,21 @@ div#vetores{
 	margin-top: 80px;
 }
 
-#escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3, #asteriscos{
+#demo, #escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3, #asteriscos{
 	display: none;
 }
 
 .fonte8 {font-size: 8pt}
 
 .inline-block {display: inline-block}
+
+.rodape {
+	background-color: #0A383F;
+	color: white;
+	margin-top: 60px;
+}
+
+footer img{
+	margin: 20px; 
+	height: 40px;
+}
