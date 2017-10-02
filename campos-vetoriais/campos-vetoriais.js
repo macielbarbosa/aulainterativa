@@ -51,6 +51,9 @@ function campo(tipo){
 		case 'radial':
 		radial();
 		break;
+		case 'ascendente':
+		ascendente();
+		break;
 	}
 	document.ggb.startAnimation();
 }
@@ -87,5 +90,13 @@ function radial(){
 		geogebra('Vector(Rotate((b1, 0),'+g+'°), Rotate((a1, 0),'+g+'°))');
 		geogebra('Vector(Rotate((b2, 0),'+g+'°), Rotate((a2, 0),'+g+'°))');
 	}
+	document.ggb.setAnimating('slider',true);
+}
+
+function ascendente(){
+	for(var i=-4; i<=4; i++)
+		for(var j=-5; j<=4; j+=2){
+			geogebra('Vector(('+i+','+j+'+slider),('+i+','+(j+1)+'+slider))');
+		}
 	document.ggb.setAnimating('slider',true);
 }
