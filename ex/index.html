@@ -56,16 +56,30 @@
                 <br><br>
                 <input type="number" id="a" value="0">
                 `&lt;t&lt;`
-                <input type="number" id="b" value="1">
+                <input type="number" id="b" value="3.14">
                 <br><br>
-                <p class="recuo">E h(x,y) a altura em cada ponto, sendo:</p>
+                <p class="recuo">E `h(x,y)` a altura em cada ponto de `f`, formando o caminho `C`, sendo:</p>
                 `h(x,y)=`
                 <input type="text" id="hxy" value="x+y">
+                <input type="checkbox" onchange="exibirH(this.checked)">
+                exibir
                 <br><br>
                 <button onclick="show()">OK</button>
+                <br><br><br>
+                A área `A` é a integral de linha da curva `C` ao longo de `h(x,y)`, em que:
+                <br><br>
+                `A=int_Ch(x,y)ds=int_(t_0)^th(x(t),y(t))sqrt(((dx)/(dt))^2+((dy)/(dt))^2)dt`<br><br><br>
+                <span id="area">`A=23.12`</span>
+                <br><br>
             </div>
             <div class="col-sm-6">
                 <div id="applet_container"></div>
+                <div class="legenda">
+                    <div><img src="../imagens/curva-f.png" height="15"><b class="fonte8"> `f(x(t),y(t))`</b></div>
+                    <div><img src="../imagens/curva-c.png" height="15"><b class="fonte8"> Curva `C` ao longo de `h(x,y)`</b></div>
+                    <div><img src="../imagens/area-a.png" height="15"><b class="fonte8"> Área `A`</b></div>
+                </div>
+                <br>
                 <img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
                 <img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
             </div>
