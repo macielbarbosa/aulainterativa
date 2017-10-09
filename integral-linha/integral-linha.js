@@ -22,7 +22,7 @@ var ggbInit = false;
 
 window.onload = function() {
 	applet.inject('applet_container','preferHTML5');
-	document.getElementById('xt').value = '4+cos(t)'
+	document.getElementById('xt').value = '4+3*cos(t)'
 	document.getElementById('yt').value = '4+sin(-t)'
 	document.getElementById('a').value = '0'
 	document.getElementById('b').value = '3.14'
