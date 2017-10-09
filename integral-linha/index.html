@@ -5,7 +5,7 @@
     <title>Integral de linha</title>
     <link rel="stylesheet" type="text/css" href="../css/estilo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="ex.css">
+    <link rel="stylesheet" type="text/css" href="integral-linha.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="http://www.geogebra.org/scripts/deployggb.js"></script>
-    <script src="ex.js"></script>
+    <script src="integral-linha.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../css/template.css">
@@ -46,7 +46,7 @@
         <br>
         <div class="row" align="middle">
             <div class="col-sm-6">
-                <p class="recuo">Seja `f(x(t),y(t))` uma curva parametrizada, tal que:</p>
+                <p class="recuo">Seja `vec(f)(t)=(x(t),y(t))` uma curva `C` parametrizada no plano `RR^2`, tal que:</p>
                 <br>
                 `x(t)=`
                 <input type="text" id="xt" value="4+3*cos(t)">
@@ -58,15 +58,15 @@
                 `&lt;=t&lt;=`
                 <input type="number" id="b" value="3.14">
                 <br><br>
-                <p class="recuo">E `h(x,y)` a altura em cada ponto de `f`, formando o caminho `C`, sendo:</p>
+                <p class="recuo">E `h(x,y)` uma função escalar de duas variáveis, sendo:</p>
                 `h(x,y)=`
                 <input type="text" id="hxy" value="x+y">
                 <input type="checkbox" onchange="exibirH(this.checked)">
-                exibir
+                exibir `h`
                 <br><br>
                 <button onclick="show()">OK</button>
                 <br><br><br>
-                A área `A` é a integral de linha da curva `C` ao longo de `h(x,y)`, em que:
+                A área `A` é a integral de linha da `h(x,y)` ao longo da curva `C`, em que:
                 <br><br>
                 `A=int_Ch(x,y)ds=int_(t_0)^th(x(t),y(t))sqrt(((dx)/(dt))^2+((dy)/(dt))^2)dt`<br><br><br>
                 <span id="area">`A=23.12`</span>
@@ -75,7 +75,7 @@
             <div class="col-sm-6">
                 <div id="applet_container"></div>
                 <div class="legenda">
-                    <div><img src="../imagens/curva-f.png" height="15"><b class="fonte8"> `f(x(t),y(t))`</b></div>
+                    <div><img src="../imagens/curva-f.png" height="15"><b class="fonte8"> `C: vec(f)(t)=(x(t),y(t))`</b></div>
                     <div><img src="../imagens/curva-c.png" height="15"><b class="fonte8"> Curva `C` ao longo de `h(x,y)`</b></div>
                     <div><img src="../imagens/area-a.png" height="15"><b class="fonte8"> Área `A`</b></div>
                 </div>
