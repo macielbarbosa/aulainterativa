@@ -5,8 +5,23 @@
 	src: url(../fontes/chawp.otf);
 }
 
-body{
-	font-family: Arial, Sans-serif;
+html {
+  	height: 100%;
+  	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  	box-sizing: inherit;
+}
+
+body {
+  	position: relative;
+  	margin: 0;
+  	padding-bottom: 150px;
+  	min-height: 100%;
+  	font-family: Arial, Sans-serif;
 	font-size: 15px;
 }
 
@@ -96,9 +111,13 @@ div#vetores{
 .inline-block {display: inline-block}
 
 .rodape {
+  	position: absolute;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+   	width: 100%;
 	background-color: #0A383F;
 	color: white;
-	margin-top: 60px;
 }
 
 footer img{
