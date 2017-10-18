@@ -48,17 +48,19 @@
             <div id="form" class="col-sm-5">
                 Escolha o campo:
                 <select onchange="campo(this.value)">
-                    <option value="circular" selected>Circular</option>
+                    <option value="rotacional" selected>Rotacional</option>
                     <option value="expansivo">Expansivo</option>
                     <option value="contratil">Contrátil</option>
                     <option value="uniforme">Uniforme</option>
                 </select>
                 <br><br><br>
-                <p class='recuo'>Para o campo vetorial <span id="campo">rotacional</span>, temos:</p>
-                `gradxxvecF!=vec0`
-                <br><br>
-                <p class="recuo">Ou seja,</p>
-                `rot(vecF)!=vec0`
+                <div id="textoCampo">
+                    <p class='recuo'>Para o campo vetorial rotacional, temos:</p>
+                    `gradxxvecF!=vec0`
+                    <br><br>
+                    <p class="recuo">Ou seja,</p>
+                    `rot(vecF)!=vec0`
+                </div>
             </div>
             <div class="col-sm-7 center">
                 <div id="applet_container"></div>

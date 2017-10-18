@@ -27,7 +27,7 @@ window.onload = function() {
 function ggbOnInit(){
 	document.ggb.setCoordSystem(-4,4,-4,4);
 	if(!ggbInit){
-		campo('circular');
+		campo('rotacional');
 		ggbInit = true;
 	}
 }
@@ -37,28 +37,34 @@ function geogebra(comando){
 }
 
 function campo(tipo){
+	var textoCampo = document.getElementById('textoCampo');
 	if(ggbInit)
 		document.ggb.reset();
-	document.ggb.setAnimating('angulo',false);
+	document.ggb.setAnimating('angulo',false); 
 	document.ggb.setAnimating('slider',false);
 	switch(tipo){
-		case 'circular':
-		circular();
+		case 'rotacional':
+		rotacional();
+		textoCampo.innerHTML = "<p class='recuo'>Para o campo vetorial rotacional, temos:</p>`gradxxvecF!=vec0`<br><br><p class='recuo'>Ou seja,</p>`rot(vecF)!=vec0`";
 		break;
 		case 'expansivo':
 		expansivo();
+		textoCampo.innerHTML = "<p class='recuo'>Para o campo vetorial expansivo, temos:</p>`gradxxvecF=vec0` (irrotacional)<br><br>`\"div\"(F)>0`<br><br><p class='recuo'>Ou seja, tem fonte para qualquer ponto do `RR^2`.</p>";
 		break;
 		case 'contratil':
 		contratil();
+		textoCampo.innerHTML = "<p class='recuo'>Para o campo vetorial contrátil, temos:</p>`gradxxvecF=vec0` (irrotacional)<br><br>`\"div\"(F)<0`<br><br><p class='recuo'>Ou seja, tem sumidouro para qualquer ponto do `RR^2`.</p>";
 		break;
 		case 'uniforme':
 		uniforme();
+		textoCampo.innerHTML = "<p class='recuo'>Para o campo vetorial contrátil, temos:</p>`gradxxvecF=vec0` (irrotacional)<br><br>`\"div\"(F)=0`<br><br><p class='recuo'>Ou seja, não tem fonte nem sumidouro.</p>";
 		break;
 	}
 	document.ggb.startAnimation();
+	MathJax.Hub.Typeset(); //atualizar notacao asciimath
 }
 
-function circular(){
+function rotacional(){
 	sequenceRotate('P1',45);
 	sequenceRotate('P2',30);
 	sequenceRotate('P3',20);
