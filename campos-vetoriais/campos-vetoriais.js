@@ -48,11 +48,11 @@ function campo(tipo){
 		case 'expansivo':
 		expansivo();
 		break;
-		case 'radial':
-		radial();
+		case 'contratil':
+		contratil();
 		break;
-		case 'ascendente':
-		ascendente();
+		case 'uniforme':
+		uniforme();
 		break;
 	}
 	document.ggb.startAnimation();
@@ -76,24 +76,24 @@ function sequenceRotate(ponto,graus){
 function expansivo(){
 	geogebra('b0 = slider');
 	for(var g=0; g<360; g+=30){
-		geogebra('If(b0 < 1, Vector((0, 0), Rotate((b0, 0),'+g+'°)), Vector(Rotate((a0, 0),'+g+'°), Rotate((b0, 0),'+g+'°)))');
-		geogebra('Vector(Rotate((a1, 0),'+g+'°), Rotate((b1, 0),'+g+'°))');
-		geogebra('Vector(Rotate((a2, 0),'+g+'°), Rotate((b2, 0),'+g+'°))');
+		geogebra('If(b0 < 1, Vector((0, 0), Rotate((b0*1.2, 0),'+g+'°)), Vector(Rotate((a0, 0),'+g+'°), Rotate((b0*1.2, 0),'+g+'°)))');
+		geogebra('Vector(Rotate((a1, 0),'+g+'°), Rotate((b1*1.2, 0),'+g+'°))');
+		geogebra('Vector(Rotate((a2, 0),'+g+'°), Rotate((b2*1.2, 0),'+g+'°))');
 	}
 	document.ggb.setAnimating('slider',true);
 }
 
-function radial(){
+function contratil(){
 	geogebra('b0 = 2-slider');
 	for(var g=0; g<360; g+=30){
-		geogebra('If(b0 < 1, Vector(Rotate((b0, 0),'+g+'°),(0, 0)), Vector(Rotate((b0, 0),'+g+'°), Rotate((a0, 0),'+g+'°)))');
-		geogebra('Vector(Rotate((b1, 0),'+g+'°), Rotate((a1, 0),'+g+'°))');
-		geogebra('Vector(Rotate((b2, 0),'+g+'°), Rotate((a2, 0),'+g+'°))');
+		geogebra('If(b0 < 1, Vector(Rotate((b0*1.2, 0),'+g+'°),(0, 0)), Vector(Rotate((b0*1.2, 0),'+g+'°), Rotate((a0, 0),'+g+'°)))');
+		geogebra('Vector(Rotate((b1*1.2, 0),'+g+'°), Rotate((a1, 0),'+g+'°))');
+		geogebra('Vector(Rotate((b2*1.2, 0),'+g+'°), Rotate((a2, 0),'+g+'°))');
 	}
 	document.ggb.setAnimating('slider',true);
 }
 
-function ascendente(){
+function uniforme(){
 	for(var i=-4; i<=4; i++)
 		for(var j=-5; j<=4; j+=2){
 			geogebra('Vector(('+i+','+j+'+slider),('+i+','+(j+1)+'+slider))');

@@ -44,16 +44,25 @@
     <div class="container">
         <h1>Campos vetoriais em movimento</h1>
         <br>
-        <div class="row" align="middle">
-            Escolha o campo:
-            <select onchange="campo(this.value)">
-                <option value="circular" selected>Circular</option>
-                <option value="expansivo">Expansivo</option>
-                <option value="radial">Radial</option>
-                <option value="ascendente">Ascendente</option>
-            </select>
-            <br><br>
-            <div id="applet_container"></div>
+        <div class="row" align="center">
+            <div id="form" class="col-sm-5">
+                Escolha o campo:
+                <select onchange="campo(this.value)">
+                    <option value="circular" selected>Circular</option>
+                    <option value="expansivo">Expansivo</option>
+                    <option value="contratil">Contrátil</option>
+                    <option value="uniforme">Uniforme</option>
+                </select>
+                <br><br><br>
+                <p class='recuo'>Para o campo vetorial <span id="campo">rotacional</span>, temos:</p>
+                `gradxxvecF!=vec0`
+                <br><br>
+                <p class="recuo">Ou seja,</p>
+                `rot(vecF)!=vec0`
+            </div>
+            <div class="col-sm-7 center">
+                <div id="applet_container"></div>
+            </div>
         </div>
     </div>
     <footer class="text-center rodape">
