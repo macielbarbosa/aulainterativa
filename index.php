@@ -178,10 +178,9 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-sm-2"></div>
     <div class="col-sm-4" align="middle">
       <a href="campo-vetorial" class="thumbnail">
-        <img src="imagens/icon-campos-vetoriais.png">
+        <img src="imagens/icon-campo-vetorial.png">
       </a>
       <a href="campo-vetorial">
         <h4>Campo vetorial em movimento</h4>
@@ -195,8 +194,15 @@
         <h4>Integral de linha</h4>
       </a>
     </div>
+    <div class="col-sm-4" align="middle">
+      <a href="campo-eletrico" class="thumbnail">
+        <img src="imagens/icon-campo-eletrico.PNG">
+      </a>
+      <a href="campo-eletrico">
+        <h4>Campo elétrico de um dipolo</h4>
+      </a>
+    </div>
   </div>
-  <div class="col-sm-2"></div>
 </div>
 
 <div id="contato" class="container-fluid bg-grey">
