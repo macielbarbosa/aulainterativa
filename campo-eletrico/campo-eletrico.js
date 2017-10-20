@@ -25,10 +25,9 @@ window.onload = function() {
 }
 
 function ggbOnInit(){
-	//document.ggb.setCoordSystem(-8,8,-8,8);
 	if(!ggbInit){
-		campo('pn');
 		ggbInit = true;
+		campo('pn');
 	}
 }
 
