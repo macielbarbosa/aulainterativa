@@ -45,6 +45,13 @@
         <h1>Campo elétrico de um dipolo</h1>
         <br>
         <div class="row" align="center">
+            Dipolo: 
+            <select onchange="campo(this.value)">
+                <option value="pn" selected> positivo/negativo </option>
+                <option value="pp"> positivo/positivo </option>
+                <option value="nn"> negativo/negativo </option>
+            </select>
+            <br><br>
             <div id="applet_container"></div>
         </div>
     </div>
