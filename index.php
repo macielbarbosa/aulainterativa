@@ -4,6 +4,7 @@
   <meta content= "Aula Interativa é um projeto da Escola de Ciências e Tecnologia da UFRN que visa descomplicar o Cálculo e a Álgebra Linear através de gráficos dinâmicos." name="description">
   <title>Aula Interativa</title>
   <meta charset="utf-8">
+  <link rel="icon" href="../icon/favicon.ico"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -200,6 +201,17 @@
       </a>
       <a href="campo-eletrico">
         <h4>Campo elétrico de um dipolo</h4>
+      </a>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-4" align="middle">
+      <a href="super-parametrica" class="thumbnail">
+        <img src="imagens/icon-super-parametrica.png">
+      </a>
+      <a href="super-parametrica">
+        <h4>Superfícies Paramétricas</h4>
       </a>
     </div>
   </div>
