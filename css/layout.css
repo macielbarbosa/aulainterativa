@@ -1,0 +1,57 @@
+/* BASIC LAYOUT CSS */
+
+@charset "UTF-8";
+
+@font-face{
+	font-family: 'chawp';
+	font-style: normal;
+	src: url(../fontes/chawp.otf);
+}
+
+*,
+*:before,
+*:after {
+  	box-sizing: inherit;
+}
+
+html {
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.navbar {
+	margin-bottom: 0;
+    background-color: #0A383F;
+	border: 0;
+	font-size: 12px !important;
+    letter-spacing: 4px;
+	border-radius: 0;
+	font-family: Montserrat, sans-serif;
+}
+
+.navbar-brand{
+	font-family: chawp;
+	color: white !important;
+}
+
+.navbar li a{
+	color: white !important;
+}
+.navbar li a:hover{
+	background-color: white !important;
+    color: #0A383F !important;
+}
+
+footer {
+	font-family: Montserrat, sans-serif;
+	font-size: 12px !important;
+	position: relative;
+	width: 100%;
+  	background-color: #0A383F;
+  	color: white;
+}
+
+footer img{
+  margin: 20px; 
+  height: 40px;
+}
