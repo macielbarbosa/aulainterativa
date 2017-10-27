@@ -45,14 +45,32 @@
         <h1>Campo elétrico de um dipolo</h1>
         <br>
         <div class="row" align="center">
-            Dipolo: 
-            <select onchange="campo(this.value)">
-                <option value="pn" selected> positivo/negativo </option>
-                <option value="pp"> positivo/positivo </option>
-                <option value="nn"> negativo/negativo </option>
-            </select>
+            <div id="dipolo">
+                Dipolo: 
+                <select onchange="campo()">
+                    <option value="pn" selected> positivo/negativo </option>
+                    <option value="pp"> positivo/positivo </option>
+                    <option value="nn"> negativo/negativo </option>
+                </select>
+            </div>
+            <div id="size">
+                `q2=`
+                <input onchange="campo()" id="sizeq2" type="number" name="q2" value="1" min="1" max="3">
+                `xxq1`
+            </div>
+            <form id="visualizacao" onchange="visualizacao(tipo.value)">
+                <input id="radioTipo" type="radio" name="tipo" value="campo-vetorial" checked>
+                <span>Campo vetorial</span>
+                <input type="radio" name="tipo" value="linhas-campo">
+                <span>Linhas de campo</span>
+            </form>
+            <input onchange="campo()" id="densidade" type="checkbox" checked> Alta densidade
             <br><br>
             <div id="applet_container"></div>
+            <img src="../imagens/square-red.png">
+            <span class="red"> Positivo </span>
+            <img id="square-black" src="../imagens/square-black.png">
+            <span> Negativo </span>
         </div>
     </div>
     <footer class="text-center rodape">

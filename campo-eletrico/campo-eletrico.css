@@ -1,0 +1,27 @@
+.red{
+	color: red;
+}
+#square-black{
+	margin-left: 10px;
+}
+input[type="radio"]{
+	margin-left: 10px !important;
+}
+form{
+	display: inline-block;
+}
+input[type="number"] {
+   width:40px;
+}
+#dipolo, #size{
+	display: inline-block;
+	margin-right: 10px;
+}
+
+input[type="checkbox"] {
+   margin-left: 10px !important;
+}
+
+#visualizacao{
+	display: none;
+}
