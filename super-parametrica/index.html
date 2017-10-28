@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Superfície Paramétrica</title>
-	<link rel="icon" href="../icon/favicon.ico"/>
+	<link rel="icon" href="../icon/favicon.ico" />
 
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
@@ -89,17 +89,27 @@
 				</div>
 				<br>
 				<div class="row">
-					<button type="button" class="btn btn-primary" onclick="createGraph();">OK</button>
+					<div class="col-sm-6" align="right">
+						<button type="button" class="btn btn-primary" onclick="createGraph();">OK</button>
+					</div>
+					<div class="col-sm-6" align="left">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="showLines">Mostrar linhas</label>
+						</div>
+					</div>
 				</div>
 				<br>
 				<div class="row">
-					<p class="recuo equacoes">A área `A` é a integral de `||(delr(u,v))/(delu)xx(delr(u,v))/(delv)||dvdu` por toda a superfície paramétrica `S`, em que:</p>
+					<p class="recuo equacoes">A área `A` é a integral de `||(delr(u,v))/(delu)xx(delr(u,v))/(delv)||dvdu` por toda a superfície paramétrica `S`, em
+						que:
+					</p>
 					<p class="recuo equacoes">`A=int_SdA=int_(u_i)^(u_f) int_(v_i)^(v_f) ||(delr(u,v))/(delu)xx(delr(u,v))/(delv)||dvdu`</p>
 					<br>
 					<span id="area"></span>
 				</div>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-6" id="fullScreenTarget">
 				<div class="btn-group btn-group-justified">
 					<a class="btn btn-primary" onclick="cilindro();">Cilindro</a>
 					<a class="btn btn-primary" onclick="mobius();">Fita de Mobius</a>
@@ -113,7 +123,7 @@
 						<label>`u:`</label>
 					</div>
 					<div class="col-sm-11">
-						<input type="range" min="10" max="210" value="0" class="slider" id="uPos">
+						<input type="range" min="0" max="100" value="0" class="slider" id="uPos">
 					</div>
 				</div>
 			</div>
@@ -127,13 +137,14 @@
 	</footer>
 
 	<!-- MATHJAX JS -->
-	<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 	<!-- BOOTSTRAP JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- Three JS -->
 	<script src='js/three.min.js'></script>
 	<script src='js/OrbitControls.js'></script>
+	<script src='js/ParametricGeometries.js'></script>
 	<!-- Nerdamer JS -->
 	<script src="nerdamer/nerdamer.core.js"></script>
 	<script src="nerdamer/Calculus.js"></script>

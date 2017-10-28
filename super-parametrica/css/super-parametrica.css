@@ -10,14 +10,16 @@ input{
 
 input[type="text"] {
 	width:70% !important;
- }
+}
 
 input[type="text"].small {
 	width:30% !important;
 }
+
 p{
 	text-align: justify;
 }
+
 p.recuo{
 	text-indent: 40px;
 	font-size: 15px;
@@ -29,6 +31,10 @@ span#area{
 	border: 1px solid gray;
 	padding: 10px 25px;
 	border-radius: 5px; 
+}
+
+#canvas-container {
+    display: block; /* fix necessary to remove space at bottom of canvas */
 }
 
 /* SLIDER */

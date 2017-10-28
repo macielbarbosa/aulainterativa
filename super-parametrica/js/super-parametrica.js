@@ -2,7 +2,6 @@
 let canvas_container, scene, camera, renderer, controls, stats;
 let clock = new THREE.Clock();
 let SCREEN_WIDTH = $('#canvas-container').width(), SCREEN_HEIGHT = 450;
-let resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
 // CUSTOM GLOBAL VARIABLES
 let xFuncText, yFuncText, zFuncText,
@@ -50,7 +49,7 @@ function init() {
 	scene.fog = new THREE.FogExp2(0x888888, 0.005);
 
 	//  CUSTOM
-	let radius = 0.3;
+	let radius = 0.2;
 	let length = 30;
 	let xLine = function (u0, v0) {
 		return new THREE.Vector3(length * v0, radius * Math.cos(2 * Math.PI * u0), radius * Math.sin(2 * Math.PI * u0));
@@ -78,6 +77,11 @@ function init() {
 	gridHelper1.position.z = -0.05;
 	gridHelper1.rotation.x = Math.PI / 2;
 	scene.add(gridHelper1);
+
+	//TEST AREA
+
+	//
+
 	createGraph();
 }
 
@@ -95,6 +99,8 @@ function createGraph() {
 	uMax = nerdamer($('#uMax').val()).evaluate().valueOf();
 	vMin = nerdamer($('#vMin').val()).evaluate().valueOf();
 	vMax = nerdamer($('#vMax').val()).evaluate().valueOf();
+	uFixed = (uMin + uMax) / 2;
+	vFixed = (vMin + vMax) / 2;
 	uRange = uMax - uMin;
 	vRange = vMax - vMin;
 	xFunc = nerdamer(xFuncText).buildFunction(['u', 'v']);
@@ -130,8 +136,8 @@ function createGraph() {
 	scene.add(graphMesh);
 
 	contantUV();
-
-	triedroFrenet(10/100);
+	
+	triedroFrenet($('#uPos').val()/100);
 
 	calculateArea();
 }
@@ -143,42 +149,47 @@ function contantUV() {
 	/////////////
 	//U CONSTANTE
 	/////////////
-	uFixed = (uMin + uMax) / 2;
-	let uFunction = function () {
-		THREE.Curve.call(this);
+	if ($('#showLines').is(':checked')) {
+		let uFunction = function () {
+			THREE.Curve.call(this);
+		}
+		uFunction.prototype = Object.create(THREE.Curve.prototype);
+		uFunction.prototype.constructor = uFunction;
+		uFunction.prototype.getPoint = function (t) {
+			let vt = vMin + t * vRange;
+			return new THREE.Vector3(xFunc(uFixed, vt), yFunc(uFixed, vt), zFunc(uFixed, vt));
+		};
+		let uGeometry = new THREE.ParametricGeometries.TubeGeometry(new uFunction(), 64, 0.1, 8, true);
+		let uMaterial = new THREE.MeshBasicMaterial({ color: 0x0077c1 });
+		uMesh = new THREE.Mesh(uGeometry, uMaterial);
+		scene.add(uMesh);
+		/////////////
+		//V CONSTANTE
+		/////////////
+
+		let vFunction = function () {
+			THREE.Curve.call(this);
+		}
+		vFunction.prototype = Object.create(THREE.Curve.prototype);
+		vFunction.prototype.constructor = vFunction;
+		vFunction.prototype.getPoint = function (t) {
+			let ut = uMin + t * uRange;
+			return new THREE.Vector3(xFunc(ut, vFixed), yFunc(ut, vFixed), zFunc(ut, vFixed));
+		};
+		let vGeometry = new THREE.ParametricGeometries.TubeGeometry(new vFunction(), 64, 0.1, 8, true);
+		let vMaterial = new THREE.MeshBasicMaterial({ color: 0x7A4875 });
+		vMesh = new THREE.Mesh(vGeometry, vMaterial);
+		scene.add(vMesh);
 	}
-	uFunction.prototype = Object.create(THREE.Curve.prototype);
-	uFunction.prototype.constructor = uFunction;
-	uFunction.prototype.getPoint = function (t) {
-		let vt = vMin + t * vRange;
-		return new THREE.Vector3(xFunc(uFixed, vt), yFunc(uFixed, vt), zFunc(uFixed, vt));
-	};
-	let uGeometry = new THREE.TubeGeometry(new uFunction(), 64, 0.1, 8, true);
-	let uMaterial = new THREE.MeshBasicMaterial({ color: 0x0077c1 });
-	uMesh = new THREE.Mesh(uGeometry, uMaterial);
-	scene.add(uMesh);
-	/////////////
-	//V CONSTANTE
-	/////////////
-	vFixed = (vMin + vMax) / 2;
-	let vFunction = function () {
-		THREE.Curve.call(this);
-	}
-	vFunction.prototype = Object.create(THREE.Curve.prototype);
-	vFunction.prototype.constructor = vFunction;
-	vFunction.prototype.getPoint = function (t) {
-		let ut = uMin + t * uRange;
-		return new THREE.Vector3(xFunc(ut, vFixed), yFunc(ut, vFixed), zFunc(ut, vFixed));
-	};
-	let vGeometry = new THREE.TubeGeometry(new vFunction(), 64, 0.1, 8, true);
-	let vMaterial = new THREE.MeshBasicMaterial({ color: 0x7A4875 });
-	vMesh = new THREE.Mesh(vGeometry, vMaterial);
-	scene.add(vMesh);
 }
-var slider = document.getElementById("uPos");
-slider.oninput = function () {
+
+$('#uPos').on('input', function () {
 	triedroFrenet(this.value / 100);
-}
+});
+
+$('#showLines').on('change', function () {
+	contantUV();
+});
 
 function triedroFrenet(t) {
 
@@ -210,9 +221,9 @@ function triedroFrenet(t) {
 	let nDir = new THREE.Vector3(dxv(ut, vFixed), dyv(ut, vFixed), dzv(ut, vFixed)).setLength(5);
 	let bDir = cross(vDir, nDir).setLength(5);
 
-	let vGeometry = new THREE.TubeGeometry(new line3D(pos, vDir), 64, 0.1, 8, true);
-	let nGeometry = new THREE.TubeGeometry(new line3D(pos, nDir), 64, 0.1, 8, true);
-	let bGeometry = new THREE.TubeGeometry(new line3D(pos, bDir), 64, 0.1, 8, true);
+	let vGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, vDir), 64, 0.1, 8, true);
+	let nGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, nDir), 64, 0.1, 8, true);
+	let bGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, bDir), 64, 0.1, 8, true);
 
 	vLine = new THREE.Mesh(vGeometry, vMaterial);
 	nLine = new THREE.Mesh(nGeometry, nMaterial);
@@ -286,12 +297,6 @@ function boole2D(f, a, b, c, d) {
 			7 * f(a + 4 * du, c + 4 * dv)))) / 2025;
 }
 
-function resetCamera() {
-	camera.position.set(20, 20, 30);
-	camera.up = new THREE.Vector3(0, 0, 1);
-	camera.lookAt(new THREE.Vector3(0, 0, 0));
-}
-
 function cilindro() {
 	$("#xFuncText").val("5*cos(u)");
 	$("#yFuncText").val("5*sin(u)");
@@ -342,11 +347,16 @@ function update() {
 	controls.update();
 }
 
-window.addEventListener('resize', function () {
-	resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
+function resetCamera() {
+	camera.position.set(20, 20, 30);
+	camera.up = new THREE.Vector3(0, 0, 1);
+	camera.lookAt(new THREE.Vector3(0, 0, 0));
+}
+
+$(window).on('resize', function () {
 	renderer.setSize($('#canvas-container').width(), SCREEN_HEIGHT);
-	camera.aspect = $('#canvas-container').width() / SCREEN_HEIGHT;;
+	camera.aspect = $('#canvas-container').width() / SCREEN_HEIGHT;
 	camera.updateProjectionMatrix();
 	resetCamera();
 	createControls();
-}, false);
+});
