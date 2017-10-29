@@ -8,11 +8,15 @@ input{
 	text-align: center;
 }
 
-input[type="text"] {
+input.large {
 	width:70% !important;
 }
 
-input[type="text"].small {
+input.medium {
+	width:50% !important;
+}
+
+input.small {
 	width:30% !important;
 }
 
@@ -28,9 +32,11 @@ p.recuo{
 .inline-block {display: inline-block}
 
 span#area{
-	border: 1px solid gray;
+	width: auto;
+	height: auto;
 	padding: 10px 25px;
-	border-radius: 5px; 
+	border: 1px solid gray;
+	border-radius: 5px;
 }
 
 #canvas-container {

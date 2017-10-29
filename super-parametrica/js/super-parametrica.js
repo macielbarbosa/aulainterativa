@@ -1,7 +1,7 @@
-// STANDART GLOBAL letIABLES
+// STANDART GLOBAL VARIABLES
 let canvas_container, scene, camera, renderer, controls, stats;
 let clock = new THREE.Clock();
-let SCREEN_WIDTH = $('#canvas-container').width(), SCREEN_HEIGHT = 450;
+let SCREEN_WIDTH = $("#canvas-container").width(), SCREEN_HEIGHT = 500;
 
 // CUSTOM GLOBAL VARIABLES
 let xFuncText, yFuncText, zFuncText,
@@ -9,8 +9,7 @@ let xFuncText, yFuncText, zFuncText,
 	uMin, uMax, uRange = uMax - uMin,
 	vMin, vMax, vRange = vMax - vMin,
 	xFunc, yFunc, zFunc,
-	uFixed, vFixed,
-	segments = 40;
+	uFixed, vFixed;
 
 let graphMesh,
 	uMesh,
@@ -22,7 +21,7 @@ animate();
 
 function init() {
 
-	canvas_container = document.getElementById('canvas-container');
+	canvas_container = document.getElementById("canvas-container");
 
 	let VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.01, FAR = 1000;
 
@@ -48,7 +47,7 @@ function init() {
 	// SKYBOX/FOG
 	scene.fog = new THREE.FogExp2(0x888888, 0.005);
 
-	//  CUSTOM
+	// AXIS
 	let radius = 0.2;
 	let length = 30;
 	let xLine = function (u0, v0) {
@@ -73,45 +72,50 @@ function init() {
 	let zAxes = new THREE.Mesh(zgeometry, zmaterial);
 	scene.add(zAxes);
 
+	// GRID 
 	let gridHelper1 = new THREE.GridHelper(200, 200 / 5, 0x000000, 0x969593);
 	gridHelper1.position.z = -0.05;
 	gridHelper1.rotation.x = Math.PI / 2;
 	scene.add(gridHelper1);
 
-	//TEST AREA
+	// TEST AREA
 
 	//
 
-	createGraph();
+	processPage();
 }
 
-function createControls() {
-	controls = new THREE.OrbitControls(camera, renderer.domElement);
-	controls.enableKeys = false;
-	controls.zoomSpeed = 1.5;
+function processPage() {
+	createGraph();
+
+	contantUV();
+
+	triedroFrenet($("#uPos").val() / 100);
+
+	calculateArea();
 }
 
 function createGraph() {
-	xFuncText = $('#xFuncText').val();
-	yFuncText = $('#yFuncText').val();
-	zFuncText = $('#zFuncText').val();
-	uMin = nerdamer($('#uMin').val()).evaluate().valueOf();
-	uMax = nerdamer($('#uMax').val()).evaluate().valueOf();
-	vMin = nerdamer($('#vMin').val()).evaluate().valueOf();
-	vMax = nerdamer($('#vMax').val()).evaluate().valueOf();
+	xFuncText = $("#xFuncText").val();
+	yFuncText = $("#yFuncText").val();
+	zFuncText = $("#zFuncText").val();
+	uMin = nerdamer($("#uMin").val()).evaluate().valueOf();
+	uMax = nerdamer($("#uMax").val()).evaluate().valueOf();
+	vMin = nerdamer($("#vMin").val()).evaluate().valueOf();
+	vMax = nerdamer($("#vMax").val()).evaluate().valueOf();
 	uFixed = (uMin + uMax) / 2;
 	vFixed = (vMin + vMax) / 2;
 	uRange = uMax - uMin;
 	vRange = vMax - vMin;
-	xFunc = nerdamer(xFuncText).buildFunction(['u', 'v']);
-	yFunc = nerdamer(yFuncText).buildFunction(['u', 'v']);
-	zFunc = nerdamer(zFuncText).buildFunction(['u', 'v']);
-	dxu = nerdamer.diff(xFuncText, 'u').buildFunction(['u', 'v']);
-	dyu = nerdamer.diff(yFuncText, 'u').buildFunction(['u', 'v']);
-	dzu = nerdamer.diff(zFuncText, 'u').buildFunction(['u', 'v']);
-	dxv = nerdamer.diff(xFuncText, 'v').buildFunction(['u', 'v']);
-	dyv = nerdamer.diff(yFuncText, 'v').buildFunction(['u', 'v']);
-	dzv = nerdamer.diff(zFuncText, 'v').buildFunction(['u', 'v']);
+	xFunc = nerdamer(xFuncText).buildFunction(["u", "v"]);
+	yFunc = nerdamer(yFuncText).buildFunction(["u", "v"]);
+	zFunc = nerdamer(zFuncText).buildFunction(["u", "v"]);
+	dxu = nerdamer.diff(xFuncText, "u").buildFunction(["u", "v"]);
+	dyu = nerdamer.diff(yFuncText, "u").buildFunction(["u", "v"]);
+	dzu = nerdamer.diff(zFuncText, "u").buildFunction(["u", "v"]);
+	dxv = nerdamer.diff(xFuncText, "v").buildFunction(["u", "v"]);
+	dyv = nerdamer.diff(yFuncText, "v").buildFunction(["u", "v"]);
+	dzv = nerdamer.diff(zFuncText, "v").buildFunction(["u", "v"]);
 
 	let meshFunction = function (u0, v0) {
 		let u = uRange * u0 + uMin;
@@ -121,25 +125,19 @@ function createGraph() {
 		let z = zFunc(u, v);
 		return new THREE.Vector3(x, y, z);
 	}
-	let graphGeometry = new THREE.ParametricBufferGeometry(meshFunction, segments, segments);
+	let graphGeometry = new THREE.ParametricBufferGeometry(meshFunction, 64, 64);
 
 	if (graphMesh) { scene.remove(graphMesh); }
 
-	let graphTexture = new THREE.TextureLoader().load('./imagens/square.png');
+	let graphTexture = new THREE.TextureLoader().load("../imagens/square.png");
 	graphTexture.wrapS = graphTexture.wrapT = THREE.RepeatWrapping;
-	graphTexture.repeat.set(segments / 2, segments / 2);
+	graphTexture.repeat.set(32, 32);
 
 	let graphMaterial = new THREE.MeshBasicMaterial({ map: graphTexture, color: 0xe19c24, side: THREE.DoubleSide });
 
 	graphMesh = new THREE.Mesh(graphGeometry, graphMaterial);
 
 	scene.add(graphMesh);
-
-	contantUV();
-	
-	triedroFrenet($('#uPos').val()/100);
-
-	calculateArea();
 }
 
 function contantUV() {
@@ -149,7 +147,7 @@ function contantUV() {
 	/////////////
 	//U CONSTANTE
 	/////////////
-	if ($('#showLines').is(':checked')) {
+	if ($("#showLines").is(":checked")) {
 		let uFunction = function () {
 			THREE.Curve.call(this);
 		}
@@ -182,14 +180,6 @@ function contantUV() {
 		scene.add(vMesh);
 	}
 }
-
-$('#uPos').on('input', function () {
-	triedroFrenet(this.value / 100);
-});
-
-$('#showLines').on('change', function () {
-	contantUV();
-});
 
 function triedroFrenet(t) {
 
@@ -252,8 +242,8 @@ function calculateArea() {
 			at += boole2D(dA, ut, ut + du, vt, vt + dv);
 		}
 	}
-	$('#area').text('`A=' + at.toPrecision(10) + '`');
-	MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('area')]);
+	$("#area").text("`A=" + at.toPrecision(10) + "`");
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("area")]);
 }
 
 function norm(v) {
@@ -264,22 +254,11 @@ function cross(v1, v2) {
 	return new THREE.Vector3(-(v1.z * v2.y) + v1.y * v2.z, v1.z * v2.x - v1.x * v2.z, -(v1.y * v2.x) + v1.x * v2.y);
 }
 
-function recursiveBoole(f, a, b, c, d, p, aold) {
-	let anew = boole2D(f, a, b, c, d);
-	if (Math.abs(anew - aold) < Math.pow(10, -p)) {
-		return anew;
-	} else {
-		let mab = (a + b) / 2;
-		let mcd = (c + d) / 2;
-		return recursiveBoole(f, a, mab, c, mcd, p, anew) + recursiveBoole(f, mab, b, c, mcd, p, anew) +
-			recursiveBoole(f, a, mab, mcd, d, p, anew) + recursiveBoole(f, mab, b, mcd, d, p, anew);
-	}
-}
-
 function boole1D(f, uni, a, b) {
 	let h = (b - a) / 4;
 	return (2 / 45) * h * (7 * f(uni, a) + 32 * f(uni, a + h) + 12 * f(uni, a + 2 * h) + 32 * f(uni, a + 3 * h) + 7 * f(uni, a + 4 * h));
 }
+
 function boole2D(f, a, b, c, d) {
 	let du = (b - a) / 4;
 	let dv = (d - c) / 4;
@@ -305,7 +284,7 @@ function cilindro() {
 	$("#uMax").val("2*pi");
 	$("#vMin").val("0");
 	$("#vMax").val("10");
-	createGraph();
+	processPage();
 	resetCamera();
 }
 
@@ -317,7 +296,7 @@ function mobius() {
 	$("#uMax").val("2*pi");
 	$("#vMin").val("-5");
 	$("#vMax").val("5");
-	createGraph();
+	processPage();
 	resetCamera();
 }
 
@@ -327,9 +306,9 @@ function toro() {
 	$("#zFuncText").val("2*sin(v)");
 	$("#uMin").val("0");
 	$("#uMax").val("2*pi");
-	$("#vMin").val("0");
-	$("#vMax").val("2*pi");
-	createGraph();
+	$("#vMin").val("-pi");
+	$("#vMax").val("pi");
+	processPage();
 	resetCamera();
 }
 
@@ -353,10 +332,24 @@ function resetCamera() {
 	camera.lookAt(new THREE.Vector3(0, 0, 0));
 }
 
-$(window).on('resize', function () {
-	renderer.setSize($('#canvas-container').width(), SCREEN_HEIGHT);
-	camera.aspect = $('#canvas-container').width() / SCREEN_HEIGHT;
+function createControls() {
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.enableKeys = false;
+	controls.zoomSpeed = 1.5;
+}
+
+$(window).on("resize", function () {
+	renderer.setSize($("#canvas-container").width(), SCREEN_HEIGHT);
+	camera.aspect = $("#canvas-container").width() / SCREEN_HEIGHT;
 	camera.updateProjectionMatrix();
 	resetCamera();
 	createControls();
+});
+
+$("#uPos").on("input", function () {
+	triedroFrenet(this.value / 100);
+});
+
+$("#showLines").on("change", function () {
+	contantUV();
 });

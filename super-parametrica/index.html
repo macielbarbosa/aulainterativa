@@ -10,8 +10,8 @@
 	<link rel="icon" href="../icon/favicon.ico" />
 
 	<!-- GOOGLE FONTS -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
 	<!-- BOOTSTRAP CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- LAYOUT CSS -->
@@ -49,27 +49,27 @@
 		<h1>Superfície Paramétrica</h1>
 		<br>
 		<div class="row" align="middle">
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 				<p class="recuo">Seja `vec(r)(u,v)=(x(u,v); y(u,v); z(u,v))` uma superfícies `S` parametrizada no espaço `RR^3`, tal que:</p>
 				<br>
 				<form class="form-inline">
 					<div class="form-group">
 						<label>`x(u,v)=`</label>
-						<input type="text" class="form-control" id="xFuncText" value="(10+v*cos(1/2*u))*cos(u)">
+						<input type="text" class="form-control large" id="xFuncText" value="(10+v*cos(1/2*u))*cos(u)">
 					</div>
 				</form>
 				<br>
 				<form class="form-inline">
 					<div class="form-group">
 						<label>`y(u,v)=`</label>
-						<input type="text" class="form-control" id="yFuncText" value="(10+v*cos(1/2*u))*sin(u)">
+						<input type="text" class="form-control large" id="yFuncText" value="(10+v*cos(1/2*u))*sin(u)">
 					</div>
 				</form>
 				<br>
 				<form class="form-inline">
 					<div class="form-group">
 						<label>`z(u,v)=`</label>
-						<input type="text" class="form-control" id="zFuncText" value="v*sin(1/2*u)">
+						<input type="text" class="form-control large" id="zFuncText" value="v*sin(1/2*u)">
 					</div>
 				</form>
 				<br>
@@ -90,7 +90,7 @@
 				<br>
 				<div class="row">
 					<div class="col-sm-6" align="right">
-						<button type="button" class="btn btn-primary" onclick="createGraph();">OK</button>
+						<button type="button" class="btn btn-primary" onclick="processPage();">OK</button>
 					</div>
 					<div class="col-sm-6" align="left">
 						<div class="checkbox">
@@ -109,7 +109,7 @@
 					<span id="area"></span>
 				</div>
 			</div>
-			<div class="col-sm-6" id="fullScreenTarget">
+			<div class="col-sm-7" id="fullScreenTarget">
 				<div class="btn-group btn-group-justified">
 					<a class="btn btn-primary" onclick="cilindro();">Cilindro</a>
 					<a class="btn btn-primary" onclick="mobius();">Fita de Mobius</a>
@@ -142,13 +142,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- Three JS -->
-	<script src='js/three.min.js'></script>
-	<script src='js/OrbitControls.js'></script>
-	<script src='js/ParametricGeometries.js'></script>
+	<script src='../js/three/three.min.js'></script>
+	<script src='../js/three/OrbitControls.js'></script>
+	<script src='../js/three/ParametricGeometries.js'></script>
 	<!-- Nerdamer JS -->
-	<script src="nerdamer/nerdamer.core.js"></script>
-	<script src="nerdamer/Calculus.js"></script>
-	<script src="nerdamer/Extra.js"></script>
+	<script src="../js/nerdamer/nerdamer.core.js"></script>
+	<script src="../js/nerdamer/Calculus.js"></script>
+	<script src="../js/nerdamer/Extra.js"></script>
 	<!-- My sketch -->
 	<script src='js/super-parametrica.js'></script>
 </body>
