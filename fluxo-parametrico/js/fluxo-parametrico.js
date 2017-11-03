@@ -191,7 +191,7 @@ function calculateFlow() {
 			ft += boole2D(dFlow, ut, ut + du, vt, vt + dv);
 		}
 	}
-	if (ft < Math.pow(1, -10)) { ft = 0; }
+	//if (ft < Math.pow(1, -10)) { ft = 0; }
 	$("#area").text("`phi=" + ft.toPrecision(10) + "`");
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("area")]);
 }
