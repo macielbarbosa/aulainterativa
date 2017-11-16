@@ -30,10 +30,10 @@ function init() {
 
 	// CAMERA
 	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, SCREEN_WIDTH / SCREEN_HEIGHT, NEAR, FAR);
-	scene.add(camera);
 	camera.position.set(20, 20, 30);
 	camera.up = new THREE.Vector3(0, 0, 1);
 	camera.lookAt(new THREE.Vector3(0, 0, 0));
+	scene.add(camera);
 
 	// RENDERER
 	renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -183,45 +183,49 @@ function contantUV() {
 
 function triedroFrenet(t) {
 
-	let line3D = function (start, dir) {
-		this.start = start;
-		this.dir = dir;
-		THREE.Curve.call(this);
-	}
-	line3D.prototype = Object.create(THREE.Curve.prototype);
-	line3D.prototype.constructor = line3D;
-	line3D.prototype.getPoint = function (t) {
-		return new THREE.Vector3(this.start.x + t * this.dir.x,
-			this.start.y + t * this.dir.y,
-			this.start.z + t * this.dir.z
-		);
-	}
-
 	if (vLine) { scene.remove(vLine); }
 	if (nLine) { scene.remove(nLine); }
 	if (bLine) { scene.remove(bLine); }
 
-	let vMaterial = new THREE.MeshBasicMaterial({ color: 0x800517 });
-	let nMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-	let bMaterial = new THREE.MeshBasicMaterial({ color: 0xE4287C });
 
-	let ut = uMin + t * uRange;
-	let pos = new THREE.Vector3(xFunc(ut, vFixed), yFunc(ut, vFixed), zFunc(ut, vFixed));
-	let vDir = new THREE.Vector3(dxu(ut, vFixed), dyu(ut, vFixed), dzu(ut, vFixed)).setLength(5);
-	let nDir = new THREE.Vector3(dxv(ut, vFixed), dyv(ut, vFixed), dzv(ut, vFixed)).setLength(5);
-	let bDir = cross(vDir, nDir).setLength(5);
+	if ($("#showFrenet").is(":checked")) {
 
-	let vGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, vDir), 64, 0.1, 8, true);
-	let nGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, nDir), 64, 0.1, 8, true);
-	let bGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, bDir), 64, 0.1, 8, true);
+		let line3D = function (start, dir) {
+			this.start = start;
+			this.dir = dir;
+			THREE.Curve.call(this);
+		}
+		line3D.prototype = Object.create(THREE.Curve.prototype);
+		line3D.prototype.constructor = line3D;
+		line3D.prototype.getPoint = function (t) {
+			return new THREE.Vector3(this.start.x + t * this.dir.x,
+				this.start.y + t * this.dir.y,
+				this.start.z + t * this.dir.z
+			);
+		}
 
-	vLine = new THREE.Mesh(vGeometry, vMaterial);
-	nLine = new THREE.Mesh(nGeometry, nMaterial);
-	bLine = new THREE.Mesh(bGeometry, bMaterial);
+		let vMaterial = new THREE.MeshBasicMaterial({ color: 0x800517 });
+		let nMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+		let bMaterial = new THREE.MeshBasicMaterial({ color: 0xE4287C });
 
-	scene.add(vLine);
-	scene.add(nLine);
-	scene.add(bLine);
+		let ut = uMin + t * uRange;
+		let pos = new THREE.Vector3(xFunc(ut, vFixed), yFunc(ut, vFixed), zFunc(ut, vFixed));
+		let vDir = new THREE.Vector3(dxu(ut, vFixed), dyu(ut, vFixed), dzu(ut, vFixed)).setLength(5);
+		let nDir = new THREE.Vector3(dxv(ut, vFixed), dyv(ut, vFixed), dzv(ut, vFixed)).setLength(5);
+		let bDir = cross(vDir, nDir).setLength(5);
+
+		let vGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, vDir), 64, 0.1, 8, true);
+		let nGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, nDir), 64, 0.1, 8, true);
+		let bGeometry = new THREE.ParametricGeometries.TubeGeometry(new line3D(pos, bDir), 64, 0.1, 8, true);
+
+		vLine = new THREE.Mesh(vGeometry, vMaterial);
+		nLine = new THREE.Mesh(nGeometry, nMaterial);
+		bLine = new THREE.Mesh(bGeometry, bMaterial);
+
+		scene.add(vLine);
+		scene.add(nLine);
+		scene.add(bLine);
+	}
 }
 
 function calculateArea() {
@@ -352,4 +356,15 @@ $("#uPos").on("input", function () {
 
 $("#showLines").on("change", function () {
 	contantUV();
+});
+
+$("#showFrenet").on("change", function () {
+	triedroFrenet($("#uPos").val() / 100);
+	if ($("#showFrenet").is(":checked")) {
+		$("#uPos").show();
+		$("#uOfuPos").show();
+	} else {
+		$("#uPos").hide();
+		$("#uOfuPos").hide();
+	}
 });
