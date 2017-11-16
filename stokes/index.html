@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset='UTF-8'/>
+    <title>Teorema de Stokes</title>
+    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stokes.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://www.geogebra.org/scripts/deployggb.js"></script>
+    <script src="stokes.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../css/template.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                  </button>
+                  <a class="navbar-brand navbar-logo" href="../index.php#myPage">Aula Interativa</a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../index.php#sobre">SOBRE</a></li>
+                    <li><a href="../index.php#algebra-linear">ÁLGEBRA LINEAR</a></li>
+                    <li><a href="../index.php#calculo">CÁLCULO</a></li>
+                    <li><a href="../index.php#contato">CONTATO</a></li>
+                  </ul>
+              </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Teorema de Stokes</h1>
+        <br>
+        <div class="row" align="middle">
+            <div class="col-sm-6">
+                <div class="borded">    
+                    <p class='recuo'>O Teorema de Stokes relaciona uma integral de superfície sobre uma superfície `S` com uma integral em torno da curva da fronteira `S`, de forma que, seja `bb"F"` um campo vetorial, então:</p>
+                    `oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA`
+                </div>
+                <!--form id="tipoSuperficie" onchange="tipoFuncao()">
+                    <input type="radio" name="tipo" value="implicita" checked>
+                    <label for="implicita">Implícita</label>
+                    <input type="radio" name="tipo" value="parametrica">
+                    <label for="parametrica">Parametrizada</label>
+                </form-->
+                <br>
+                <p class="recuo">Defina a superfície `S`, o campo vetorial `F` e a curva `C`:</p>
+                <br>
+                <form id="implicita">
+                    `S:`
+                    <input type="text" id="superficie" value="x^2+y^2+z^2=4">
+                </form>
+                <br>
+                `F=(`
+                <input type="text" id="fx" size="5" value="xz">
+                `,`
+                <input type="text" id="fx" size="5" value="yz">
+                `,`
+                <input type="text" id="fx" size="5" value="xy">
+                `)`
+                <!--form id="parametrica">
+                    <p class="recuo">Defina a superfície `bb"S"(u,v)=(x(u,v),y(u,v),z(u,v)):`</p>
+                    <br>
+                    `x(u,v)=`
+                    <input type="text" id="xuv" value="sin(u)cos(v)">
+                    <br><br>
+                    `y(u,v)=`
+                    <input type="text" id="yuv" value="sin(u)sin(v)">
+                    <br><br>
+                    `z(u,v)=`
+                    <input type="text" id="zuv" value="cos(u)">
+                    <br><br>
+                    <input type="text" id="ui" size='6' value="0">
+                    `&lt;=u&lt;=`
+                    <input type="text" id="uf" size='6' value="pi">
+                    <br><br>
+                    <input type="text" id="vi" size='6' value="0">
+                    `&lt;=v&lt;=`
+                    <input type="text" id="vf" size='6' value="2pi">
+                </form-->
+                <br><br>
+                <p class="recuo">`C:bb"r"(t)=(x(t),y(t),z(t))`</p>
+                <form id="curva">
+                    `x(t)=`
+                    <input type="text" id="xt" value="cos(t)">
+                    <br><br>
+                    `y(t)=`
+                    <input type="text" id="yt" value="sin(t)">
+                    <br><br>
+                    `z(t)=`
+                    <input type="text" id="zt" value="sqrt(3)">
+                    <br><br>
+                    <input type="text" id="ti" size='6' value="0">
+                    `&lt;=t&lt;=`
+                    <input type="text" id="tf" size='6' value="2pi">
+                </form>
+                <br><br>
+                <button class="btn btn-primary" onclick="show()">OK</button>
+                <br><br>
+                <p class="recuo">Nesse caso:</p>
+                <div class="borded">`oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA=`<span id="resultado">0</span></div>
+            </div>
+            <div class="col-sm-6 geogebra">
+                <div id="applet_container"></div>
+                <div class="legenda">
+                    <div><img src="../imagens/curva-f.png" height="15"><b class="fonte8"> `C: vec(f)(t)=(x(t),y(t))`</b></div>
+                    <div><img src="../imagens/curva-c.png" height="15"><b class="fonte8">  `h(x,y)` ao longo da curva `C`</b></div>
+                    <div><img src="../imagens/area-a.png" height="15"><b class="fonte8"> Área `A`</b></div>
+                </div>
+                <br>
+                <img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
+                <img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center rodape">
+        <img src="../imagens/ect-logo.png">
+        Escola de Ciências e Tecnologia - UFRN
+        <img src="../imagens/ufrn-logo.png">
+    </footer>
+</body>
+</html>

@@ -45,12 +45,6 @@
         <h1>Campo elétrico de um dipolo</h1>
         <br>
         <div class="row" align="center">
-            <form id="visualizacao" onchange="visualizacao(tipo.value)">
-                <input id="radioTipo" type="radio" name="tipo" value="campo-vetorial" checked>
-                <span>Campo vetorial</span>
-                <input type="radio" name="tipo" value="linhas-campo">
-                <span>Linhas de campo</span>
-            </form>
             <div id="dipolo">
                 Dipolo: 
                 <select onchange="campo()">
@@ -72,6 +66,9 @@
             <span class="red"> Positivo </span>
             <img id="square-black" src="../imagens/square-black.png">
             <span> Negativo </span>
+            <br><br>
+            <h4>Linhas de campo e equipotenciais</h4>
+            <img src="../imagens/linhas-campo.png">
         </div>
     </div>
     <footer class="text-center rodape">

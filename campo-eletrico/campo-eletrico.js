@@ -22,7 +22,6 @@ var ggbInit = false;
 window.onload = function() {
 	applet.inject('applet_container');
 	document.getElementsByTagName('select')[0].selectedIndex = 0;
-	document.getElementById('radioTipo').checked = true;
 	document.getElementById('densidade').checked = false;
 	document.getElementById('sizeq2').value = 1;
 }
@@ -36,20 +35,6 @@ function ggbOnInit(){
 
 function geogebra(comando){
 	document.ggb.evalCommand(comando);
-}
-
-function visualizacao(tipo){
-	var dipolo = document.getElementsByTagName('select')[0].value;
-	switch(tipo){
-		case 'campo-vetorial':
-		campo(dipolo);
-		displayForm('inline-block');
-		break;
-		case 'linhas-campo':
-		linhas();
-		displayForm('none');
-		break;
-	}
 }
 
 function campo(){
@@ -91,33 +76,9 @@ function campo(){
 	}
 }
 
-
-function linhas(dipolo){
-	document.ggb.reset();
-	geogebra('R=Translate(A,0.001*Vector(A,B))');
-	geogebra('M=Midpoint(A,B)');
-	geogebra('L=Segment(A,B)');
-	for(var g=20; g<180; g+=20){
-		geogebra('linha'+g+'=CircumcircularArc(A,Rotate(R,'+g+'°,A),B)');
-		geogebra('Reflect(linha'+g+',Rotate(L,90°,M))');		
-	}
-
-}
-
 function allInvisible(){
 	document.ggb.setVisible('A',false);
 	document.ggb.setVisible('B',false);
 	document.ggb.setVisible('C',false);
 	document.ggb.setVisible('D',false);
 }
-
-function displayForm(display){
-	document.getElementById('size').style.display = display;
-	document.getElementById('dipolo').style.display = display;
-	document.getElementById('densidade').style.display = display;
-	document.getElementById('span-densidade').style.display = display;
-}
-
-/*function pontosRadial(){
-
-}*/
