@@ -30,59 +30,105 @@ function ggbOnInit(){
 }
 
 function initialValues() {
-    document.getElementById('superficie').value = 'x^2+y^2+z^2=4';
-    document.getElementById('xt').value = 'cos(t)';
-    document.getElementById('yt').value = 'sin(t)';
-    document.getElementById('zt').value = 'sqrt(3)';
-    document.getElementById('ti').value = '0';
-    document.getElementById('tf').value = '2pi';
-    document.getElementById('fx').value = 'yz';
-    document.getElementById('fy').value = 'xz';
-    document.getElementById('fz').value = 'xy';
-    /*document.getElementById('xuv').value = 'sin(u)cos(v)';
+    document.getElementById('xuv').value = 'sin(u)cos(v)';
     document.getElementById('yuv').value = 'sin(u)sin(v)';
     document.getElementById('zuv').value = 'cos(u)';
     document.getElementById('ui').value = '0';
     document.getElementById('uf').value = 'pi';
     document.getElementById('vi').value = '0';
     document.getElementById('vf').value = '2pi';
-    document.getElementById('superficie').value = 'x+y';
+
+    document.getElementById('xt').value = 'cos(t)';
+    document.getElementById('yt').value = 'sin(t)';
+    document.getElementById('zt').value = 'sqrt(3)';
+    document.getElementById('ti').value = '0';
+    document.getElementById('tf').value = '2pi';
+
+    document.getElementById('fx').value = 'yz';
+    document.getElementById('fy').value = 'xz';
+    document.getElementById('fz').value = 'xy';
+    
+    /*document.getElementById('superficie').value = 'x+y';
     document.getElementsByName('tipo')[0].checked = true;
     document.getElementById('parametrica').style.display = 'none';
     document.getElementById('implicita').style.display = 'block';*/
 }
 
+// superficie
+var xuv = document.getElementById('xuv').value;   
+var yuv = document.getElementById('yuv').value;   
+var zuv = document.getElementById('zuv').value;   
+var ui = document.getElementById('ui').value;   
+var uf = document.getElementById('uf').value;   
+var vi = document.getElementById('vi').value;   
+var vf = document.getElementById('vf').value; 
+
+// curva
+var rx = document.getElementById('xt').value;
+var ry = document.getElementById('yt').value;
+var rz = document.getElementById('zt').value;
+var ti = document.getElementById('ti').value;
+var tf = document.getElementById('tf').value;
+
+// campo
+var fx = document.getElementById('fx').value;
+var fy = document.getElementById('fy').value;
+var fz = document.getElementById('fz').value;
+
 function geogebra(comando){
     document.ggb.evalCommand(comando);
 }
 
-function show(){
-    var superficie = document.getElementById('superficie').value;
-    var fx = document.getElementById('fx').value;
-    var fy = document.getElementById('fy').value;
-    var fz = document.getElementById('fz').value;
-    var rx = document.getElementById('xt').value;
-    var ry = document.getElementById('yt').value;
-    var rz = document.getElementById('zt').value;
-    var ti = document.getElementById('ti').value;
-    var tf = document.getElementById('tf').value;
+function calcular(){
+    plotSuperficie();
+    plotCurva();
+    fx = document.getElementById('fx').value;
+    fy = document.getElementById('fy').value;
+    fz = document.getElementById('fz').value;
     if(ti>tf) {
         alert('O parâmetro t inicial da curva deve ser menor que o t final.');
         return;
     }
-    geogebra('superficie:'+superficie)
-    geogebra('fx='+fx);
-    geogebra('fy='+fy);
-    geogebra('fz='+fz);
+    geogebra('fx(x,y,z)='+fx);
+    geogebra('fy(x,y,z)='+fy);
+    geogebra('fz(x,y,z)='+fz);
+    document.getElementById('resultado').innerHTML = document.ggb.getValue('integral').toFixed(2);
+    //setEscala(a,b);
+    //MathJax.Hub.Typeset();
+}
+
+function plotSuperficie(){
+    xuv = document.getElementById('xuv').value;   
+    yuv = document.getElementById('yuv').value;   
+    zuv = document.getElementById('zuv').value;   
+    ui = document.getElementById('ui').value;   
+    uf = document.getElementById('uf').value;   
+    vi = document.getElementById('vi').value;   
+    vf = document.getElementById('vf').value;
+
+    geogebra('xuv(u,v)='+xuv);
+    geogebra('yuv(u,v)='+yuv);
+    geogebra('zuv(u,v)='+zuv);
+    geogebra('ui='+ui);
+    geogebra('uf='+uf);
+    geogebra('vi='+vi);
+    geogebra('vf='+vf);
+}
+
+function plotCurva(){
+    rx = document.getElementById('xt').value;
+    ry = document.getElementById('yt').value;
+    rz = document.getElementById('zt').value;
+    ti = document.getElementById('ti').value;
+    tf = document.getElementById('tf').value;
+
     geogebra('rx(t)='+rx);
     geogebra('ry(t)='+ry);
     geogebra('rz(t)='+rz);
     geogebra('ti='+ti);
     geogebra('tf='+tf);
-    document.getElementById('resultado').innerHTML = document.ggb.getValue('integral').toFixed(2);
-    //setEscala(a,b);
-    //MathJax.Hub.Typeset();
 }
+
 /*
 function tipoFuncao() {
     var implicita = document.getElementsByName('tipo')[0].checked;
