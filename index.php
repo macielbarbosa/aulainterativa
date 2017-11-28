@@ -214,12 +214,20 @@
         <h4>Superfícies Paramétricas</h4>
       </a>
     </div>
-	<div class="col-sm-4" align="middle">
+    <div class="col-sm-4" align="middle">
       <a href="fluxo-parametrico" class="thumbnail">
         <img src="imagens/icon-fluxo-parametrico.png">
       </a>
       <a href="fluxo-parametrico">
         <h4>Fluxo em Superfícies Paramétricas</h4>
+      </a>
+    </div>
+    <div class="col-sm-4" align="middle">
+      <a href="stokes" class="thumbnail">
+        <img src="imagens/icon-stokes.png">
+      </a>
+      <a href="stokes">
+        <h4>Teorema de Stokes</h4>
       </a>
     </div>
   </div>
