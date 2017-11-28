@@ -27,3 +27,5 @@ span#area{
 	border: 1px solid lightblue;
 	border-radius: 5px
 }
+
+#resultadoBox { display: none }

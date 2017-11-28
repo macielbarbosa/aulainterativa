@@ -59,7 +59,6 @@
                 <br>
                 <p class="recuo">Defina a superfície `S` parametrizada, a curva `C` e o campo vetorial `F`:</p>
                 <br>
-                <form>
                     <p class="recuo">Defina a superfície `bb"S"(u,v)=(x(u,v),y(u,v),z(u,v)):`</p>
                     `x(u,v)=`
                     <input type="text" id="xuv" value="sin(u)cos(v)">
@@ -78,11 +77,10 @@
                     `&lt;=v&lt;=`
                     <input type="text" id="vf" size='6' value="2pi">
                     <br><br>
-                    <button class="btn btn-primary" onclick="plotSuperficie()">Plotar</button>
-                </form>
-                <br>
+                    <button class="btn btn-secondary btn-sm" onclick="plotSuperficie()">Plotar superfície</button>
+                <br><br>
                 <p class="recuo">`C:bb"r"(t)=(x(t),y(t),z(t))`</p>
-                <form>
+                
                     `x(t)=`
                     <input type="text" id="xt" value="cos(t)">
                     <br><br>
@@ -96,8 +94,7 @@
                     `&lt;=t&lt;=`
                     <input type="text" id="tf" size='6' value="2pi">
                     <br><br>
-                    <button class="btn btn-primary" onclick="plotCurva()">Plotar</button>
-                </form>
+                    <button class="btn btn-secondary btn-sm" onclick="plotCurva()">Plotar curva</button>
                 <br><br>
                 `F=(`
                 <input type="text" id="fx" size="5" value="xz">
@@ -107,10 +104,12 @@
                 <input type="text" id="fz" size="5" value="xy">
                 `)`
                 <br><br>
-                <button class="btn btn-primary" onclick="calcular()">OK</button>
+                <button class="btn btn-primary" onclick="calcular()">Calcular</button>
                 <br><br>
-                <p class="recuo">Nesse caso:</p>
-                <div class="borded">`oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA=`<span id="resultado">0</span></div>
+                <div id="resultadoBox">
+                    <p class="recuo">Nesse caso:</p>
+                    <div class="borded">`oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA=`<span id="resultado"></span></div>
+                </div>
             </div>
             <div class="col-sm-6 geogebra">
                 <div id="applet_container"></div>
