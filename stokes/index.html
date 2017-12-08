@@ -47,8 +47,8 @@
         <div class="row" align="middle">
             <div class="col-sm-6">
                 <div class="borded">    
-                    <p class='recuo'>O Teorema de Stokes relaciona uma integral de superfície sobre uma superfície `S` com uma integral em torno da curva da fronteira `S`, de forma que, seja `bb"F"` um campo vetorial, então:</p>
-                    `oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA`
+                    <p class='recuo'>O Teorema de Stokes relaciona uma integral de superfície sobre uma superfície `S` com uma integral em torno da curva da curva C (fronteira de `S`), de forma que, seja `bb"F"` um campo vetorial, então:</p>
+                    `oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA" "(**)`
                 </div>
                 <!--form id="tipoSuperficie" onchange="tipoFuncao()">
                     <input type="radio" name="tipo" value="implicita" checked>
@@ -96,7 +96,7 @@
                     <br><br>
                     <button class="btn btn-secondary btn-sm" onclick="plotCurva()">Plotar curva</button>
                 <br><br>
-                `F=(`
+                `bb"F"=(`
                 <input type="text" id="fx" size="5" value="xz">
                 `,`
                 <input type="text" id="fy" size="5" value="yz">
@@ -107,7 +107,6 @@
                 <button class="btn btn-primary" onclick="calcular()">Calcular</button>
                 <br><br>
                 <div id="resultadoBox">
-                    <p class="recuo">Nesse caso:</p>
                     <div class="borded">`oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA=`<span id="resultado"></span></div>
                 </div>
             </div>
@@ -121,6 +120,16 @@
                 <br>
                 <img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
                 <img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
+                <br><br>
+                <div>
+                    <p class="recuo">`(**)`</p>
+                    <p class="recuo">`gradxxbb"F"rarr` rotacional de `bb"F"`</p>
+                    <p class="recuo">`hatnrarr` vetor normal à superfície `S`</p>
+                    <p class="recuo">`dArarr` elemento infinitesimal de área</p>
+                    <br>
+                    <br>
+                    <p class="recuo col-sm-10">Para obedecer ao Teorema de Stokes, um movél `m` que percorre a curva `C` deve ter sempre a superfície `S` à sua esquerda.</p>
+                </div>
             </div>
         </div>
     </div>
