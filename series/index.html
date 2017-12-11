@@ -42,17 +42,32 @@
         </nav>
     </header>
     <div class="container">
-        <h1>Séries</h1>
+        <h1>Séries de Potências e Séries Geométricas</h1>
         <br>
         <div class="row" align="middle">
             <div class="col-sm-6">
+                <div class="borded">
+                    <p class="recuo">São séries da forma:</p>
+                    `a+ar+ar^2+ar^3+...+ar^(n-1)+...`
+                    <br><br>
+                    <p class="recuo">
+                        Em que, `a_1=a` é o primeiro termo e `r` é a razão da série.
+                    </p>
+                </div>
                 <br><br>
+                Digite uma série:
                 `sum_(n=0)^infty`
                 <input type="text" value="(-1/4)^n(x-2)^n" id="input">
+                <br><br>
+                <p class="recuo">Digite a função em que ele converge:</p>
+                `f(x)=`
+                <input type="text" value="4/(x+2)" id="funcao">
+                <br><br>
+                <button class='btn btn-primary' onclick="somatorio('reset')">OK</button>
                 <br><br><br>
                 <button class="btn btn-default" onclick="somatorio('reset')">resetar</button>
-                <button class="btn btn-secondary" onclick="somatorio('previous')">anterior</button>
-                <button class="btn btn-primary" onclick="somatorio('next')">próximo</button>
+                <button class="btn btn-secondary" onclick="somatorio('previous')">Termo anterior</button>
+                <button class="btn btn-primary" onclick="somatorio('next')">Próximo termo</button>
                 <br><br>
                 <div id="resultado">
                     `n=`
