@@ -231,6 +231,20 @@
       </a>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-4" align="middle">
+    </div>
+    <div class="col-sm-4" align="middle">
+      <a href="series" class="thumbnail">
+        <img src="imagens/icon-series.PNG">
+      </a>
+      <a href="series">
+        <h4>Série de Potência</h4>
+      </a>
+    </div>
+    <div class="col-sm-4" align="middle">
+    </div>
+  </div>
 </div>
 
 <div id="contato" class="container-fluid bg-grey">
