@@ -62,18 +62,22 @@
         <img class="img-responsive" src="../imagens/series-geometricas-termos.PNG" alt="Termos da série geométrica">
         <br><br>
         <h4>Gráfico das somas parciais e da função de convergência</h4>
-        <br><br>
+        <br>
         <div id="applet_container"></div>
         <br>
         <button class="btn btn-secondary" onclick="primeirosTermos()">4 primeiros termos</button>
         <input id="manter" type="checkbox" onchange="manterSomas(this.checked)">
-        manter somas parciais
+        Manter somas parciais
         <br><br>
-        <button class="btn btn-default" onclick="somatorio('reset')">resetar</button>
+        <button class="btn btn-default" onclick="somatorio('reset')">Resetar</button>
         <button id="btn-prev" class="btn btn-primary" onclick="somatorio('previous')" disabled>`y_0`</button>
         Termo atual: <span id="atual">`y_1`</span>
         <button id="btn-next" class="btn btn-primary" onclick="somatorio('next')">`y_2`</button>
-        <br><br>
+        <br><br><br>
+        <h4>Conclusão</h4>
+        <p class="recuo">
+          As somas parciais se aproximam do valor exato quanto maior for o número de termos. Com essa afirmação podemos perceber que algumas funções (diferenciáveis em todo o domínio) podem ser expandidas como uma soma infinita de série de potência. Essas são chamadas de <ins>Série de Taylor</ins>.
+        </p>
       </div>
       <div class="col-sm-2"></div>
     </div>

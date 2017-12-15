@@ -53,6 +53,7 @@ function somatorio (command) {
     var atual = document.getElementById('atual');
     var btnPrev = document.getElementById('btn-prev');
     var btnNext = document.getElementById('btn-next');
+    var checkboxManter = document.getElementById('manter')
     switch (command) {
         case 'next':
         n++;
@@ -62,6 +63,12 @@ function somatorio (command) {
         break;
         case 'reset':
         n=0;
+        if (primeiros)
+            primeirosTermos();
+        if (checkboxManter.checked) {
+            checkboxManter.checked = false;
+            manterSomas(false);
+        }
     }
     for (var i=0; i<=n; i++) {
         somatorio += serie.replace(/n/gi,i);

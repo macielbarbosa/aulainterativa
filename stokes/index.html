@@ -47,19 +47,13 @@
         <div class="row" align="middle">
             <div class="col-sm-6">
                 <div class="borded">    
-                    <p class='recuo'>O Teorema de Stokes relaciona uma integral de superfície sobre uma superfície `S` com uma integral em torno da curva da curva C (fronteira de `S`), de forma que, seja `bb"F"` um campo vetorial, então:</p>
+                    <p class='recuo'>O Teorema de Stokes relaciona uma integral de superfície sobre uma superfície `S` com uma integral de linha em torno da curva da curva C (fronteira de `S`), de forma que, seja `bb"F"` um campo vetorial, então:</p>
                     `oint_Cbb"F"*dbb"r"=intint_Sgradxxbb"F"*hatbb"n"dA" "(**)`
                 </div>
-                <!--form id="tipoSuperficie" onchange="tipoFuncao()">
-                    <input type="radio" name="tipo" value="implicita" checked>
-                    <label for="implicita">Implícita</label>
-                    <input type="radio" name="tipo" value="parametrica">
-                    <label for="parametrica">Parametrizada</label>
-                </form-->
                 <br>
                 <p class="recuo">Defina a superfície `S` parametrizada, a curva `C` e o campo vetorial `F`:</p>
                 <br>
-                    <p class="recuo">Defina a superfície `bb"S"(u,v)=(x(u,v),y(u,v),z(u,v)):`</p>
+                    <p class="recuo">`bb"S"(u,v)=(x(u,v),y(u,v),z(u,v)):`</p>
                     `x(u,v)=`
                     <input type="text" id="xuv" value="sin(u)cos(v)">
                     <br><br>
@@ -112,11 +106,6 @@
             </div>
             <div class="col-sm-6 geogebra">
                 <div id="applet_container"></div>
-                <!--div class="legenda">
-                    <div><img src="../imagens/curva-f.png" height="15"><b class="fonte8"> `C: vec(f)(t)=(x(t),y(t))`</b></div>
-                    <div><img src="../imagens/curva-c.png" height="15"><b class="fonte8">  `h(x,y)` ao longo da curva `C`</b></div>
-                    <div><img src="../imagens/area-a.png" height="15"><b class="fonte8"> Área `A`</b></div>
-                </div-->
                 <br>
                 <img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
                 <img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
@@ -124,7 +113,7 @@
                 <div>
                     <p class="recuo">`(**)`</p>
                     <p class="recuo">`gradxxbb"F"rarr` rotacional de `bb"F"`</p>
-                    <p class="recuo">`hatnrarr` vetor normal à superfície `S`</p>
+                    <p class="recuo">`hatnrarr` vetor unitário normal à superfície `S`</p>
                     <p class="recuo">`dArarr` elemento infinitesimal de área</p>
                     <br>
                     <br>
