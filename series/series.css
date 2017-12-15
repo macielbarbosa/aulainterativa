@@ -13,3 +13,7 @@
 	border: 1px solid lightblue;
 	border-radius: 5px
 }
+
+input[type="checkbox"] {
+	margin-left: 20px !important
+}
