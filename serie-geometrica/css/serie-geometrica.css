@@ -1,6 +1,6 @@
 /* CUSTOM LAYOUT CSS */
 
-h1{
+h1 h3{
 	font-family: Montserrat, sans-serif;
 }
 
@@ -13,15 +13,24 @@ input.large {
 }
 
 input.medium {
-	width:53% !important;
+	width:50% !important;
 }
 
 input.small {
 	width:30% !important;
 }
 
+img.fractal{
+    width: 100%;
+    height: auto;
+}
+
 p{
-	text-align: justify;
+    text-align: justify;
+}
+
+p.center{
+    text-align: center;
 }
 
 p.recuo{
@@ -39,7 +48,6 @@ p.featured{
 	border-radius: 5px;
 	text-align: center
 }
-
 
 #canvas-container {
     display: block; /* fix necessary to remove space at bottom of canvas */

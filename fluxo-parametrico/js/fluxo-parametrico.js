@@ -46,7 +46,7 @@ function init() {
 	scene.fog = new THREE.FogExp2(0x888888, 0.001);
 
 	// AXIS
-	let radius = 0.2;
+	let radius = 0.075;
 	let length = 30;
 	let xLine = function (u0, v0) {
 		return new THREE.Vector3(length * v0, radius * Math.cos(2 * Math.PI * u0), radius * Math.sin(2 * Math.PI * u0));
@@ -159,7 +159,7 @@ function showField() {
 				vt = vMin + j * dv;
 				let from = new THREE.Vector3(xFunc(ut, vt), yFunc(ut, vt), zFunc(ut, vt));
 				let direction = new THREE.Vector3(xFieldFunc(ut, vt), yFieldFunc(ut, vt), zFieldFunc(ut, vt));
-				fieldMesh[i * np + j] = new THREE.ArrowHelper(direction.clone().normalize(), from, direction.length(), 0x1E63DB);
+				fieldMesh[i * np + j] = new THREE.ArrowHelper(direction.clone().normalize(), from, 3, 0x1E63DB);
 				scene.add(fieldMesh[i * np + j]);
 			}
 		}
@@ -191,9 +191,9 @@ function calculateFlow() {
 			ft += boole2D(dFlow, ut, ut + du, vt, vt + dv);
 		}
 	}
-	//if (ft < Math.pow(1, -10)) { ft = 0; }
-	$("#area").text("`phi=" + ft.toPrecision(10) + "`");
-	MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("area")]);
+	if (Math.abs(ft) < Math.pow(1, -4)) { ft = 0; }
+	$("#fluxo").text("`phi=" + ft.toPrecision(10) + "`");
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("fluxo")]);
 }
 
 function norm(v) {

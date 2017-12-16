@@ -31,12 +31,13 @@ p.recuo{
 
 .inline-block {display: inline-block}
 
-span#area{
+p.featured{
 	width: auto;
 	height: auto;
 	padding: 10px 25px;
 	border: 1px solid gray;
 	border-radius: 5px;
+	text-align: center
 }
 
 #canvas-container {

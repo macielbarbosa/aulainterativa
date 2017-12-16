@@ -48,7 +48,7 @@ function init() {
 	scene.fog = new THREE.FogExp2(0x888888, 0.005);
 
 	// AXIS
-	let radius = 0.2;
+	let radius = 0.075;
 	let length = 30;
 	let xLine = function (u0, v0) {
 		return new THREE.Vector3(length * v0, radius * Math.cos(2 * Math.PI * u0), radius * Math.sin(2 * Math.PI * u0));

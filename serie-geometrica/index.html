@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta charset='UTF-8' />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Séries Geométricas</title>
+	<link rel="icon" href="../icon/favicon.ico" />
+
+	<!-- GOOGLE FONTS -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
+	<!-- BOOTSTRAP CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- LAYOUT CSS -->
+	<link rel="stylesheet" href="../css/layout.css">
+	<link rel="stylesheet" href="css/serie-geometrica.css">
+
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="../index.php#myPage">Aula Interativa</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="../index.php#sobre">SOBRE</a>
+					</li>
+					<li>
+						<a href="../index.php#algebra-linear">ÁLGEBRA LINEAR</a>
+					</li>
+					<li>
+						<a href="../index.php#calculo">CÁLCULO</a>
+					</li>
+					<li>
+						<a href="../index.php#contato">CONTATO</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<div class="container">
+		<h1>Séries Geométricas</h1>
+		<br>
+		<div class="row" align="middle">
+			<!-- LEFT SIDE -->
+			<div class="col-sm-5">
+				<p class="recuo">Considere a região fractal, centrada no quadrado de lado L = 1 cm. Adicionando a cada etapa 3 novos quadrados com lado
+					igual a terceira parte da etapa anterior e em posições cêntricas (como mostra a figura a seguir), a área e o perímetro
+					da região são:
+				</p>
+				<br>
+				<div class="row">
+					<div class="col-sm-4">
+						<img class="fractal" src="images/n0.png">
+						<p class="center">
+							`n = 0`
+						</p>
+						<p class="center">
+							`a_0 = L^2`
+						</p>
+						<p class="center">
+							`p_0 = 4*L`
+						</p>
+					</div>
+					<div class="col-sm-4">
+						<img class="fractal" src="images/n1.png">
+						<p class="center">
+							`n = 1`
+						</p>
+						<p class="center">
+							`a_1 = L^2+3*(L/3)^2`
+						</p>
+						<p class="center">
+							`p_1 = 4*L+6*L/3`
+						</p>
+					</div>
+					<div class="col-sm-4">
+						<img class="fractal" src="images/n2.png">
+						<p class="center">
+							`n = 2`
+						</p>
+						<p class="center">
+							`a_2 = L^2+3*(L/3)^2+9*(L/9)^2`
+						</p>
+						<p class="center">
+							`p_2 = 4*L+6*L/3+18*L/9`
+						</p>
+					</div>
+				</div>
+				<p class="recuo">Para o n-ésimo termo:</p>
+				<p>`A(n) = L^2 + 3(L/3)^2 + 9*(L/9)^2 + 27*(L/27)^2 + ... + 3^n*(L/3^n)^2`</p>
+				<p>`P(n) = 4*L + 6*L/3 + 18*L/9 + 54*L/27 + ... + 3^n*2*L/3^n`</p>
+				<br>
+				<p class="recuo">Simplificando e assumindo que `L=1cm`, tem-se: </p>
+				<p class="">Área: `A(n)=1/2*3^(-n)*(3^(n+1)-1)`</p>
+				<p class="featured" id="area"></p>
+				<p class="">Perímetro: `P(n)=4+2*n`</p>
+				<p class="featured" id="perimeter"></p>
+				<br>
+				<p class="recuo">Para valores de n muito grandes:</p>
+				<p>`lim_(n->oo) A(n) = 3/2`</p>
+				<p>`lim_(n->oo) P(n) = oo`</p>
+			</div>
+			<!-- CENTER -->
+			<div class="col-sm-1">
+			</div>
+			<!-- RIGHT SIDE -->
+			<div class="col-sm-6">
+				<!--
+				<div class="btn-group btn-group-justified">
+					<a class="btn btn-primary" onclick="fractal1();">Fractal 1</a>
+				</div>
+				<br>
+				-->
+				<div id="canvas-container"></div>
+				<br>
+				<div class="row">
+					<div class="col-sm-1">
+						<label id="N">`n:`</label>
+					</div>
+					<div class="col-sm-11">
+						<input type="range" min="0" max="20" value="0" class="slider" id="nIndex">
+					</div>
+				</div>
+			</div>
+		</div>
+		<h3>Definições: sequências geométricas</h3>
+		<div class="row" align="middle">
+			<div class="col-sm-12">
+				<p class="recuo">`{A_n}->{a,a*r,a*r^2,a*r^3,a*r^4,...,a*r^n}`, onde `{(a->1º termo),(r->razão):}`</p>
+			</div>
+		</div>
+		<h3>Definições: séries geométricas</h3>
+		<div class="row" align="middle">
+			<div class="col-sm-12">
+				<p class="recuo">`S_n = sum_(k=0)^(n)a*r^k=a*(r^n-1)/(r-1)`</p>
+				<p class="recuo">`S_oo = sum_(i=0)^oo a*r^k = a/(1-r)`, para `|r|lt1`</p>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<footer class="text-center">
+		<img src="../imagens/ect-logo.png"> Escola de Ciências e Tecnologia - UFRN
+		<img src="../imagens/ufrn-logo.png">
+	</footer>
+
+	<!-- MATHJAX JS -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<!-- BOOTSTRAP JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- Three JS -->
+	<script src='../js/three/three.min.js'></script>
+	<script src='../js/three/OrbitControls.js'></script>
+	<!-- Nerdamer JS -->
+	<script src="../js/nerdamer/nerdamer.core.js"></script>
+	<script src="../js/nerdamer/Calculus.js"></script>
+	<script src="../js/nerdamer/Extra.js"></script>
+	<!-- My sketch -->
+	<script src='js/serie-geometrica.js'></script>
+</body>
+
+</html>

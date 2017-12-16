@@ -233,6 +233,12 @@
   </div>
   <div class="row">
     <div class="col-sm-4" align="middle">
+    <a href="serie-geometrica" class="thumbnail">
+        <img src="imagens/icon-serie-geometrica.png">
+      </a>
+      <a href="serie-geometrica">
+        <h4>Séries Geométricas</h4>
+      </a>
     </div>
     <div class="col-sm-4" align="middle">
       <a href="series" class="thumbnail">
