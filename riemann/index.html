@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset='UTF-8'/>
+  <title>Soma de Riemann</title>
+  <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="riemann.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://www.geogebra.org/scripts/deployggb.js"></script>
+  <script src="riemann.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="../css/template.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand navbar-logo" href="../index.php#myPage">Aula Interativa</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../index.php#sobre">SOBRE</a></li>
+            <li><a href="../index.php#algebra-linear">ÁLGEBRA LINEAR</a></li>
+            <li><a href="../index.php#calculo">CÁLCULO</a></li>
+            <li><a href="../index.php#contato">CONTATO</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Soma de Riemann</h2>
+    <br><br>
+    <div class="row" align="middle">
+      <div class="col-sm-6">
+        `f(x,y)=`
+        <input id="funcao" type="text" value='sin(x)'/>
+        <div class="row">
+          <br>
+          <div class="col-sm-6">
+            <b>Domínio</b>
+            <br><br>`x_min=`
+            <input type="text" id="xmin" size="3" value="0">
+            <br><br>`x_max=`
+            <input type="text" id="xmax" size="3" value="2">
+          </div>
+          <div class="col-sm-6">
+            <b>Tipo de integração</b><br><br>
+            <input type="radio" name="tipoInt" id="inf" checked> Soma inferior<br>
+            <input type="radio" name="tipoInt" id="sup"> Soma superior<br><br>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <br>
+              <b>Partições</b>
+              <br><br>
+              `n=`
+              <input type="text" id="n" size="5">
+              <div class="inline-block"><input type="range" id='n' min="1" max="10" value="1" oninput="setValorN()"></div><span id="valorN"> 1</span>
+              <br><br>
+              <button class="btn btn-primary" onclick="calcular()">Calcular</button><br><br>
+            </div>
+          </div>
+        </div><br>
+        <table>
+          <tr>
+            <td class="padding-5">&nbsp;&nbsp;n&nbsp;&nbsp;</td>
+            <td class="padding-5">Soma inferior</td>
+            <td class="padding-5">Valor exato</td>
+            <td class="padding-5">Soma superior</td>
+          </tr>
+          <tr>
+            <td class="padding-5" id="np1">--</td>
+            <td class="padding-5" id="vi1">--</td>
+            <td rowspan="3" class="padding-5" id="valorExato">2.04</td>
+            <td class="padding-5" id="vs1">--</td>
+          </tr>
+          <tr>
+            <td class="padding-5" id="np2">--</td>
+            <td class="padding-5" id="vi2">--</td>
+            <td class="padding-5" id="vs2">--</td>
+          </tr>
+          <tr>
+            <td class="padding-5" id="np3">--</td>
+            <td class="padding-5" id="vi3">--</td>
+            <td class="padding-5" id="vs3">--</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-6">
+        <div id="applet-container"></div>
+        <br>
+        <img src="../imagens/mouse-click.png"/><b class="fonte8">Visualização </b>
+        <img src="../imagens/mouse-scroll.png"><b class="fonte8"> Zoom</b>
+      </div>
+    </div>
+  </div>
+  <footer class="text-center rodape">
+      <img src="../imagens/ect-logo.png">
+      Escola de Ciências e Tecnologia - UFRN
+      <img src="../imagens/ufrn-logo.png">
+  </footer>
+</body>
+</html>

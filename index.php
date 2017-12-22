@@ -153,8 +153,16 @@
   <br>
   <div class="row">
     <div class="col-sm-4" align="middle">
-      <a href="riemann-3d" class="thumbnail">
+      <a href="riemann" class="thumbnail">
         <img src="imagens/icon-riemann.PNG">
+      </a>
+      <a href="riemann">
+        <h4>Integração por Soma de Riemann</h4>
+      </a>
+    </div>
+    <div class="col-sm-4" align="middle">
+      <a href="riemann-3d" class="thumbnail">
+        <img src="imagens/icon-riemann-3d.PNG">
       </a>
       <a href="riemann-3d">
         <h4>Integração dupla por Soma de Riemann</h4>
@@ -168,6 +176,9 @@
         <h4>Projeção de sólidos nos planos cartesianos</h4>
       </a>
     </div>
+  </div>
+  <br>
+  <div class="row">
     <div class="col-sm-4" align="middle">
       <a href="fluxo" class="thumbnail">
         <img src="imagens/icon-fluxo.png">
@@ -176,9 +187,6 @@
         <h4>Fluxo através de um plano</h4>
       </a>
     </div>
-  </div>
-  <br>
-  <div class="row">
     <div class="col-sm-4" align="middle">
       <a href="campo-vetorial" class="thumbnail">
         <img src="imagens/icon-campo-vetorial.png">
@@ -195,6 +203,9 @@
         <h4>Integral de linha</h4>
       </a>
     </div>
+  </div>
+  <br>
+  <div class="row">
     <div class="col-sm-4" align="middle">
       <a href="campo-eletrico" class="thumbnail">
         <img src="imagens/icon-campo-eletrico.PNG">
@@ -203,9 +214,6 @@
         <h4>Campo elétrico de um dipolo</h4>
       </a>
     </div>
-  </div>
-  <br>
-  <div class="row">
     <div class="col-sm-4" align="middle">
       <a href="super-parametrica" class="thumbnail">
         <img src="imagens/icon-super-parametrica.png">
@@ -222,6 +230,8 @@
         <h4>Fluxo em Superfícies Paramétricas</h4>
       </a>
     </div>
+  </div>
+  <div class="row">
     <div class="col-sm-4" align="middle">
       <a href="stokes" class="thumbnail">
         <img src="imagens/icon-stokes.png">
@@ -230,8 +240,6 @@
         <h4>Teorema de Stokes</h4>
       </a>
     </div>
-  </div>
-  <div class="row">
     <div class="col-sm-4" align="middle">
     <a href="serie-geometrica" class="thumbnail">
         <img src="imagens/icon-serie-geometrica.png">
@@ -241,14 +249,13 @@
       </a>
     </div>
     <div class="col-sm-4" align="middle">
-      <a href="series" class="thumbnail">
-        <img src="imagens/icon-series.PNG">
+      <a href="serie-potencia" class="thumbnail">
+        <img src="imagens/icon-serie-potencia.PNG">
       </a>
-      <a href="series">
+      <a href="serie-potencia">
         <h4>Série de Potência</h4>
       </a>
     </div>
-    <div class="col-sm-4" align="middle">
     </div>
   </div>
 </div>
