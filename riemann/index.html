@@ -3,6 +3,7 @@
 <head>
   <meta charset='UTF-8'/>
   <title>Soma de Riemann</title>
+  <link rel="icon" href="../icon/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="../css/estilo.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="riemann.css">
@@ -48,9 +49,15 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
         <p class="recuo">
-          Se `f` é uma função contínua definida em `a<=x<=b`, dividimos os intervalos `[a,b]` em `n` subintervalos de comprimentos iguais `deltax=(b-a)/n`. Sejam `x_0(=a),x_1,x_2,...,x_n(=b)` as extremidades desses subintervalos, e sejam `x_1^**,x_2^**,...,x_n^**` pontos amostrais arbitrários nesses subintervalos, de forma que `x_i^**` esteja no i-ésimo subintervalo `[x_(i-1),x_i]`. Então a integral definida de `f` de `a` a `b` é
+          Se `f` é uma função contínua definida em `a<=x<=b`, dividimos os intervalos `[a,b]` em `n` subintervalos de comprimentos iguais `Deltax=(b-a)/n`. Sejam `x_0(=a),x_1,x_2,...,x_n(=b)` as extremidades desses subintervalos, e sejam `x_1^**,x_2^**,...,x_n^**` pontos amostrais arbitrários nesses subintervalos, de forma que `x_i^**` esteja no i-ésimo subintervalo `[x_(i-1),x_i]`. Então a integral definida de `f` de `a` a `b` é
         </p>
-        `int_a^bf(x)dx=lim_(n->oo)sum_(i=1)^nf(x_i^**)deltax`
+        `int_a^bf(x)dx=lim_(n->oo)sum_(i=1)^nf(x_i^**)Deltax`
+        <br>
+        <p>
+          Em nosso exemplo, o ponto amostral `x_i^**` de cada subintervalo depende do tipo de integração escolhido.<br>
+        </p>
+        <p class="recuo"><b>Soma superior</b>`->`máximo da função no subintervalo.</p>
+        <p class="recuo"><b>Soma inferior</b>`->`mínimo da função no subintervalo.</p>
       </div>
       <div class="col-sm-2"></div>
     </div>
